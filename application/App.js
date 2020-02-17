@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from "react-dom";
 import { Switch, Route, BrowserRouter, Link } from "react-router-dom";
-import logo from './logo.svg';
+
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 import { UncontrolledCarousel, Navbar } from "reactstrap";
