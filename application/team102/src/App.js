@@ -54,7 +54,7 @@ const items = [
     key: "1"
   },
   {
-    src: 'https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SL1500_.jpg',
+    src: 'https://lh3.googleusercontent.com/P8muruAcjE5sWo0lZ2KDKBZaDNE2d4esUndK1JY_bmFEqGSJemEblvA8q3hd_hDs_j5TLlUjg9fmG7V5-0EHAX7uPBoxpEbqmaMnUU1CzVrJut6cq_7MIA8FpAxKHCOXojJ92x2Itrt__knNqlx7ifE9glPw-FurZEXulEjFyn4RdavNJo-nbWsFLaa9ymtosoUTkd2dPJ2O-Ze1bd943CZw-1WnEa7I1szPZuHw8l3PCcKIT1_kWXs7Lne2HxFGDKi_7d04lyk4KmGFdnHUJOowG9C_MeUKHve-F8jq93KGntqtjbjQJU62KYPKL0TZNjIX4c55YwyaBuO2DXlg0I8UqNVWDKVT5skqfuunbZYiyDDbARvYFbcVVwRI0qwntXt6z9x9KGepjQ9YEAxeIN0mtY9Nip-udRQ9kbDFt0W1shNJSK8EQAXDxfB_UhkgJZsK-hh_9JISVPnT5CJloriI-YXjSfmMa7ReeGNfTwxYu_MXwIB9mmQ-_PqqvzfbeKllHqwvMBA_HCrxNX2gnTmFtafBJCZSc88b3iiq748KciJJwn6pi_KVJL5hEV_NP3zpzpcClYGe8fHqZ8Y822QOIlavlWVEjOXQQ5LcvALik5v_mSRPWK-dGr-nx7wIuYRsM-DokIRnJP3ucWj4bP3x2VlPTM_m5wXka4fuR0T4t9DVtsoAGuY=w537-h600-no',
     altText: "Slide 2",
     caption: "Scrum Master",
     header: "Aurpon Gupta",
@@ -96,7 +96,7 @@ const items = [
     key: "7"
   },
   {
-    src: 'data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22800%22%20height%3D%22400%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20400%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_15ba800aa21%20text%20%7B%20fill%3A%23333%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A40pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_15ba800aa21%22%3E%3Crect%20width%3D%22800%22%20height%3D%22400%22%20fill%3D%22%23555%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22277%22%20y%3D%22218.3%22%3EThird%20slide%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E',
+    src: 'https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/27973881_1685219221563384_3890492963377647087_n.jpg?_nc_cat=101&_nc_ohc=kG2vgc98Mg4AX-sFCky&_nc_ht=scontent-sjc3-1.xx&oh=b830ba080c4ea5b8843e1c78c1c79456&oe=5EB59F84',
     altText: "Slide 8",
     caption: "Developer",
     header: "Christian Melendez",
