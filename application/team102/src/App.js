@@ -54,7 +54,7 @@ const items = [
     key: "1"
   },
   {
-    src: 'https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SL1500_.jpg',
+    src: 'https://lh3.googleusercontent.com/P8muruAcjE5sWo0lZ2KDKBZaDNE2d4esUndK1JY_bmFEqGSJemEblvA8q3hd_hDs_j5TLlUjg9fmG7V5-0EHAX7uPBoxpEbqmaMnUU1CzVrJut6cq_7MIA8FpAxKHCOXojJ92x2Itrt__knNqlx7ifE9glPw-FurZEXulEjFyn4RdavNJo-nbWsFLaa9ymtosoUTkd2dPJ2O-Ze1bd943CZw-1WnEa7I1szPZuHw8l3PCcKIT1_kWXs7Lne2HxFGDKi_7d04lyk4KmGFdnHUJOowG9C_MeUKHve-F8jq93KGntqtjbjQJU62KYPKL0TZNjIX4c55YwyaBuO2DXlg0I8UqNVWDKVT5skqfuunbZYiyDDbARvYFbcVVwRI0qwntXt6z9x9KGepjQ9YEAxeIN0mtY9Nip-udRQ9kbDFt0W1shNJSK8EQAXDxfB_UhkgJZsK-hh_9JISVPnT5CJloriI-YXjSfmMa7ReeGNfTwxYu_MXwIB9mmQ-_PqqvzfbeKllHqwvMBA_HCrxNX2gnTmFtafBJCZSc88b3iiq748KciJJwn6pi_KVJL5hEV_NP3zpzpcClYGe8fHqZ8Y822QOIlavlWVEjOXQQ5LcvALik5v_mSRPWK-dGr-nx7wIuYRsM-DokIRnJP3ucWj4bP3x2VlPTM_m5wXka4fuR0T4t9DVtsoAGuY=w537-h600-no',
     altText: "Slide 2",
     caption: "Scrum Master",
     header: "Aurpon Gupta",
