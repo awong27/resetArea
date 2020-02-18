@@ -13,8 +13,9 @@ after that if i run the npm start command inside the team102 folder evertying st
 
 ####### if cloning my branch ######
 
-if you are clonning or pulling my branch you should have to do the create command. if you are starting fresh with just the clone 
-you will still need to run the npm init and npm node.js. and run the nmp i react-router-dom bootstrap reactstrap inside the
-team102 folder.
-
-let me know if this works - i haven't cloned my own branch and have the dependencies already installed
+switch to branch dmitry
+fetch origin
+go into the team102 folder
+run command: npm i react-router-dom bootstarp reactstrap
+after that run: npm start
+should all work
