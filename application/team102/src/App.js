@@ -47,7 +47,7 @@ function App() {
 }
 const items = [
   {
-    src: 'https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SL1500_.jpg',
+    src: 'https://lh3.googleusercontent.com/WjA3U-WvKgKGS2o4R46ftzo1YjGe3tyv8MQguc02sQgPU21JqrW1ImACcFigfQcgJ0LtYpsfch291RC9pGIQib7m0wEgAPebyMcoQECd8BNdBmfKfhqfevN-CQwP7Urq9boJ3F80qg',
     altText: "Slide 1",
     caption: "Team Leader",
     header: "Sanchit Joshi",
@@ -109,7 +109,7 @@ const About = () => (
           <h1>About the Team</h1>
           <UncontrolledCarousel items={items} />
           <h2>Meetings: Wed 12:30PM | Sat 2:00PM</h2>
-          
+          <h3>Our dedicated Team is focused to develop a Refrigerator Organizer and host it on the Google Cloud Engine using MERN Stack(MongoDB- Database, Express - Web App Framework, ReactJS- Front End UI ,NodeJS for Server).</h3>
     </div>  
 );
 
