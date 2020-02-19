@@ -26,16 +26,12 @@
 .App-link {
   color: #61dafb;
 }
-.carousel-item > img {
-  margin: auto;
-  max-width: 50%;
-  height: 550px;   
-  
-}
 .carousel-item {
-  
-  max-width: 100%;
-  height: auto;
-  background-color:#8f99ad;
-  
+  height: 72vh;
+  background-color: grey;
+}
+.carousel-item img {
+  display: blockk;
+  height: inherit;
+  object-fit: contain;
 }
