@@ -29,9 +29,15 @@
 .carousel-item {
   height: 72vh;
   background-color: grey;
+  
 }
 .carousel-item img {
   display: blockk;
   height: inherit;
   object-fit: contain;
+}
+
+.carousel-caption {
+  background-color: #8f99ad96 !important;
+  color: rgb(0, 0, 0) !important;  
 }
