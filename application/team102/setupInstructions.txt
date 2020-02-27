@@ -1,0 +1,21 @@
+This is how I made it run on my local machine
+
+Open in project in the file explorer, find and move/save index.js and app.js in a temp location
+go to the application folder and delete everything that is in there.
+start new in the vs code and run the npm init and npm node.js for initial setup
+run npx create-react-app team102
+    that command has to have a destination folder and cannot be made from the previous folder into the application folder.
+    I just called it "team102"
+move to the team102 folder and run npm i react-router-dom bootstrap reactstrap
+the standard react and react-dom is already installed by the create command
+after that if i run the npm start command inside the team102 folder evertying starts and runs great on my local machine
+
+
+####### if cloning my branch ######
+
+switch to branch dmitry
+fetch origin
+go into the team102 folder
+run command: npm i react-router-dom bootstarp reactstrap
+after that run: npm start
+should all work
