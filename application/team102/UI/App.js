@@ -8,6 +8,7 @@ import inventory from "./Component/inventory.js";
 import Home from "./Component/Home.js";
 //import Register from "./Register.js";
 import statistics from "./Component/Statistics.js";
+import CreateFood from "./Component/create-food.component.js";
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
           <Route path="/inventory" exact component={inventory} />
           <Route path="/mealplan" exact component={mealplan} />
           <Route path="/statistics" exact component={statistics} />
+          <Route path="/create" exact component={CreateFood}/>
         </Switch>
       </div>    
       </BrowserRouter>
