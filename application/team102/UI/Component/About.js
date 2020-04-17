@@ -2,26 +2,32 @@ import React from 'react';
 import Navi from "./Navigation";
 import { UncontrolledCarousel, Navbar } from "reactstrap";
 
-const About = () => (
-  
-    <div className = "App-container" >
-          <h1>About the Team</h1>
-          <UncontrolledCarousel items={items} />
-          <h2>Meeting Times and other stuff</h2>
-          <Navi/>
-    </div>  
-);
+export default class About extends Component{
+  render(){
+    return(
+      <div className = "container" >
+        <h1>About the Team</h1>
+        <UncontrolledCarousel items={items} />
+        <h2>Meetings: Wed 12:30PM | Sat 2:00PM</h2>
+        <h3>Our dedicated Team is focused to develop a Refrigerator Organizer 
+          and host it on the Google Cloud Engine using MERN Stack(MongoDB- 
+          Database, Express - Web App Framework, ReactJS- Front End UI ,NodeJS for Server).</h3>
+        <Navi/>
+      </div>    
+    );
+  }
+}
 
 const items = [
     {
-      src: 'https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SL1500_.jpg',
+      src: 'https://lh3.googleusercontent.com/WjA3U-WvKgKGS2o4R46ftzo1YjGe3tyv8MQguc02sQgPU21JqrW1ImACcFigfQcgJ0LtYpsfch291RC9pGIQib7m0wEgAPebyMcoQECd8BNdBmfKfhqfevN-CQwP7Urq9boJ3F80qg',
       altText: "Slide 1",
       caption: "Team Leader",
       header: "Sanchit Joshi",
       key: "1"
     },
     {
-      src: 'https://images-na.ssl-images-amazon.com/images/I/8166xCVDGnL._SL1500_.jpg',
+      src: 'https://scontent-lax3-2.xx.fbcdn.net/v/t1.0-9/28280135_1025280377610793_64509129045776436_n.jpg?_nc_cat=107&_nc_sid=85a577&_nc_ohc=FiWWtOpc1ZUAX81I0RD&_nc_ht=scontent-lax3-2.xx&oh=85d28c1e580ebb7f82723d4ad5b1ad8f&oe=5EB59E46',
       altText: "Slide 2",
       caption: "Scrum Master",
       header: "Aurpon Gupta",
