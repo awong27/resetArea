@@ -1,13 +1,71 @@
-import React, {useState} from 'react';
+import React, {useState, Component} from 'react';
 import {Table} from 'reactstrap';
 import Navi from "./Navigation";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
-const inventory = (props) => {
-    //const[counter,setCounter] = useState(0)
-    //const addClick = () => setCounter(counter+1)
-    //const subClick = () => setCounter(counter-1)
+const Fooddata = props => (
+  <tr>
+    <td scope="row">{props.food.foodName}</td>
+    <td>{props.food.expirationDate}</td>
+    <td>{props.food.calories}</td>
+    <td>{props.food.numOfItems}</td>
+    <td>
+      <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
+      <a
+        href="#"
+        onClick={() => {
+          props.deleteItems(props.food._id);
+        }}
+      >
+        delete
+      </a>
+    </td>
+  </tr>
+);
+
+export default class inventory extends Component {
     
-  
+  constructor(props) {
+    super(props);
+
+    this.deleteItems = this.deleteItems.bind(this);
+
+    this.state = { fooddata: [] };
+  }
+
+  componentDidMount() {
+    axios
+      .get("http://localhost:8080/fooddata/")
+      .then(response => {
+        this.setState({ fooddata: response.data });
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  deleteItems(id) {
+    axios
+      .delete("http://localhost:8080/fooddata/" + id)
+      .then(res => console.log(res.data));
+    this.setState({
+      fooddata: this.state.fooddata.filter(el => el._id != id)
+    });
+  }
+
+  inventory() {
+    return this.state.fooddata.map(currentfood => {
+      return (
+        <Fooddata
+          food={currentfood}
+          deleteItems={this.deleteItems}
+          key={currentfood._id}
+        />
+      );
+    });
+  }
+  render() {      
     return (
       <div>
       <div><h1>Inventory</h1></div>
@@ -17,63 +75,16 @@ const inventory = (props) => {
           <th>Item</th>
           <th>Exp. Date</th>
           <th>Quantity</th>
-          <th></th>
+          <th>Actions</th>
         </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">Apples</th>
-          <td>June 13</td>
-          <td>5</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Bread</th>
-          <td>March 31</td>
-          <td>12</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Duck</th>
-          <td>April 6</td>
-          <td>1</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Cake</th>
-          <td>May 18</td>
-          <td>3</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Eggs</th>
-          <td>April 13</td>
-          <td>14</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Lettuce</th>
-          <td>February 23</td>
-          <td>2</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Steak</th>
-          <td>December 20</td>
-          <td>5</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-        <tr>
-          <th scope="row">Seaweed</th>
-          <td>July 4</td>
-          <td>50</td>
-          <td><button>+</button><button>-</button></td>
-        </tr>
-      </tbody>
+      </thead>      
+      <tbody>{this.inventory()}</tbody>
     </Table>
+    <div >
+      <button>Eat</button> <button>Add</button><button>Delete</button>
+    </div>
       <Navi/>
       </div>
     )
-    
-};
-export default inventory;
+  }
+}
