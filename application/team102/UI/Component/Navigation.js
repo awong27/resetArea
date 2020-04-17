@@ -36,7 +36,10 @@ const Navigation = () => {
           </DropdownMenu>
         </Dropdown>
         <NavItem>
-          <NavLink href="/About" ><button>Shopping List</button></NavLink>
+          <NavLink href="/create" ><button>Create</button></NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink href="/About" ><button>About</button></NavLink>
         </NavItem>
         <NavItem>
           <NavLink href="/inventory" ><button>Inventory</button></NavLink>
