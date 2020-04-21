@@ -1,12 +1,13 @@
 import React, { Component} from 'react';
 import {Progress,Container, Row, Col, Table, Button, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
+import TopBar from "./TopBar"; 
 //import "./Stats.css"
 
 export default class Statistics extends Component {
   render() {
     return (             
-      <Container>
+      <Container><TopBar/><br/><br/>
       <Row><Col><h1>Statistics</h1></Col></Row>
       <Row><Col>        </Col></Row>
       <Row> <Col xs="1"></Col>
