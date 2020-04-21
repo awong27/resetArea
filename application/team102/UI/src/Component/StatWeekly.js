@@ -1,12 +1,12 @@
 import React, { Component} from 'react';
 import {Progress,Container, Row, Col, Table, Button, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
-//import "./Stats.css"
+import TopBar from "./TopBar"; 
 
 export default class StatWeekly extends Component {
   render() {
     return (             
-      <Container>
+      <Container><TopBar/><br/><br/>
       <Row><Col><h1>Statistics</h1></Col></Row>
       <Row><Col>        </Col></Row>
       <Row> <Col xs="1"></Col>
