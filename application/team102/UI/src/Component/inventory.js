@@ -1,6 +1,7 @@
 import React, {useState, Component} from 'react';
 import {Table, Button, Row, Col, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
+import TopBar from "./TopBar"; 
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -67,7 +68,8 @@ export default class inventory extends Component {
   }
   render() {      
     return (
-      <div>
+      <div><TopBar/>
+      <br/><br/>
       <div><h1>Inventory</h1></div>      
       <Table hover>
         <thead> 
@@ -82,24 +84,25 @@ export default class inventory extends Component {
           {this.inventory()}
         </tbody>
       </Table>
+      <div className="listItem"> 
       <Button className="invBar"><Row>
-        <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions">+-</Col>
+        <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions"></Col>
       </Row></Button>
       <Button className="invBar"><Row>
-        <Col className="itemName">Beef Shank</Col><Col className="expire">4/8</Col><Col className="quantity">1</Col><Col className="actions">+-</Col>
+        <Col className="itemName">Beef Shank</Col><Col className="expire">4/8</Col><Col className="quantity">1</Col><Col className="actions"></Col>
       </Row></Button>
       <Button className="invBar"><Row>
-        <Col className="itemName">Kiwi</Col><Col className="expire">9/1</Col><Col className="quantity">6</Col><Col className="actions">+-</Col>
+        <Col className="itemName">Kiwi</Col><Col className="expire">9/1</Col><Col className="quantity">6</Col><Col className="actions"></Col>
       </Row></Button>
       <Button className="invBar"><Row>
-        <Col className="itemName">Bread</Col><Col className="expire">2/10</Col><Col className="quantity">12</Col><Col className="actions">+-</Col>
+        <Col className="itemName">Bread</Col><Col className="expire">2/10</Col><Col className="quantity">12</Col><Col className="actions"></Col>
       </Row></Button>
       <Button className="invBar"><Row>
-        <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col className="quantity">3</Col><Col className="actions">+-</Col>
-      </Row></Button>
+        <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col className="quantity">3</Col><Col className="actions"></Col>
+      </Row></Button></div>
       <ButtonGroup size='lg'>
         <Button href="/create">Delete</Button>
-        <Button href="/create">Add</Button>
+        <Button href="/create">Scan</Button>
         <Button href="/create">Eat</Button>
       </ButtonGroup>
       <Navi/>
