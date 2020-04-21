@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import Navi from "./Navigation";
+import TopBar from "./TopBar"; 
 import { UncontrolledCarousel} from "reactstrap";
 import "./About.css"
 export default class About extends Component{
   render(){
     return(
-      <div className = "container" >
+      <div className = "container" ><TopBar/><br/><br/>
         <h1>About the Team</h1>
         <UncontrolledCarousel items={items} />
         <h2>Meetings: Wed 12:30PM | Sat 2:00PM</h2>
