@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import Tphoto from "./thanos.png";
 import { Container, Row, Col, NavLink} from "reactstrap";
 import Navi from "./Navigation";
+import TopBar from "./TopBar"; 
 import Fphoto from "./fridgeIcomn.png";
 import Mphoto from "./mealplanicon.png";
 import Dphoto from "./plate.png";
@@ -11,7 +12,7 @@ export default class Home extends Component{
     
   render() { 
     return (
-      <div align = "center" > 
+      <div align = "center" > <TopBar/>
       <Container className="HomePage">       
         <Row><Col> 
           <NavLink href="/About"><img alt="UserPic" src={Tphoto} className="userPic"/></NavLink>
