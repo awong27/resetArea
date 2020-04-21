@@ -1,7 +1,7 @@
-import React, {useState, Component} from 'react';
-import { Switch, Route, BrowserRouter} from "react-router-dom";
+import React, { useState, Component } from "react";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 //import Navi from "./Component/Navigation.js";
-import './App.css';
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./Component/About.js";
 import SList from "./Component/ShoppingList.js";
@@ -16,15 +16,16 @@ import StatWeekly from "./Component/StatWeekly.js";
 //import Nav2 from "./components/navbar.component";
 //import Inventory from "./components/inventory.component";
 //import EditFoodData from "./components/edit-fooddata.component";
-import CreateFood from "./Component/create-food.component.js";
+import CreateFood from "./Component/create-fooddata.component.js";
 
 function App() {
-  /** */   
-    //const[visibility,inVis] = useState(false);
-    
-    return (
-      <div align="center">          
-      <BrowserRouter>       
+  /** */
+
+  //const[visibility,inVis] = useState(false);
+
+  return (
+    <div align="center">
+      <BrowserRouter>
         <div className="Main">
           <Switch>
             <Route path="/" exact component={Welcome} />
@@ -35,12 +36,12 @@ function App() {
             <Route path="/SList" exact component={SList} />
             <Route path="/inventory" exact component={inventory} />
             <Route path="/mealplan" exact component={mealplan} />
-            <Route path="/statistics" exact component={Statistics} />  
-            <Route path="/StatWeekly" exact component={StatWeekly} />        
-            <Route path="/create" exact component={CreateFood}/>
+            <Route path="/statistics" exact component={Statistics} />
+            <Route path="/StatWeekly" exact component={StatWeekly} />
+            <Route path="/create" exact component={CreateFood} />
           </Switch>
-        </div>    
-      </BrowserRouter> 
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
