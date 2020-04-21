@@ -16,6 +16,7 @@ import navCart from './NavCart.png'
 import navFridge from './NavFridge.png'
 import navMeal from './NavMeal.png'
 import navPerson from './NavPerson.png'
+import navRecipe from './recipeIcon.png'
 
 const Navigation = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -32,36 +33,30 @@ const Navigation = () => {
           <img alt="Home" src ={navHome}/>           
         </NavLink>
         </NavItem>  
-      
-      <Dropdown nav isOpen={dropdownOpen} toggle={toggle}>
-        <DropdownToggle nav  active={openTab===1}>
-          <img alt="MealPlan" src ={navMeal}/>            
-        </DropdownToggle>
-        <DropdownMenu>            
-          <DropdownItem><NavLink href="/mealplan">Meal Plan</NavLink></DropdownItem>
-          
-          <DropdownItem><NavLink href="/mealplan">Recipes</NavLink></DropdownItem>
-        </DropdownMenu>
-      </Dropdown>
-      
+
       <NavItem onClick={()=> setTab(2)}>
-        <NavLink href="/SList" active={openTab===2}>
+        <NavLink href="/mealplan" active={openTab===1}>
+          <img alt="MealPlan" src ={navMeal}/> 
+        </NavLink>
+      </NavItem>
+
+      <NavItem onClick={()=> setTab(2)}>
+        <NavLink href="/mealplan" active={openTab===2}>
+          <img alt="Recipe" src ={navRecipe}/>
+        </NavLink>
+      </NavItem>
+
+      <NavItem onClick={()=> setTab(2)}>
+        <NavLink href="/SList" active={openTab===3}>
           <img alt="ShoppingList" src ={navCart}/>
         </NavLink>
       </NavItem>
             
       <NavItem onClick={()=> setTab(3)}>
-        <NavLink href="/inventory" active={openTab===3}>
+        <NavLink href="/inventory" active={openTab===4}>
           <img alt="inv" src ={navFridge}/>
         </NavLink>
       </NavItem>
-      
-      <NavItem onClick={()=> setTab(4)}> 
-        <NavLink  href="/statistics" active={openTab===4}>
-          <img alt="Stats" src ={navPerson}/>
-        </NavLink>
-      </NavItem>   
-      
       </Navbar> 
     </Nav> 
   );
