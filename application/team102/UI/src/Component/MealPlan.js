@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Table,Input} from 'reactstrap';
 import Navi from "./Navigation";
-
+import TopBar from "./TopBar"; 
 
 export default class MealPlan extends Component {
   render() {
     return (             
-      <Container>
+      <Container> <TopBar/> <br/><br/>
       <Row><Col><h1>Meal Plan</h1></Col></Row>
       <Row><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col></Row>
       <Row><Col><h2>Weekly Menu</h2></Col></Row>
