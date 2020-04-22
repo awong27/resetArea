@@ -16,6 +16,6 @@ after that if i run the npm start command inside the team102 folder evertying st
 switch to branch dmitry
 fetch origin
 go into the team102 folder
-run command: npm i react-router-dom bootstarp reactstrap
+run command: npm i react-router-dom bootstrap reactstrap axios 
 after that run: npm start
 should all work
