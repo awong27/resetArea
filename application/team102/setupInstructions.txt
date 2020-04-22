@@ -19,3 +19,10 @@ go into the team102 folder
 run command: npm i react-router-dom bootstrap reactstrap axios 
 after that run: npm start
 should all work
+
+
+######## Anthony Clone #########
+---Need npm installed
+git clone -b Anthony-Front-End https://github.com/CSC-648-SFSU/csc648-03-sp20-team102.git
+cd csc648-03-sp20-team102\application\team102\UI
+npm start
