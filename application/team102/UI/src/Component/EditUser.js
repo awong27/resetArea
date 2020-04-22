@@ -41,4 +41,4 @@ export default class EditUser extends Component{
       </div>
     );
   }
-
+}
