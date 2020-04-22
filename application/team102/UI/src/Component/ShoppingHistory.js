@@ -52,8 +52,4 @@ export default class ShoppingHistory extends Component {
       </div>
     )
   }
-<<<<<<< HEAD
-}
-=======
-}
->>>>>>> a3f9cc73f4d80b9828314ce84360166723aac3a9
+
