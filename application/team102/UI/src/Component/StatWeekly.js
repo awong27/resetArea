@@ -3,10 +3,12 @@ import {Progress,Container, Row, Col, Table, Button, ButtonGroup} from 'reactstr
 import Navi from "./Navigation";
 import TopBar from "./TopBar"; 
 
+
 export default class StatWeekly extends Component {
   render() {
-    return (             
-      <Container><TopBar/><br/><br/>
+    return (     
+      <div><TopBar/><br/><br/><br/>        
+      <Container>
       <Row><Col><h1>Statistics</h1></Col></Row>
       <Row><Col>        </Col></Row>
       <Row> <Col xs="1"></Col>
@@ -60,9 +62,10 @@ export default class StatWeekly extends Component {
           <Button href="/StatWeekly">Monthly</Button>
           <Button href="/Statistics">Daily</Button>
           <Button href="/StatWeekly">Weekly</Button>
-        </ButtonGroup>
-      <Navi/>              
+        </ButtonGroup>                   
       </Container>       
+      <Navi/> 
+      </div>
     );
   }
 }

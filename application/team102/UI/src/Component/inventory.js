@@ -1,4 +1,4 @@
-import React, {useState, Component} from 'react';
+import React, { Component} from 'react';
 import {Table, Button, Row, Col, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar"; 
@@ -69,7 +69,7 @@ export default class inventory extends Component {
   render() {      
     return (
       <div><TopBar/>
-      <br/><br/>
+      <br/><br/><br/>
       <div><h1>Inventory</h1></div>      
       <Table hover>
         <thead> 

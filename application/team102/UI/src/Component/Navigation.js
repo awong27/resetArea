@@ -2,10 +2,6 @@ import React, { useState } from "react";
 import {  
   Nav,
   NavItem,
-  Dropdown,
-  DropdownItem,
-  DropdownToggle,
-  DropdownMenu,
   NavLink,
   Navbar
 } from "reactstrap";
@@ -15,13 +11,12 @@ import navHome from './NavHome.png'
 import navCart from './NavCart.png'
 import navFridge from './NavFridge.png'
 import navMeal from './NavMeal.png'
-import navPerson from './NavPerson.png'
 import navRecipe from './recipeIcon.png'
 
 const Navigation = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  //const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openTab,setTab] = useState(0);
-  const toggle = () => setDropdownOpen(!dropdownOpen);
+  //const toggle = () => setDropdownOpen(!dropdownOpen);
   
   return (
      
@@ -41,7 +36,7 @@ const Navigation = () => {
       </NavItem>
 
       <NavItem onClick={()=> setTab(2)}>
-        <NavLink href="/mealplan" active={openTab===2}>
+        <NavLink href="/Recipe" active={openTab===2}>
           <img alt="Recipe" src ={navRecipe}/>
         </NavLink>
       </NavItem>

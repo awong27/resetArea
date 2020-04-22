@@ -16,7 +16,7 @@ const TopBar = () => {
     <Nav onScroll='fixed' fill='true' className='d-block'>
       <Navbar  fixed='top' color="light"  > 
                
-      <NavItem><h1>DIRT</h1></NavItem>
+      <NavItem className="logo"><h1>DIRT</h1></NavItem>
       <NavItem/><NavItem/><NavItem/>
       <NavItem> 
         <NavLink  href="/statistics">

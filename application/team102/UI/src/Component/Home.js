@@ -12,10 +12,10 @@ export default class Home extends Component{
     
   render() { 
     return (
-      <div align = "center" > <TopBar/>
-      <Container className="HomePage">       
+      <div align = "center" > <TopBar/> 
+      <Container className="HomePage">  <br/>
         <Row><Col> 
-          <NavLink href="/About"><img alt="UserPic" src={Tphoto} className="userPic"/></NavLink>
+          <NavLink href="/EditUser"><img alt="UserPic" src={Tphoto} className="userPic"/></NavLink>
         </Col></Row>  
               
         <Row>
@@ -24,11 +24,16 @@ export default class Home extends Component{
           <Col><NavLink href="/inventory"><img alt="Inv" src={Fphoto} className="icons"/></NavLink></Col>
         </Row>  
         <Row>
-          <Navi/> 
-        </Row>            
+          <Col><p>Meal Plan</p> </Col>
+          <Col><p>Statistics</p> </Col>
+          <Col><p>Inventory</p> </Col>
+        </Row>          
       </Container>      
-      
+      <Navi/> 
       </div>
     );
   }
 }
+/*<Row><Col xs='4'></Col><Col xs='4'></Col><Col>
+          <Badge className="notiv" color="danger">4</Badge>
+        </Col></Row> */
