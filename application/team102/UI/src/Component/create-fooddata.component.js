@@ -64,7 +64,7 @@ export default class Create extends Component {
 
     console.log(food);
     axios
-      .post("http://localhost:8080/fooddata/add", food)
+      .post("/fooddata/add", food)
       .then(res => console.log(res.data));
 
     window.location = "/inventory";
