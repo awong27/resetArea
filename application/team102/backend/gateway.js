@@ -10,9 +10,36 @@ apiProxy.on('error', (err, req, res) => {
   res.status(500).send('Proxy Error');
 });
 
-app.all('/fooddata*', (req, res) => {
+app.all('/fooddata', (req, res) => {
   apiProxy.web(req, res, {
     target: 'http://localhost:8080',
+  });
+});
+
+app.all('/fooddata/add', (req, res) => {
+  apiProxy.web(req, res, {
+    target: 'http://localhost:8080',
+  });
+});
+
+app.all('/api/auth/authenticate', (req, res) => {
+  incrCounter();
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3001',
+  });
+});
+
+app.all('/api/auth/create', (req, res) => {
+  incrCounter();
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3001',
+  });
+});
+
+app.all('/api/vision/read', (req, res) => {
+  incrCounter();
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3002',
   });
 });
 
