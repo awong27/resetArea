@@ -37,7 +37,7 @@ export default class inventory extends Component {
 
   componentDidMount() {
     axios
-      .get("http://localhost:8080/fooddata/")
+      .get("/fooddata/")
       .then(response => {
         this.setState({ fooddata: response.data });
       })
@@ -48,7 +48,7 @@ export default class inventory extends Component {
 
   deleteItems(id) {
     axios
-      .delete("http://localhost:8080/fooddata/" + id)
+      .delete("/fooddata/" + id)
       .then(res => console.log(res.data));
     this.setState({
       fooddata: this.state.fooddata.filter(el => el._id !== id)
