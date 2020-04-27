@@ -2,31 +2,68 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-import Navi from "./Navigation";
 
 export default class Create extends Component {
   constructor(props) {
     super(props);
 
+
     this.onChangeFoodname = this.onChangeFoodname.bind(this);
     this.onChangeExpirationdate = this.onChangeExpirationdate.bind(this);
     this.onChangeCalories = this.onChangeCalories.bind(this);
+    this.onChangeCarbs = this.onChangeCarbs.bind(this);
     this.onChangeNumberOfItems = this.onChangeNumberOfItems.bind(this);
-    this.onChangeDate = this.onChangeDate.bind(this);
+    this.onChangeSugar=this.onChangeSugar.bind(this);
+    this.onChangeFat=this.onChangeFat.bind(this);
+    this.onChangeProtein=this.onChangeProtein.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
+
+
+
+
 
     this.state = {
       foodname: "",
       expirationdate: "",
       calories: "",
       numberOfItems: "",
-      date: new Date()
+      carbs:"",
+      sugar:"",
+      fat:"",
+      protein:0,
+      foods:[],
+
+
+
     };
   }
+
+
 
   onChangeFoodname(e) {
     this.setState({
       foodname: e.target.value
+    });
+  }
+  onChangeFat(e){
+    this.setState({
+      fat:e.target.value
+    });
+  }
+  onChangeSugar(e){
+    this.setState({
+      sugar:e.target.value
+    });
+  }
+  onChangeProtein(e){
+    this.setState({
+      protein:e.target.value
+    });
+  }
+  onChangeCarbs(e){
+    this.setState({
+      carbs:e.target.value
     });
   }
 
@@ -45,21 +82,44 @@ export default class Create extends Component {
       numberOfItems: e.target.value
     });
   }
-  onChangeDate(date) {
-    this.setState({
-      date: date
-    });
-  }
+
+
 
   onSubmit(e) {
     e.preventDefault();
+    var proteins;
+
+
+    axios
+      .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query="+this.state.foodname)
+      .then(response => {
+        console.log(response.data.foods[0].foodNutrients[0]);
+        this.setState({
+        foods:response.data.foods[0].foodNutrients});
+        this.state.foods.map(currentfood=>{
+          //if(currentfood.nutrientName=="Protein"){
+            //this.state.protein=currentfood.value
+            console.log(currentfood.value);
+            proteins=currentfood.value;
+
+          //}
+        })
+
+      })
+      .catch(error => {
+        console.log(error);
+      });
 
     const food = {
       foodName: this.state.foodname,
       expirationDate: this.state.expirationdate,
       calories: this.state.calories,
       numOfItems: this.state.numberOfItems,
-      date: this.state.date
+      carbs:this.state.carbs,
+      protein:proteins,
+      fat:this.state.fat,
+      sugar:this.state.sugar,
+
     };
 
     console.log(food);
@@ -67,13 +127,19 @@ export default class Create extends Component {
       .post("http://localhost:8080/fooddata/add", food)
       .then(res => console.log(res.data));
 
-    window.location = "/inventory";
+    //window.location = "/";
   }
 
-  render() {
+
+
+
+  render(){
+
+
     return (
-      <div><br/><br/>
+      <div>
         <h3>Create New Food Items</h3>
+
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Food Name: </label>
@@ -85,24 +151,20 @@ export default class Create extends Component {
               onChange={this.onChangeFoodname}
             />
           </div>
+
+
           <div className="form-group">
-            <label>Expiration Date: </label>
+            <label>Expiration: </label>
             <input
               type="text"
+              required
               className="form-control"
               value={this.state.expirationdate}
               onChange={this.onChangeExpirationdate}
             />
           </div>
-          <div className="form-group">
-            <label>Calories: </label>
-            <input
-              type="text"
-              className="form-control"
-              value={this.state.calories}
-              onChange={this.onChangeCalories}
-            />
-          </div>
+
+
           <div className="form-group">
             <label>Number of Items: </label>
             <input
@@ -112,15 +174,7 @@ export default class Create extends Component {
               onChange={this.onChangeNumberOfItems}
             />
           </div>
-          <div className="form-group">
-            <label>Date: </label>
-            <div>
-              <DatePicker
-                selected={this.state.date}
-                onChange={this.onChangeDate}
-              />
-            </div>
-          </div>
+
 
           <div className="form-group">
             <input
@@ -130,7 +184,6 @@ export default class Create extends Component {
             />
           </div>
         </form>
-        <Navi/>
       </div>
     );
   }
