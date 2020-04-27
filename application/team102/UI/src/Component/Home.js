@@ -21,7 +21,9 @@ export default class Home extends Component{
   this.deleteItems = this.deleteItems.bind(this);
 
   this.state = {
-    userdata: []
+    userdata: [],
+    password:"",
+    username:""
 
 
    };
@@ -30,16 +32,21 @@ export default class Home extends Component{
 
 componentDidMount() {
   const {match:{params}} = this.props;
-
+  console.log(params.id);
   //console.log({itemid});
   axios
     .get(`http://localhost:8080/userdata/${params.id}`)
     .then(response => {
       this.setState({ userdata: response.data });
+
     })
     .catch(error => {
       console.log(error);
     });
+    this.setState({
+      password: this.state.userdata.password,
+      username: this.state.userdata.username
+    })
 }
 
 
@@ -53,11 +60,13 @@ deleteItems(id) {
 }
 
   render() {
-    var username = this.state.userdata.username;
+    console.log(this.state.userdata);
+
 
     return (
       <div align = "center" > <TopBar/>
       <Container className="HomePage">  <br/>
+
         <Row><Col>
           <NavLink href="/EditUser"><img alt="UserPic" src={Tphoto} className="userPic"/></NavLink>
         </Col></Row>
@@ -78,6 +87,3 @@ deleteItems(id) {
     );
   }
 }
-/*<Row><Col xs='4'></Col><Col xs='4'></Col><Col>
-          <Badge className="notiv" color="danger">4</Badge>
-        </Col></Row> */
