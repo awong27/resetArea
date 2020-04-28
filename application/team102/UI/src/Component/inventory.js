@@ -1,7 +1,7 @@
 import React, { Component} from 'react';
 import {Table, Button, Row, Col, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
-import TopBar from "./TopBar"; 
+import TopBar from "./TopBar";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -26,7 +26,7 @@ const Fooddata = props => (
 );
 
 export default class inventory extends Component {
-    
+
   constructor(props) {
     super(props);
 
@@ -56,35 +56,38 @@ export default class inventory extends Component {
   }
 
   inventory() {
+    const {match:{params}} = this.props;
     return this.state.fooddata.map(currentfood => {
-      return (
-        <Fooddata
-          food={currentfood}
-          deleteItems={this.deleteItems}
-          key={currentfood._id}
-        />
-      );
+      if(currentfood.creator==params.id){
+        return (
+          <Fooddata
+            food={currentfood}
+            deleteItems={this.deleteItems}
+            key={currentfood._id}
+            />
+          );}
     });
   }
-  render() {      
+
+  render() {
     return (
       <div><TopBar/>
       <br/><br/><br/>
-      <div><h1>Inventory</h1></div>      
+      <div><h1>Inventory</h1></div>
       <Table hover>
-        <thead> 
+        <thead>
           <tr>
             <th>Item</th>
             <th>Exp. Date</th>
             <th>Quantity</th>
             <th>Actions</th>
           </tr>
-        </thead>      
-        <tbody>                   
+        </thead>
+        <tbody>
           {this.inventory()}
         </tbody>
       </Table>
-      <div className="listItem"> 
+      <div className="listItem">
       <Button className="invBar"><Row>
         <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions"></Col>
       </Row></Button>

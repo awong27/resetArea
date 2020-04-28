@@ -24,25 +24,25 @@ import StatWeekly from "./Component/StatWeekly.js";
 import CreateFood from "./Component/create-fooddata.component.js";
 
 function App() {
-  /** */   
+  /** */
     //const[visibility,inVis] = useState(false);
-    
+
     return (
-      <div align="center">          
-      <BrowserRouter>       
+      <div align="center">
+      <BrowserRouter>
         <div className="Main">
           <Switch>
             <Route path="/" exact component={Welcome} />
             <Route path="/Register" exact component={Register} />
             <Route path="/Login" exact component={Login} />
 
-            <Route path="/Home" exact component={Home} />
+            <Route path="/Home/:id/:password" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />
             <Route path="/About" exact component={About} />
 
             <Route path="/SList" exact component={SList} />
             <Route path="/SHist" exact component={SHist} />
-            <Route path="/inventory" exact component={inventory} />
+            <Route path="/inventory/:id/:password" exact component={inventory} />
 
             <Route path="/mealplan" exact component={mealplan} />
             <Route path="/mealDay" exact component={mealDay} />
@@ -50,12 +50,12 @@ function App() {
             <Route path="/Recipe" exact component={Recipe} />
             <Route path="/inRep" exact component={inRep} />
 
-            <Route path="/statistics" exact component={Statistics} />  
-            <Route path="/StatWeekly" exact component={StatWeekly} />        
+            <Route path="/statistics" exact component={Statistics} />
+            <Route path="/StatWeekly" exact component={StatWeekly} />
             <Route path="/create" exact component={CreateFood}/>
           </Switch>
-        </div>    
-      </BrowserRouter> 
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
