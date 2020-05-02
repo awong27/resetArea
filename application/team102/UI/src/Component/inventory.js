@@ -1,28 +1,17 @@
 import React, { Component} from 'react';
-import {Table, Button, Row, Col, ButtonGroup} from 'reactstrap';
+import {Button, Row, Col, ButtonGroup} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
-import { Link } from "react-router-dom";
 import axios from "axios";
 
-const Fooddata = props => (
-  <tr>
-    <td scope="row">{props.food.foodName}</td>
-    <td>{props.food.expirationDate}</td>
-    <td>{props.food.calories}</td>
-    <td>{props.food.numOfItems}</td>
-    <td>
-      <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-      <a
-        href="/create"
-        onClick={() => {
-          props.deleteItems(props.food._id);
-        }}
-      >
-        delete
-      </a>
-    </td>
-  </tr>
+const Fooddata = props => (  
+  <Button className="invBar" ><Row>
+    <Col className="itemName">{props.food.foodName}</Col>
+    <Col className="expire">{props.food.expirationDate}</Col>
+    
+    <Col className="actions">{props.food.numOfItems}</Col>
+    <Col><Button onClick={() => "/create" + props.food._id}>Edit</Button><Button onClick={() => {props.deleteItems(props.food._id);}}>Delete</Button></Col>
+  </Row></Button>
 );
 
 export default class inventory extends Component {
@@ -58,7 +47,7 @@ export default class inventory extends Component {
   inventory() {
     const {match:{params}} = this.props;
     return this.state.fooddata.map(currentfood => {
-      if(currentfood.creator==params.id){
+      if(currentfood.creator===params.id){
         return (
           <Fooddata
             food={currentfood}
@@ -69,40 +58,19 @@ export default class inventory extends Component {
     });
   }
 
-  render() {
+  render() {      
     return (
       <div><TopBar/>
       <br/><br/><br/>
-      <div><h1>Inventory</h1></div>
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Exp. Date</th>
-            <th>Quantity</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.inventory()}
-        </tbody>
-      </Table>
-      <div className="listItem">
-      <Button className="invBar"><Row>
-        <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Beef Shank</Col><Col className="expire">4/8</Col><Col className="quantity">1</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Kiwi</Col><Col className="expire">9/1</Col><Col className="quantity">6</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Bread</Col><Col className="expire">2/10</Col><Col className="quantity">12</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col className="quantity">3</Col><Col className="actions"></Col>
-      </Row></Button></div>
+      <div><h1>Inventory</h1></div>     
+      <Row>
+        <Col>Item</Col>  
+        <Col>Exp. Date</Col>  
+        <Col>Qty</Col>  
+        <Col>Actions</Col>        
+      </Row> 
+      {this.inventory()}
+            
       <ButtonGroup size='lg'>
         <Button href="/create">Delete</Button>
         <Button href="/create">Scan</Button>

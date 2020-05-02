@@ -41,5 +41,15 @@
 .nav-item{
     width: 20vw;
 }
+.userPic {
+    border-radius: 50%;
+    width: 25vw;
+    max-width: 45px;
+    height: 25vw; 
+    max-height: 45px;   
+    padding: 2px;
+
+    background: silver;
+}
 
 

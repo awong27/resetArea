@@ -16,8 +16,6 @@ export default class Home extends Component{
   constructor(props) {
   super(props);
 
-
-
   this.deleteItems = this.deleteItems.bind(this);
 
   this.state = {
@@ -55,7 +53,7 @@ deleteItems(id) {
     .delete("http://localhost:8080/userdata/" + id)
     .then(res => console.log(res.data));
   this.setState({
-    userdata: this.state.userdata.filter(el => el._id != id)
+    userdata: this.state.userdata.filter(el => el._id !== id)
   });
 }
 
