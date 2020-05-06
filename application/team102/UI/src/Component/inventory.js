@@ -60,7 +60,7 @@ export default class inventory extends Component {
 
   render() {      
     return (
-      <div><TopBar/>
+      <div><TopBar/><div>
       <br/><br/><br/>
       <div><h1>Inventory</h1></div>     
       <Row>
@@ -71,11 +71,11 @@ export default class inventory extends Component {
       </Row> 
       {this.inventory()}
             
-      <ButtonGroup size='lg'>
+      <ButtonGroup size='lg' >
         <Button href="/create">Delete</Button>
         <Button href="/create">Scan</Button>
         <Button href="/create">Eat</Button>
-      </ButtonGroup>
+      </ButtonGroup></div>
       <Navi/>
       </div>
     )

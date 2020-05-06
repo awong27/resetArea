@@ -1,7 +1,6 @@
 .icons {
     border-radius: 50%;
-    max-width: 175px;
-    max-height: 175px;
+
     width: 23vw;
     height: 23vw;       
     margin-top: 7.5vh;
@@ -42,4 +41,23 @@
     font-size: 1.75rem;
     border-radius: 50% 50% 50% 10%;
     vertical-align: bottom;    
+}
+.homeRow {
+    width: 100vw;
+    height: 45vh;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.homeSquare {
+    width: 45vw;
+    height: 45vh;
+    padding: 10px;
+    border-radius: 10%;
+    
+}
+.homeSquare > .nav-link {
+    color: rgb(87, 87, 87);
+}
+.HomePage {
+    padding-top: 52px;;
 }

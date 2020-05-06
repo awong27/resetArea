@@ -25,14 +25,14 @@ const Navigation = () => {
       <Navbar  fixed='bottom' color="light" className="navbar-light navbar-expand-sm" > 
          
       <NavItem onClick={()=> setTab(0)}>
-        <NavLink href="/mealplan" active={openTab===0}>
-          <img alt="MealPlan" src ={navMeal}/> 
+        <NavLink href="/Recipe" active={openTab===0}>
+          <img alt="Recipe" src ={navRecipe}/>
         </NavLink>
       </NavItem>
 
       <NavItem onClick={()=> setTab(1)}>
-        <NavLink href="/Recipe" active={openTab===1}>
-          <img alt="Recipe" src ={navRecipe}/>
+        <NavLink href="/mealplan" active={openTab===1}>
+          <img alt="MealPlan" src ={navMeal}/> 
         </NavLink>
       </NavItem>
 
@@ -43,7 +43,7 @@ const Navigation = () => {
       </NavItem>
             
       <NavItem onClick={()=> setTab(3)}>
-        <NavLink href="/inventory" active={openTab===3}>
+        <NavLink href="/inventory/:id/:password" active={openTab===3}>
           <img alt="inv" src ={navFridge}/>
         </NavLink>
       </NavItem>

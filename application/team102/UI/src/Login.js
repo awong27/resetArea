@@ -128,12 +128,12 @@ onSubmit(e) {
         </div>
         <FormGroup>
         <div className="lowerbox">
-          <Input
+          <Button><Input
             type="submit"
             value="Login"
-            className="btn btn-primary"
-          />
-
+            className="btn btn-secondary"
+          /></Button>
+          <Button href="/">Go Back</Button>
         </div>
         </FormGroup>
 

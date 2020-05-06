@@ -8,7 +8,7 @@ export default class ShoppingHistory extends Component {
   render() {      
     return (
       <div><TopBar/><br/><br/><br/>
-      <div><h1>Shopping History</h1></div>   
+      <div><h1>Shopping History</h1></div>         
       <div className="listItem">   
       <Row><Col xs='1'/><h3>Feb 28, 2020</h3></Row>
       <Button className="invBar"><Row>
