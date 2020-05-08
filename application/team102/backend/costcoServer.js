@@ -10,22 +10,45 @@ app.use(bodyParser());
 
 app.post('/api/description/get', (req, res) => {
 
-    console.log(req.body);
+    const descriptions = [];
+    let info;
     const itemsIds = req.body.itemsIds;
-
-    itemsIds.forEach(item => {
     
-        rp(`https://www.costcobusinessdelivery.com/${item}`)
-        .then((html) => {
-            const $ = cheerio.load(html);
-            const info = $('.description').text();
-            console.log(info);
-        })
-        .catch((e) => {
-            //console.log(e);
-            //add to array item not found.
+    let successes = 0;
+    let failures = 0;
+    let returns = 0;
+
+    const promise1 = new Promise( (resolve, reject) => {
+
+        itemsIds.forEach( (item, index, array) => {
+    
+            rp(`https://www.costcobusinessdelivery.com/${item}`)
+            .then((html) => {
+                const $ = cheerio.load(html);
+                info = $('.description').text().trim();
+                //console.log(info);
+                returns += 1;
+                //console.log(`returns ${returns}`);
+            })
+            .then(()=> {
+                descriptions.push(info);
+            })
+            .catch((e) => {
+                //console.log(e);
+                //add to array item not found.
+                returns +=1
+                //console.log(`returns ${returns}`);
+            }).then( () => {
+                //console.log(`length of original array ${array.length} returns ${returns}`);
+                if (returns === array.length) resolve('success');
+            });
         });
-        
+    });
+
+    promise1.then((value) =>{
+        console.log(value);
+        console.log(descriptions);
+        res.send(descriptions);
     });
 
 });
