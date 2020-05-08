@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {  
+import {
   Nav,
   NavItem,
   NavLink,
@@ -7,48 +7,61 @@ import {
 } from "reactstrap";
 import './Nav.css';
 
-//import navHome from './NavHome.png'
+import navHome from './NavHome.png'
 import navCart from './NavCart.png'
 import navFridge from './NavFridge.png'
 import navMeal from './NavMeal.png'
-//import navPerson from './NavPerson.png'
 import navRecipe from './recipeIcon.png'
 
-const Navigation = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+var Navigation = ({username,password}) => {
+  console.log(username);
+  console.log(password);
+  //const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openTab,setTab] = useState(0);
-  const toggle = () => setDropdownOpen(!dropdownOpen);
-  
-  return (
-     
-    <Nav onScroll='fixed' fill='true'>
-      <Navbar  fixed='bottom' color="light" className="navbar-light navbar-expand-sm" > 
-         
-      <NavItem onClick={()=> setTab(0)}>
-        <NavLink href="/Recipe" active={openTab===0}>
-          <img alt="Recipe" src ={navRecipe} className="nav-pic"/>
-        </NavLink>
-      </NavItem>
+  //const toggle = () => setDropdownOpen(!dropdownOpen);
+  var home = "/Home/"+username+"/"+password
+  var recipe = "/Recipe/"+username+"/"+password
+  var slist = "/SList/"+username+"/"+password
+  var inv = "/inventory/"+username+"/"+password
+  var mealplan = "/mealplan/"+username+"/"+password
 
-      <NavItem onClick={()=> setTab(1)}>
-        <NavLink href="/mealplan" active={openTab===1}>
-          <img alt="MealPlan" src ={navMeal} className="nav-pic"/> 
+
+  return (
+
+    <Nav onScroll='fixed' fill='true'>
+      <Navbar  fixed='bottom' color="light" className="navbar-light navbar-expand-sm" >
+
+      <NavItem onClick={()=> setTab(0)} >
+        <NavLink href={home} active={openTab===0} >
+          <img alt="Home" src ={navHome}/>
+        </NavLink>
+        </NavItem>
+
+      <NavItem onClick={()=> setTab(2)}>
+        <NavLink href={mealplan} active={openTab===1}>
+          <img alt="MealPlan" src ={navMeal}/>
         </NavLink>
       </NavItem>
 
       <NavItem onClick={()=> setTab(2)}>
-        <NavLink href="/SList" active={openTab===2}>
-          <img alt="ShoppingList" src ={navCart} className="nav-pic"/>
+        <NavLink href={recipe} active={openTab===2}>
+          <img alt="Recipe" src ={navRecipe}/>
         </NavLink>
       </NavItem>
-            
+
+      <NavItem onClick={()=> setTab(2)}>
+        <NavLink href={slist} active={openTab===3}>
+          <img alt="ShoppingList" src ={navCart}/>
+        </NavLink>
+      </NavItem>
+
       <NavItem onClick={()=> setTab(3)}>
-        <NavLink href="/inventory/:id/:password" active={openTab===3}>
-          <img alt="inv" src ={navFridge} className="nav-pic"/>
+        <NavLink href={inv} active={openTab===4}>
+          <img alt="inv" src ={navFridge}/>
         </NavLink>
       </NavItem>
-      </Navbar> 
-    </Nav> 
+      </Navbar>
+    </Nav>
   );
 };
 
