@@ -98,12 +98,13 @@ export default class SignIn extends Component {
   }
   
   render() {  
-    //const [count,setCount] = useState(true);
-    //const onToggle = () => setCount(!count);
-    
+    /*
+      Form will take information and send to backend
+      Form input boxes shown depending on 'count' state .. login | register   
+    */
     return (                    
-      <Form align="centered" onSubmit={this.onSubmit}>   
-      <div className="upperbox">   
+      <Form align="centered" onSubmit={this.onSubmit}>         
+      <div className="upperbox">  
         {this.state.count===0?<>      
           <FormGroup>
             <Label for="exampleUsername">Username</Label>
@@ -163,7 +164,7 @@ export default class SignIn extends Component {
           className="btn"
           /></Button>
         
-      <ButtonGroup size='lg' className="d-block">
+      <ButtonGroup size='lg' className="d-block size-fitcontent">
       {this.state.count===0?<>
         <Button className="lightState"  onClick={()=> this.setState({count: 0})} >Login</Button>
         <Button onClick={()=> this.setState({count: 1})} >Register</Button>

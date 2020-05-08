@@ -1,8 +1,12 @@
 import React, { Component} from 'react';
-import {Button, Row, Col, ButtonGroup} from 'reactstrap';
+import {Button, Badge, Row, Col, ButtonGroup, Card, CardImg, CardImgOverlay, CardTitle, CardText, CardFooter, CardHeader} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
+import "./inv.css";
+import Tphoto from "./thanos.png";
+import consume from "./pizzaIcon.png";
+import trash from "./trashIcon.png";
 
 const Fooddata = props => (  
   <Button className="invBar" ><Row>
@@ -21,7 +25,10 @@ export default class inventory extends Component {
 
     this.deleteItems = this.deleteItems.bind(this);
 
-    this.state = { fooddata: [] };
+    this.state = { 
+      fooddata: []      
+    };
+    
   }
 
   componentDidMount() {
@@ -57,27 +64,376 @@ export default class inventory extends Component {
           );}
     });
   }
-
-  render() {      
-    return (
-      <div><TopBar/><div>
-      <br/><br/><br/>
-      <div><h1>Inventory</h1></div>     
-      <Row>
-        <Col>Item</Col>  
-        <Col>Exp. Date</Col>  
-        <Col>Qty</Col>  
-        <Col>Actions</Col>        
+  fake() {
+    return (<div>
+      <Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col>         
       </Row> 
+      <Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col>         
+      </Row><Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col>         
+      </Row><Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col>         
+      </Row><Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button>
+                  <Badge color="danger">!</Badge>
+                </Button>
+                <Button>
+                  <CardText>Apple</CardText>
+                </Button>
+                <Button>
+                  <CardText>3/15</CardText>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Qty</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col>         
+      </Row>
+</div>
+    );
+  }
+  render() {     
+    return (
+      <div><TopBar/>
+      <br/><br/><br/>
+      <div><h1>Inventory</h1></div>  
+         
+      {this.fake()}
       {this.inventory()}
             
-      <ButtonGroup size='lg' >
-        <Button href="/create">Delete</Button>
-        <Button href="/create">Scan</Button>
-        <Button href="/create">Eat</Button>
-      </ButtonGroup></div>
+      <br/><br/>
       <Navi/>
       </div>
     )
   }
 }
+
+/* <Row className="FridgeList">
+        <Col>
+          <Card className="invItem">
+            <CardImg alt="FridgeItem" src={Tphoto}/>
+            <CardHeader>
+              <ButtonGroup className="itemHead">
+                <Button><h2>
+                  <Badge color="danger">!</Badge></h2>
+                </Button>
+                <Button>
+                  <h1>Apple</h1>
+                </Button>
+                <Button>
+                  <h5>Exp Date</h5>
+                </Button>
+              </ButtonGroup>
+            </CardHeader>  
+            <CardFooter>
+              <ButtonGroup className="itemOptions">
+                <Button>
+                  <img alt="delete" src ={trash} />
+                </Button>
+                <Button>
+                  <CardText>Quantity</CardText>
+                </Button>
+                <Button>
+                  <img alt="eat" src ={consume} />
+                </Button>
+              </ButtonGroup>
+            </CardFooter>
+          </Card>  
+        </Col> 
+        
+      </Row> 
+      */

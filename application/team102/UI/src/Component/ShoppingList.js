@@ -7,6 +7,12 @@ export default class ShoppingList extends Component {
       
   render() {      
     return (
+      /*
+      * Shopping List Pulls info and displays as buttons
+      *
+      * 
+      * 
+      */
       <div><TopBar/><br/><br/><br/> <div className="midCon">
       <div><h1>Shopping List</h1></div>  
       <Row><Col xs='1'/><Col  align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
