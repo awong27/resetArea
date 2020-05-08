@@ -28,7 +28,7 @@ const mealplanRouter = require("./routes/mealplan")
 
 app.use("/fooddata", fooddataRouter);
 app.use("/userdata", userdataRouter);
-app.use("/mealplan", mealplanRouter;)
+app.use("/mealplan", mealplanRouter);
 
 // app.get("/", function(req, res, next) {
 //   res.send("Hello world");

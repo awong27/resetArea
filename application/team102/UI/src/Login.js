@@ -39,7 +39,7 @@ deleteItems(id) {
     .delete("http://localhost:8080/fooddata/" + id)
     .then(res => console.log(res.data));
   this.setState({
-    fooddata: this.state.fooddata.filter(el => el._id != id)
+    fooddata: this.state.fooddata.filter(el => el._id !== id)
   });
 }
 
@@ -83,17 +83,17 @@ onSubmit(e) {
     profilePic: this.state.ProfilePic
   };
 
-    this.state.logindata.map(currentuser=>{
-    if(currentuser.password==user.password && currentuser.username==user.username){
+  this.state.logindata.map(currentuser=>{
+    if(currentuser.password===user.password && currentuser.username===user.username){
       window.location = "/Home/"+user.username+"/"+user.password;
     }else{
       return(
         <div>
         <h3>Wrong Password</h3>
         </div>
-      )
+      );
     }
-  })
+  });
 
 
 
@@ -128,12 +128,12 @@ onSubmit(e) {
         </div>
         <FormGroup>
         <div className="lowerbox">
-          <Input
+          <Button><Input
             type="submit"
             value="Login"
-            className="btn btn-primary"
-          />
-
+            className="btn btn-secondary"
+          /></Button>
+          <Button href="/">Go Back</Button>
         </div>
         </FormGroup>
 

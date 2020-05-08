@@ -16,6 +16,7 @@ import EditUser from "./Component/EditUser.js"
 import Register from "./Register.js";
 import Login from "./Login.js";
 import Welcome from "./Welcome.js";
+import SignIn from "./SignIn.js";
 import Statistics from "./Component/Statistics.js";
 import StatWeekly from "./Component/StatWeekly.js";
 //import Nav2 from "./components/navbar.component";
@@ -24,7 +25,7 @@ import StatWeekly from "./Component/StatWeekly.js";
 import CreateFood from "./Component/create-fooddata.component.js";
 
 function App() {
-  /** */
+  /** <Route path="/" exact component={Welcome} />*/
     //const[visibility,inVis] = useState(false);
 
     return (
@@ -32,7 +33,7 @@ function App() {
       <BrowserRouter>
         <div className="Main">
           <Switch>
-            <Route path="/" exact component={Welcome} />
+            <Route path="/" exact component={SignIn} />
             <Route path="/Register" exact component={Register} />
             <Route path="/Login" exact component={Login} />
 

@@ -27,9 +27,6 @@ export default class Register extends Component {
 
   };
 }
-getNutrients(){
-
-}
 
 onChangename(e) {
   this.setState({
