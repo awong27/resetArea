@@ -93,6 +93,7 @@ export default class SignIn extends Component {
           </div>
         );
       }
+      return (null);
     }); 
   
   }
@@ -148,23 +149,20 @@ export default class SignIn extends Component {
               onChange={this.onChangepassword} />
           </FormGroup>
         <FormGroup>
-          <Label for="exampleEmail">UserName</Label>
-          <Input type="email" name="email" id="exampleEmail" placeholder="Email or Phone" />
+          <Label for="exampleUsername">UserName</Label>
+          <Input type="Username" name="Username" id="exampleUsername" placeholder="Username" />
         </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Picture</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="Password" />
-        </FormGroup> 
+ 
         </>}
         </div> 
         <div className="lowerbox">
-        <Button size='lg' className="submitBtn"><Input
+        <Button size='lg' className="SignSpace"><Input
           type="submit"
           value="Submit"
           className="btn"
           /></Button>
         
-      <ButtonGroup size='lg' className="d-block size-fitcontent">
+      <ButtonGroup size='lg' className="SignSpace">
       {this.state.count===0?<>
         <Button className="lightState"  onClick={()=> this.setState({count: 0})} >Login</Button>
         <Button onClick={()=> this.setState({count: 1})} >Register</Button>

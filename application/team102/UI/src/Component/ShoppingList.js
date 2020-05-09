@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Row, Col, Input, ButtonGroup} from 'reactstrap';
+import {Button, Row, Col, Input} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar"; 
 
@@ -32,11 +32,7 @@ export default class ShoppingList extends Component {
       <Button className="invBar"><Row>
         <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col/><Col/>
       </Row></Button></div>
-      <ButtonGroup size='lg' >
-        <Button href="/SHist">History</Button>
-        <Button href="/create">New Item</Button>
-        <Button href="/inventory">+ Inventory</Button>
-      </ButtonGroup>
+      
       </div>
 
       <Navi/>
@@ -44,3 +40,9 @@ export default class ShoppingList extends Component {
     )
   }
 }
+/*<ButtonGroup size='lg' >
+        <Button href="/SHist">History</Button>
+        <Button href="/create">New Item</Button>
+        <Button href="/inventory">+ Inventory</Button>
+      </ButtonGroup>
+      */

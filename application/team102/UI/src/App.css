@@ -25,7 +25,7 @@
   height: 50vh;
   box-sizing: border-box;
   border-radius: 10%;
-  padding: 20%;
+
 }
 .lowerbox > a:link , a:visited {
   padding:3vh 7vw;
@@ -46,14 +46,7 @@
   height: 7vh;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
 }
-.btn-group {
-  left: 1vw;
-  right: 1vw;
-  align-content: center;
-  bottom: 53px;  
-  
-  position: fixed !important;
-}
+
 .btn-secondary {
   color: #272343 !important;
   background-color: #e3f6f5 !important;
@@ -81,14 +74,19 @@
   background-color: rgb(96, 152, 204) !important;
   box-shadow: cadetblue !important;
 }
-.submitBtn {
-  left: 1vw;
-  right: 1vw;
-  align-content: center;
-  
-  display: block !important;
-  
-}
+
 .row {
   margin: 0 !important;
+}
+.SignSpace {
+  
+  width: 80vw;
+  align-content: center;
+  position: relative;
+  margin-top: 10vh;
+  padding-left: 10vw !important;
+  padding-right: 10vw !important;
+}
+.lowerbox > .btn-group {
+  box-sizing: content-box !important;
 }

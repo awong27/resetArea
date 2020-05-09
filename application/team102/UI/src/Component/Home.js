@@ -1,11 +1,7 @@
-import React, {Link, Component} from 'react';
-import Tphoto from "./thanos.png";
+import React, {Component} from 'react';
 import { Container, Row, Col, NavLink, ListGroup, ListGroupItem, Badge} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
-import Fphoto from "./fridgeIcomn.png";
-import Mphoto from "./mealplanicon.png";
-import Dphoto from "./plate.png";
 import "./Home.css";
 import axios from "axios";
 

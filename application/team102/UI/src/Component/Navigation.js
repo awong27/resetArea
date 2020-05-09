@@ -7,17 +7,13 @@ import {
 } from "reactstrap";
 import './Nav.css';
 
-//import navHome from './NavHome.png'
 import navCart from './NavCart.png'
 import navFridge from './NavFridge.png'
 import navMeal from './NavMeal.png'
-//import navPerson from './NavPerson.png'
 import navRecipe from './recipeIcon.png'
 
 const Navigation = () => {
-  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openTab,setTab] = useState(0);
-  const toggle = () => setDropdownOpen(!dropdownOpen);
   
   return (
      

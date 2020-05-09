@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {Button, Badge, Row, Col, ButtonGroup, Card, CardImg, CardImgOverlay, CardTitle, CardText, CardFooter, CardHeader} from 'reactstrap';
+import {Button, Badge, Row, Col, ButtonGroup, Card, CardImg, CardText, CardFooter, CardHeader} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -61,7 +61,7 @@ export default class inventory extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
             />
-          );}
+          );} else return (null);
     });
   }
   fake() {
