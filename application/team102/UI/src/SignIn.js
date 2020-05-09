@@ -129,6 +129,10 @@ export default class SignIn extends Component {
           </FormGroup>
         </> : <>
         <FormGroup>
+          <Label for="exampleEmail">Email</Label>
+          <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
+        </FormGroup>
+        <FormGroup>
             <Label for="exampleUsername">Username</Label>
             <Input
               type="username"
@@ -147,12 +151,7 @@ export default class SignIn extends Component {
               placeholder="Password"
               value={this.state.Password}
               onChange={this.onChangepassword} />
-          </FormGroup>
-        <FormGroup>
-          <Label for="exampleUsername">UserName</Label>
-          <Input type="Username" name="Username" id="exampleUsername" placeholder="Username" />
-        </FormGroup>
- 
+          </FormGroup> 
         </>}
         </div> 
         <div className="lowerbox">

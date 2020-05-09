@@ -58,7 +58,7 @@ deleteItems(id) {
 
 
     return (
-      <div align = "center" > <TopBar/>
+      <div align = "center" className="container"> <TopBar/>
       <Container className="HomePage">  <br/>
 
         <Row className="homeRow">

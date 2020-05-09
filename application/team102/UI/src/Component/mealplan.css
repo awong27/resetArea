@@ -12,3 +12,6 @@
     background-color: rgb(102, 170, 180);
     height: 100%;
 }
+.tab-pane.active {
+    height: 100%;
+}

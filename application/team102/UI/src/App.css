@@ -3,7 +3,8 @@
 }
 .Main {
   background-color: #bae8e8;
-  height: 100vh;
+  height: 200%;
+  min-height: 100vh;
 }
 .upperbox {
   background-color: #e3f6f5;
@@ -54,8 +55,10 @@
   background-color: #bae8e8;
   padding-left: 0 !important;
   padding-right: 0 !important;
+  min-height: 100vh;
   height: 100% !important;
-
+  margin: 0 !important;
+  width: 100vw;
 }
 .listItem {
   width: 100vw !important;
