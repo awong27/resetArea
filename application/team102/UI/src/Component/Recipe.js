@@ -7,7 +7,7 @@ export default class Recipe extends Component {
   render() {
     return (        
       <div><TopBar/> <br/><br/><br/>
-      <Container> 
+      <Container className="fit-content"> 
         <Row><Col><h1>Recipes</h1></Col></Row>
         <Row><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col></Row>
         <Row><Button href='/inRep' className='bigdes'>Recipe 1</Button></Row>

@@ -5,7 +5,6 @@
   background-color: #bae8e8;
   height: 100vh;
 }
-
 .upperbox {
   background-color: #e3f6f5;
   box-shadow: inset rgb(0, 0, 0);
@@ -52,9 +51,11 @@
   background-color: #e3f6f5 !important;
 }
 .container {
-  height: 100vh;
+  background-color: #bae8e8;
   padding-left: 0 !important;
   padding-right: 0 !important;
+  height: 100% !important;
+
 }
 .listItem {
   width: 100vw !important;

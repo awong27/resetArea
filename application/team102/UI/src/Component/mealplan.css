@@ -1,0 +1,14 @@
+.plan > .nav-item > .nav-link.active {
+    color: #495057;
+    background-color: rgb(102, 170, 180);
+    border-color: rgba(102, 170, 180, 0);
+}
+.plan {
+    color: #495057;
+    background-color: rgba(96, 116, 158, 0.247); 
+    border-color: rgba(102, 170, 180, 0);
+}
+.tab-content {
+    background-color: rgb(102, 170, 180);
+    height: 100%;
+}
