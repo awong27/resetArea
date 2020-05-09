@@ -13,9 +13,6 @@
     flex-direction: row;
     display: flex;
 }
-.logo {
-    padding-left: 15px;
-}
 .navbar {     
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, .25);
     background-size: contain;
@@ -27,7 +24,7 @@
 
 .nav-pic {
     width: 45px;
-    height: 45px;
+    height: 40px;
 }
 .userPic {
     border-radius: 50%;
