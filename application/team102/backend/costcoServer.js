@@ -1,7 +1,7 @@
 const express = require('express');
 const rp = require('request-promise');
 const cheerio = require('cheerio');
-const port = 3006;
+const port = process.env.PORT || 3006;
 
 const app = express();
 
@@ -14,8 +14,6 @@ app.post('/api/description/get', (req, res) => {
     let info;
     const itemsIds = req.body.itemsIds;
     
-    let successes = 0;
-    let failures = 0;
     let returns = 0;
 
     const promise1 = new Promise( (resolve, reject) => {
@@ -26,20 +24,16 @@ app.post('/api/description/get', (req, res) => {
             .then((html) => {
                 const $ = cheerio.load(html);
                 info = $('.description').text().trim();
-                //console.log(info);
                 returns += 1;
-                //console.log(`returns ${returns}`);
             })
             .then(()=> {
-                descriptions.push(info);
+                if(!info.includes('\t')){
+                    descriptions.push(info);
+                }
             })
             .catch((e) => {
-                //console.log(e);
-                //add to array item not found.
                 returns +=1
-                //console.log(`returns ${returns}`);
             }).then( () => {
-                //console.log(`length of original array ${array.length} returns ${returns}`);
                 if (returns === array.length) resolve('success');
             });
         });
