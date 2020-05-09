@@ -7,49 +7,44 @@ import {
 } from "reactstrap";
 import './Nav.css';
 
-import navHome from './NavHome.png'
+//import navHome from './NavHome.png'
 import navCart from './NavCart.png'
 import navFridge from './NavFridge.png'
 import navMeal from './NavMeal.png'
+//import navPerson from './NavPerson.png'
 import navRecipe from './recipeIcon.png'
 
 const Navigation = () => {
-  //const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const [openTab,setTab] = useState(0);
-  //const toggle = () => setDropdownOpen(!dropdownOpen);
+  const toggle = () => setDropdownOpen(!dropdownOpen);
   
   return (
      
     <Nav onScroll='fixed' fill='true'>
       <Navbar  fixed='bottom' color="light" className="navbar-light navbar-expand-sm" > 
          
-      <NavItem onClick={()=> setTab(0)} >       
-        <NavLink href="/Home" active={openTab===0} >  
-          <img alt="Home" src ={navHome}/>           
+      <NavItem onClick={()=> setTab(0)}>
+        <NavLink href="/Recipe" active={openTab===0}>
+          <img alt="Recipe" src ={navRecipe} className="nav-pic"/>
         </NavLink>
-        </NavItem>  
+      </NavItem>
 
-      <NavItem onClick={()=> setTab(2)}>
+      <NavItem onClick={()=> setTab(1)}>
         <NavLink href="/mealplan" active={openTab===1}>
-          <img alt="MealPlan" src ={navMeal}/> 
+          <img alt="MealPlan" src ={navMeal} className="nav-pic"/> 
         </NavLink>
       </NavItem>
 
       <NavItem onClick={()=> setTab(2)}>
-        <NavLink href="/Recipe" active={openTab===2}>
-          <img alt="Recipe" src ={navRecipe}/>
-        </NavLink>
-      </NavItem>
-
-      <NavItem onClick={()=> setTab(2)}>
-        <NavLink href="/SList" active={openTab===3}>
-          <img alt="ShoppingList" src ={navCart}/>
+        <NavLink href="/SList" active={openTab===2}>
+          <img alt="ShoppingList" src ={navCart} className="nav-pic"/>
         </NavLink>
       </NavItem>
             
       <NavItem onClick={()=> setTab(3)}>
-        <NavLink href="/inventory" active={openTab===4}>
-          <img alt="inv" src ={navFridge}/>
+        <NavLink href="/inventory/:id/:password" active={openTab===3}>
+          <img alt="inv" src ={navFridge} className="nav-pic"/>
         </NavLink>
       </NavItem>
       </Navbar> 
