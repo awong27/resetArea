@@ -68,6 +68,15 @@ deleteItems(id) {
               <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
               <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
               <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
             </ListGroup>
             </Col>
             <Col className="homeSquare">
@@ -79,7 +88,7 @@ deleteItems(id) {
         <Row className="homeRow">
           <Col className="homeSquare">
             <NavLink href="/mealplan">
-              <h1>MealPlan</h1>
+              <h3>MealPlan</h3>
               <h3>Chicken Quesadilla</h3>
               <h3>Duck</h3>
               <h3>Rice and Beans</h3>
@@ -87,7 +96,7 @@ deleteItems(id) {
           </Col>
           <Col className="homeSquare">
             <NavLink href="/Recipes">
-              <h1>Recent Recipes</h1>
+              <h3>Recent Recipes</h3>
               <h3>Tiramisu</h3>
               <h3>PotPies</h3>
               <h3>Omelete</h3>
