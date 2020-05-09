@@ -1,4 +1,4 @@
-.card-img { 
+.invItem >.card-img { 
     height: 40vw;
     width: 40vw;    
     align-items: center;

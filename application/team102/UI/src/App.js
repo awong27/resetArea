@@ -7,7 +7,6 @@ import SList from "./Component/ShoppingList.js";
 import SHist from "./Component/ShoppingHistory.js";
 import inventory from "./Component/inventory.js";
 import mealplan from "./Component/MealPlan.js";
-import mealDay from "./Component/MealDay.js";
 import inRep from "./Component/RecipeInner.js"
 import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
@@ -34,8 +33,6 @@ function App() {
             <Route path="/inventory/:id/:password" exact component={inventory} />
 
             <Route path="/mealplan" exact component={mealplan} />
-            <Route path="/mealDay" exact component={mealDay} />
-
             <Route path="/Recipe" exact component={Recipe} />
             <Route path="/inRep" exact component={inRep} />
 
