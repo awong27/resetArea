@@ -19,8 +19,7 @@ export default class SignIn extends Component {
       FamilyName: "",
       ProfilePic: "",
       count: 0     
-    };  
-  
+    };    
   }
   
   componentDidMount() {

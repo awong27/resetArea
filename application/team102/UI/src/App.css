@@ -35,17 +35,6 @@
   border-color: silver;
   margin: 10px;
 }
-.invBar {
-  width: 100vw;  
-  background-color: #bae8e8 !important;
-  border-color: silver !important;
-  color: black !important;
-  border-radius: 0% 30px 30px 0% !important;
-  margin-top: 2px;
-  margin-bottom: 6px;
-  height: 7vh;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
-}
 
 .btn-secondary {
   color: #272343 !important;
@@ -59,12 +48,6 @@
   height: 100% !important;
   margin: 0 !important;
   width: 100vw;
-}
-.listItem {
-  width: 100vw !important;
-  padding-right: 5vw !important;
-  height: fit-content;
-  background-color: #bae8e8;  
 }
 
 .lightState {

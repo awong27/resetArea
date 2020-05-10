@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
+//import Navi from "./Navigation";
+//import TopBar from "./TopBar";
+import { NavLink } from "reactstrap";
 
 export default class Create extends Component {
   constructor(props) {
@@ -15,13 +18,7 @@ export default class Create extends Component {
     this.onChangeSugar=this.onChangeSugar.bind(this);
     this.onChangeFat=this.onChangeFat.bind(this);
     this.onChangeProtein=this.onChangeProtein.bind(this);
-
     this.onSubmit = this.onSubmit.bind(this);
-
-
-
-
-
     this.state = {
       foodname: "",
       expirationdate: "",
@@ -32,8 +29,6 @@ export default class Create extends Component {
       fat:"",
       protein:0,
       foods:[],
-
-
 
     };
   }
@@ -81,8 +76,6 @@ export default class Create extends Component {
       numberOfItems: e.target.value
     });
   }
-
-
 
   onSubmit(e) {
     e.preventDefault();
@@ -138,7 +131,7 @@ export default class Create extends Component {
     return (
       <div>
         <h3>Create New Food Items</h3>
-
+        <NavLink href="/inventory/:id/:password">Back</NavLink>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Food Name: </label>

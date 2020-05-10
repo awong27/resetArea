@@ -10,7 +10,12 @@ import NavHome from "./Home.svg";
 import Tphoto from "./thanos.png";
 
 const TopBar = () => {
-  
+  /*
+      * spaces items evenly
+      * home button
+      * 
+      * user photo
+      */
   return (
      
     <Nav onScroll='fixed' fill='true' className='d-block'>
