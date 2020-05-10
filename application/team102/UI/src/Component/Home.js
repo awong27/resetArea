@@ -12,12 +12,14 @@ export default class Home extends Component{
   constructor(props) {
   super(props);
 
+  const {match:{params}} = this.props;
+
   this.deleteItems = this.deleteItems.bind(this);
 
   this.state = {
     userdata: [],
-    password:"",
-    username:""
+    password:params.password,
+    username:params.id
 
 
    };
@@ -32,15 +34,13 @@ componentDidMount() {
     .get(`http://localhost:8080/userdata/${params.id}`)
     .then(response => {
       this.setState({ userdata: response.data });
+      console.log(this.state.userdata)
 
     })
     .catch(error => {
       console.log(error);
     });
-    this.setState({
-      password: this.state.userdata.password,
-      username: this.state.userdata.username
-    })
+
 }
 
 
@@ -54,8 +54,16 @@ deleteItems(id) {
 }
 
   render() {
-    console.log(this.state.userdata);
+    const {match:{params}} = this.props;
+    console.log(this.state.username);
+    console.log(this.state.password);
 
+
+
+    var inv= "/inventory/"+params.id+"/"+params.password;
+    var stat= "/Statistics/"+params.id+"/"+params.password;
+    var meal="/mealplan/"+params.id+"/"+params.password;
+    //console.log(user);
 
     return (
       <div align = "center" className="container"> <TopBar/>
@@ -103,20 +111,9 @@ deleteItems(id) {
             </NavLink>
           </Col>          
         </Row>
-        
       </Container>
-      <Navi/>
+      <Navi username={this.state.username} password={this.state.password} />
       </div>
     );
   }
 }
-/**
- * <NavLink href="/Statistics"><img alt="Stats" src={Dphoto} className="icons"/></NavLink>
- * <NavLink href="/mealplan"><img alt="MealPlan" src={Mphoto} className="icons"/> </NavLink>
- * <Row className="homeRow">
-          <Col className="homeSquare"><NavLink href="/inventory"><img alt="Inv" src={Fphoto} className="icons"/></NavLink></Col>
-          <Col className="homeSquare"><NavLink href="/inventory"><img alt="Inv" src={Fphoto} className="icons"/></NavLink></Col>
-        </Row>
- * 
- * 
- */

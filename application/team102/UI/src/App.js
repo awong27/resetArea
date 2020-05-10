@@ -28,12 +28,12 @@ function App() {
             <Route path="/EditUser" exact component={EditUser} />
             <Route path="/About" exact component={About} />
 
-            <Route path="/SList" exact component={SList} />
-            <Route path="/SHist" exact component={SHist} />
+            <Route path="/SList/:id/:password" exact component={SList} />
+            <Route path="/SHist/:id/:password" exact component={SHist} />
             <Route path="/inventory/:id/:password" exact component={inventory} />
 
-            <Route path="/mealplan" exact component={mealplan} />
-            <Route path="/Recipe" exact component={Recipe} />
+            <Route path="/mealplan/:id/:password" exact component={mealplan} />
+            <Route path="/Recipe/:id/:password" exact component={Recipe} />
             <Route path="/inRep" exact component={inRep} />
 
             <Route path="/statistics" exact component={Statistics} />

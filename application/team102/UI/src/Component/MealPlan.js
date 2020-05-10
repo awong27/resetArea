@@ -4,14 +4,45 @@ import Navi from "./Navigation";
 import TopBar from "./TopBar"; 
 import classnames from 'classnames';
 import "./mealplan.css";
+import axios from "axios";
+
+const Fooddata = props => (
+  <tr>
+  <td>{props.food.mealName}</td>
+    <td>{props.food.date}</td>
+    <td>{props.food.planCalories}</td>
+    <td>{props.food.planCarbs}</td>
+    <td>{props.food.planProtein}</td>
+    <td>{props.food.planFat}</td>
+    <td>{props.food.planSugar}</td>
+    <td>{props.food.creator}</td>
+    <td>{props.food.restrictions}</td>
+    <td>
+      <NavLink to={"/edit/" + props.food._id}>edit</NavLink> |{" "}
+      <a
+        href="/create"
+        onClick={() => {
+          props.deleteItems(props.food._id);
+        }}
+      >
+        delete
+      </a>
+    </td>
+  </tr>
+);
 export default class MealPlan extends Component {
   constructor(props) {
     super(props);
-
     this.toggle = this.toggle.bind(this);
+    const {match:{params}} = this.props;
+    this.deleteItems = this.deleteItems.bind(this);
+
     this.state = {
+      fooddata: [],
+      username: params.id,
+      password: params.password,
       activeTab: '1'
-    };
+     };  
   }
 
   toggle(tab) {
@@ -20,6 +51,44 @@ export default class MealPlan extends Component {
         activeTab: tab 
       });
     }
+  }  
+
+  componentDidMount() {
+    const {match:{params}} = this.props;
+
+    axios
+      .get(`http://localhost:8080/mealplan/${params.id}`)
+      .then(response => {
+        this.setState({ fooddata: response.data });
+        console.log(this.state.fooddata);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }
+
+  deleteItems(id) {
+    axios
+      .delete("http://localhost:8080/mealplan/" + id)
+      .then(res => console.log(res.data));
+    this.setState({
+      fooddata: this.state.fooddata.filter(el => el._id !== id)
+    });
+  }
+
+  inventory() {
+    const {match:{params}} = this.props;
+    return this.state.fooddata.map(currentfood => {
+      if(currentfood.creator===params.id){
+        return (
+          <Fooddata
+            food={currentfood}
+            deleteItems={this.deleteItems}
+            key={currentfood._id}
+            />
+          );}
+          return (null);
+    });
   }
   render() {
     
@@ -126,11 +195,9 @@ export default class MealPlan extends Component {
           this is Saturday
         </TabPane>
       </TabContent>  
-            
       </Container>
-      <Navi/> 
-      </div>       
+      <Navi username={this.state.username} password={this.state.password} />
+      </div>
     );
   }
 }
-  

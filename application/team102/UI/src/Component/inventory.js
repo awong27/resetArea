@@ -391,10 +391,10 @@ export default class inventory extends Component {
       <div><TopBar/>
       <br/><br/><br/>
       <div><h1>Inventory</h1></div>  
-         
-      {this.fake()}
       {this.inventory()}
-            
+              
+      {this.fake()}
+      
       <br/><br/>
       <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
       <Navi/>
