@@ -1,11 +1,7 @@
-import React, {Link, Component} from 'react';
-import Tphoto from "./thanos.png";
+import React, {Component} from 'react';
 import { Container, Row, Col, NavLink, ListGroup, ListGroupItem, Badge} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
-import Fphoto from "./fridgeIcomn.png";
-import Mphoto from "./mealplanicon.png";
-import Dphoto from "./plate.png";
 import "./Home.css";
 import axios from "axios";
 
@@ -16,12 +12,14 @@ export default class Home extends Component{
   constructor(props) {
   super(props);
 
+  const {match:{params}} = this.props;
+
   this.deleteItems = this.deleteItems.bind(this);
 
   this.state = {
     userdata: [],
-    password:"",
-    username:""
+    password:params.password,
+    username:params.id
 
 
    };
@@ -36,15 +34,13 @@ componentDidMount() {
     .get(`http://localhost:8080/userdata/${params.id}`)
     .then(response => {
       this.setState({ userdata: response.data });
+      console.log(this.state.userdata)
 
     })
     .catch(error => {
       console.log(error);
     });
-    this.setState({
-      password: this.state.userdata.password,
-      username: this.state.userdata.username
-    })
+
 }
 
 
@@ -58,17 +54,34 @@ deleteItems(id) {
 }
 
   render() {
-    console.log(this.state.userdata);
+    const {match:{params}} = this.props;
+    console.log(this.state.username);
+    console.log(this.state.password);
 
+
+
+    var inv= "/inventory/"+params.id+"/"+params.password;
+    var stat= "/Statistics/"+params.id+"/"+params.password;
+    var meal="/mealplan/"+params.id+"/"+params.password;
+    //console.log(user);
 
     return (
-      <div align = "center" > <TopBar/>
+      <div align = "center" className="container"> <TopBar/>
       <Container className="HomePage">  <br/>
 
         <Row className="homeRow">
             <Col className="homeSquare">
             <h3>Notifications</h3>
             <ListGroup overflow="hidden">
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
+              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
               <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
               <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
               <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
@@ -83,7 +96,7 @@ deleteItems(id) {
         <Row className="homeRow">
           <Col className="homeSquare">
             <NavLink href="/mealplan">
-              <h1>MealPlan</h1>
+              <h3>MealPlan</h3>
               <h3>Chicken Quesadilla</h3>
               <h3>Duck</h3>
               <h3>Rice and Beans</h3>
@@ -91,27 +104,16 @@ deleteItems(id) {
           </Col>
           <Col className="homeSquare">
             <NavLink href="/Recipes">
-              <h1>Recent Recipes</h1>
+              <h3>Recent Recipes</h3>
               <h3>Tiramisu</h3>
               <h3>PotPies</h3>
               <h3>Omelete</h3>
             </NavLink>
           </Col>          
         </Row>
-        
       </Container>
-      <Navi/>
+      <Navi username={this.state.username} password={this.state.password} />
       </div>
     );
   }
 }
-/**
- * <NavLink href="/Statistics"><img alt="Stats" src={Dphoto} className="icons"/></NavLink>
- * <NavLink href="/mealplan"><img alt="MealPlan" src={Mphoto} className="icons"/> </NavLink>
- * <Row className="homeRow">
-          <Col className="homeSquare"><NavLink href="/inventory"><img alt="Inv" src={Fphoto} className="icons"/></NavLink></Col>
-          <Col className="homeSquare"><NavLink href="/inventory"><img alt="Inv" src={Fphoto} className="icons"/></NavLink></Col>
-        </Row>
- * 
- * 
- */

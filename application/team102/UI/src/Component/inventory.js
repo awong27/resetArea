@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import {Button, Badge, Row, Col, ButtonGroup, Card, CardImg, CardImgOverlay, CardTitle, CardText, CardFooter, CardHeader} from 'reactstrap';
+import {Button, Badge, Row, Col, ButtonGroup, Card, CardImg, CardText, CardFooter, CardHeader, NavLink} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -7,7 +7,7 @@ import "./inv.css";
 import Tphoto from "./thanos.png";
 import consume from "./pizzaIcon.png";
 import trash from "./trashIcon.png";
-
+import plusbtn from "./plus.svg"
 const Fooddata = props => (  
   <Button className="invBar" ><Row>
     <Col className="itemName">{props.food.foodName}</Col>
@@ -61,7 +61,7 @@ export default class inventory extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
             />
-          );}
+          );} else return (null);
     });
   }
   fake() {
@@ -391,11 +391,12 @@ export default class inventory extends Component {
       <div><TopBar/>
       <br/><br/><br/>
       <div><h1>Inventory</h1></div>  
-         
-      {this.fake()}
       {this.inventory()}
-            
+              
+      {this.fake()}
+      
       <br/><br/>
+      <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
       <Navi/>
       </div>
     )
