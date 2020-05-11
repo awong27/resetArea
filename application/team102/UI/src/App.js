@@ -12,8 +12,6 @@ import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
 import EditUser from "./Component/EditUser.js"
 import SignIn from "./SignIn.js";
-import Statistics from "./Component/Statistics.js";
-import StatWeekly from "./Component/StatWeekly.js";
 import CreateFood from "./Component/create-fooddata.component.js";
 
 function App() {
@@ -39,8 +37,6 @@ function App() {
             <Route path="/Recipe/:id/:password" exact component={Recipe} />
             <Route path="/inRep" exact component={inRep} />
 
-            <Route path="/statistics" exact component={Statistics} />
-            <Route path="/StatWeekly" exact component={StatWeekly} />
             <Route path="/create" exact component={CreateFood}/>
           </Switch>
         </div>
