@@ -394,7 +394,7 @@ export default class inventory extends Component {
          
       {this.fake()}
       {this.inventory()}
-            
+      <Button href="/Scan"> Scan</Button>
       <br/><br/>
       <Navi/>
       </div>

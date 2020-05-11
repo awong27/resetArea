@@ -23,7 +23,7 @@ import StatWeekly from "./Component/StatWeekly.js";
 //import Inventory from "./components/inventory.component";
 //import EditFoodData from "./components/edit-fooddata.component";
 import CreateFood from "./Component/create-fooddata.component.js";
-
+import Scan from "./Component/Scan.js";
 function App() {
   /** <Route path="/" exact component={Welcome} />*/
     //const[visibility,inVis] = useState(false);
@@ -54,6 +54,7 @@ function App() {
             <Route path="/statistics" exact component={Statistics} />
             <Route path="/StatWeekly" exact component={StatWeekly} />
             <Route path="/create" exact component={CreateFood}/>
+            <Route path="/Scan" exact component={Scan} />
           </Switch>
         </div>
       </BrowserRouter>
