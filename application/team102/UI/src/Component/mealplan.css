@@ -23,4 +23,8 @@
 .tab-pane.active {
     height: 100%;
     min-height: bottom;
+    position: relative;
+}
+.bottom {
+    height: 45vh;
 }

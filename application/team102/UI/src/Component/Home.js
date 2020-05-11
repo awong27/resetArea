@@ -5,6 +5,7 @@ import TopBar from "./TopBar";
 import "./Home.css";
 import classnames from 'classnames';
 import axios from "axios";
+import {Pie, Doughnut} from 'react-chartjs-2';
 
 export default class Home extends Component{
 
@@ -19,8 +20,29 @@ export default class Home extends Component{
     userdata: [],
     password:params.password,
     username:params.id,
-    activeTab: '1'
-
+    activeTab: '1',
+    labels: ['Fats', 'Protein', 'Sugar',
+           'Carbs', 'Sodium'],
+    datasets: [
+      {
+        label: 'Nutrition',
+        backgroundColor: [
+          '#B21F00',
+          '#C9DE00',
+          '#2FDE00',
+          '#00A6B4',
+          '#6800B4'
+        ],
+        hoverBackgroundColor: [
+        '#501800',
+        '#4B5000',
+        '#175000',
+        '#003350',
+        '#35014F'
+        ],
+        data: [65, 59, 80, 81, 56]
+      }
+    ]
    };
 
 }
@@ -128,7 +150,35 @@ deleteItems(id) {
         <TabPane tabId="2">
           Statistics
           <Row>
-
+              <Pie
+              data={this.state}
+              options={{
+                title:{
+                  display:true,
+                  text:'Daily Nutrition',
+                  fontSize:20
+                },
+                legend:{
+                  display:true,
+                  position:'right'
+                }
+              }}
+            />
+          </Row><Row>
+            <Doughnut
+              data={this.state}
+              options={{
+                title:{
+                  display:true,
+                  text:'Daily Nutrition',
+                  fontSize:20
+                },
+                legend:{
+                  display:true,
+                  position:'right'
+                }
+              }}
+            />
           </Row>
           <Row><Col xs="1"></Col>
             <Col><Table striped>      
