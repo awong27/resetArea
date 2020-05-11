@@ -7,7 +7,7 @@ export default class ShoppingHistory extends Component {
       
   render() {      
     return (
-      <div><TopBar/><br/><br/><br/>
+      <div><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/>
       <div><h1>Shopping History</h1></div>         
       <div className="listItem">   
       <Row><Col xs='1'/><h3>Feb 28, 2020</h3></Row>
@@ -48,7 +48,7 @@ export default class ShoppingHistory extends Component {
       <ButtonGroup size='lg'>        
         <Button href="/SList">Add to Shopping List</Button>
       </ButtonGroup>
-      <Navi/>
+      <Navi username={this.state.username} password={this.state.password}/>
       </div>
     )
   }

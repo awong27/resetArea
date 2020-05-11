@@ -84,7 +84,8 @@ export default class SignIn extends Component {
   
     this.state.logindata.map(currentuser=>{
       if(currentuser.password===user.password && currentuser.username===user.username){
-        window.location = "/Home/"+user.username+"/"+user.password;
+        var home = "/Home/"+user.username+"/"+user.password;
+        window.location = home;
       }else{
         return(
           <div>

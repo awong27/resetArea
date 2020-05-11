@@ -8,6 +8,7 @@ import Tphoto from "./thanos.png";
 import consume from "./pizzaIcon.png";
 import trash from "./trashIcon.png";
 import plusbtn from "./plus.svg"
+
 const Fooddata = props => (  
   <Button className="invBar" ><Row>
     <Col className="itemName">{props.food.foodName}</Col>
@@ -22,15 +23,18 @@ export default class inventory extends Component {
 
   constructor(props) {
     super(props);
-
+    const {match:{params}} = this.props;
     this.deleteItems = this.deleteItems.bind(this);
 
     this.state = { 
-      fooddata: []      
+      fooddata: [],
+      userdata: [],
+      password:params.password,
+      username:params.id      
     };
     
   }
-
+  
   componentDidMount() {
     axios
       .get("/fooddata/")
@@ -388,7 +392,7 @@ export default class inventory extends Component {
   }
   render() {     
     return (
-      <div><TopBar/>
+      <div><TopBar username={this.state.username} password={this.state.password}/>
       <br/><br/><br/>
       <div><h1>Inventory</h1></div>  
       {this.inventory()}
@@ -397,7 +401,7 @@ export default class inventory extends Component {
       
       <br/><br/>
       <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
-      <Navi/>
+      <Navi username={this.state.username} password={this.state.password}/>
       </div>
     )
   }

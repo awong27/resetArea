@@ -93,7 +93,7 @@ export default class MealPlan extends Component {
   render() {
     
     return (     
-      <div className="container"><TopBar/>        
+      <div className="container"><TopBar username={this.state.username} password={this.state.password}/>        
       <Container>  <br/><br/><br/>
       <Row><Col><h1>Meal Plan</h1></Col></Row>
       <Row><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col></Row>

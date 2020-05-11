@@ -5,8 +5,6 @@ import TopBar from "./TopBar";
 import "./Home.css";
 import axios from "axios";
 
-
-
 export default class Home extends Component{
 
   constructor(props) {
@@ -66,7 +64,7 @@ deleteItems(id) {
     //console.log(user);
 
     return (
-      <div align = "center" className="container"> <TopBar/>
+      <div align = "center" className="container"> <TopBar username={this.state.username} password={this.state.password}/>
       <Container className="HomePage">  <br/>
 
         <Row className="homeRow">

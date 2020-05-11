@@ -89,7 +89,7 @@ export default class inventory extends Component {
       * 
       * 
       */
-      <div><TopBar/><br/><br/><br/> <div className="midCon">
+      <div><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/> <div className="midCon">
       <div><h1>Shopping List</h1></div>  
       <Row><Col xs='1'/><Col  align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
       <div className="listItem">   

@@ -5,9 +5,21 @@ import TopBar from "./TopBar";
 import Tphoto from "./thanos.png";
 
 export default class Recipe extends Component {
+  constructor(props) {
+    super(props);
+  
+    const {match:{params}} = this.props;
+   
+    this.state = {
+      userdata: [],
+      password:params.password,
+      username:params.id
+  
+     };
+  }
   render() {
     return (        
-      <div><TopBar/> <br/><br/><br/>
+      <div><TopBar username={this.state.username} password={this.state.password}/> <br/><br/><br/>
       <Container className="fit-content"> 
         <Row><Col><h1>Recipes</h1></Col></Row>
         <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
@@ -42,7 +54,7 @@ export default class Recipe extends Component {
           </Card>  
         </Row>                 
       </Container>    
-      <Navi/>  
+      <Navi username={this.state.username} password={this.state.password}/>  
       </div>        
     );
   }
