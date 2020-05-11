@@ -5,7 +5,8 @@ import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem} from "r
 import "./Home.css"
 
 export default class EditUser extends Component{
-    
+  //pulls everything from user data
+  
   render() { 
     return (
       <Container > 

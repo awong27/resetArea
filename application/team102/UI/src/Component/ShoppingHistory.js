@@ -5,6 +5,10 @@ import TopBar from "./TopBar";
 
 export default class ShoppingHistory extends Component {
       
+  //shopping history needs dates of prev shopping list and list
+  // should be able to scroll search backwards
+  // should be able to add any item to current shopping list
+  
   render() {      
     return (
       <div><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/>

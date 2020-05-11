@@ -17,6 +17,9 @@ import StatWeekly from "./Component/StatWeekly.js";
 import CreateFood from "./Component/create-fooddata.component.js";
 
 function App() {
+  /*
+  * has all the routes
+  */
     return (
       <div align="center">
       <BrowserRouter>

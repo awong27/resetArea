@@ -91,7 +91,14 @@ export default class MealPlan extends Component {
     });
   }
   render() {
-    
+    /*
+    * grabs mealplan data
+    * populates tabs of the week with breakfast lunch dinner
+    * grabs recipe data and inv data for calories
+    * summates total calories at the top
+    * should keep track of each day and time
+    * data should be sent to userdata for stats
+    */
     return (     
       <div className="container"><TopBar username={this.state.username} password={this.state.password}/>        
       <Container>  <br/><br/><br/>

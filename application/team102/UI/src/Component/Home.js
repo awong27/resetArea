@@ -62,7 +62,14 @@ deleteItems(id) {
     var stat= "/Statistics/"+params.id+"/"+params.password;
     var meal="/mealplan/"+params.id+"/"+params.password;
     //console.log(user);
-
+    /*
+    * homepage should load with user data
+    * there should be two tabs 
+    *   one for current statistics of user
+    *   the other should have notifications of expiring items from inv
+    *     current meal plan and recent recipes
+    *     current meal plan should know the day and content
+    */
     return (
       <div align = "center" className="container"> <TopBar username={this.state.username} password={this.state.password}/>
       <Container className="HomePage">  <br/>
