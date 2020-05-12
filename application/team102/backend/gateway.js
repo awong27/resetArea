@@ -43,6 +43,18 @@ app.all('/api/vision/read', (req, res) => {
   });
 });
 
+app.all('/api/description/get', (req, res) => {
+  console.log('routing to 3006');
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3006'
+  });
+});
+
+app.all('/api/scan', (req, res) => {
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3005'
+  });
+});
 
 app.all("*", (req, res) => {
   // front end server / react
