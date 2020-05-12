@@ -5,7 +5,8 @@ export default class Scan extends Component {
         super(props);
         this.state = {
             selectedFile: null,
-            context: null
+            context: null,
+            videoSrc: null
         }
     }
     componentDidMount() {
