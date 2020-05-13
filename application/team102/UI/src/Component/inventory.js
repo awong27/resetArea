@@ -8,11 +8,11 @@ import Tphoto from "./thanos.png";
 import consume from "./pizzaIcon.png";
 import trash from "./trashIcon.png";
 import plusbtn from "./plus.svg"
-const Fooddata = props => (  
+const Fooddata = props => (
   <Button className="invBar" ><Row>
     <Col className="itemName">{props.food.foodName}</Col>
     <Col className="expire">{props.food.expirationDate}</Col>
-    
+
     <Col className="actions">{props.food.numOfItems}</Col>
     <Col><Button onClick={() => "/create" + props.food._id}>Edit</Button><Button onClick={() => {props.deleteItems(props.food._id);}}>Delete</Button></Col>
   </Row></Button>
@@ -25,15 +25,15 @@ export default class inventory extends Component {
 
     this.deleteItems = this.deleteItems.bind(this);
 
-    this.state = { 
-      fooddata: []      
+    this.state = {
+      fooddata: []
     };
-    
+
   }
 
   componentDidMount() {
     axios
-      .get("/fooddata/")
+      .get("http://localhost:8080/fooddata/")
       .then(response => {
         this.setState({ fooddata: response.data });
       })
@@ -44,7 +44,7 @@ export default class inventory extends Component {
 
   deleteItems(id) {
     axios
-      .delete("/fooddata/" + id)
+      .delete("http://localhost:8080/fooddata/" + id)
       .then(res => console.log(res.data));
     this.setState({
       fooddata: this.state.fooddata.filter(el => el._id !== id)
@@ -82,7 +82,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -96,8 +96,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
+          </Card>
+        </Col>
         <Col>
           <Card className="invItem">
             <CardImg alt="FridgeItem" src={Tphoto}/>
@@ -113,7 +113,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -127,9 +127,9 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col>         
-      </Row> 
+          </Card>
+        </Col>
+      </Row>
       <Row className="FridgeList">
         <Col>
           <Card className="invItem">
@@ -146,7 +146,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -160,8 +160,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
+          </Card>
+        </Col>
         <Col>
           <Card className="invItem">
             <CardImg alt="FridgeItem" src={Tphoto}/>
@@ -177,7 +177,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -191,8 +191,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col>         
+          </Card>
+        </Col>
       </Row><Row className="FridgeList">
         <Col>
           <Card className="invItem">
@@ -209,7 +209,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -223,8 +223,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
+          </Card>
+        </Col>
         <Col>
           <Card className="invItem">
             <CardImg alt="FridgeItem" src={Tphoto}/>
@@ -240,7 +240,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -254,8 +254,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col>         
+          </Card>
+        </Col>
       </Row><Row className="FridgeList">
         <Col>
           <Card className="invItem">
@@ -272,7 +272,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -286,8 +286,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
+          </Card>
+        </Col>
         <Col>
           <Card className="invItem">
             <CardImg alt="FridgeItem" src={Tphoto}/>
@@ -303,7 +303,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -317,8 +317,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col>         
+          </Card>
+        </Col>
       </Row><Row className="FridgeList">
         <Col>
           <Card className="invItem">
@@ -335,7 +335,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -349,8 +349,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
+          </Card>
+        </Col>
         <Col>
           <Card className="invItem">
             <CardImg alt="FridgeItem" src={Tphoto}/>
@@ -366,7 +366,7 @@ export default class inventory extends Component {
                   <CardText>3/15</CardText>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -380,21 +380,21 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col>         
+          </Card>
+        </Col>
       </Row>
 </div>
     );
   }
-  render() {     
+  render() {
     return (
       <div><TopBar/>
       <br/><br/><br/>
-      <div><h1>Inventory</h1></div>  
+      <div><h1>Inventory</h1></div>
       {this.inventory()}
-              
+
       {this.fake()}
-      
+
       <br/><br/>
       <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
       <Navi/>
@@ -419,7 +419,7 @@ export default class inventory extends Component {
                   <h5>Exp Date</h5>
                 </Button>
               </ButtonGroup>
-            </CardHeader>  
+            </CardHeader>
             <CardFooter>
               <ButtonGroup className="itemOptions">
                 <Button>
@@ -433,8 +433,8 @@ export default class inventory extends Component {
                 </Button>
               </ButtonGroup>
             </CardFooter>
-          </Card>  
-        </Col> 
-        
-      </Row> 
+          </Card>
+        </Col>
+
+      </Row>
       */
