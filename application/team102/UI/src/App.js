@@ -13,9 +13,8 @@ import inRep from "./Component/RecipeInner.js"
 import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
 import EditUser from "./Component/EditUser.js"
-import Register from "./Register.js";
-import Login from "./Login.js";
-import Welcome from "./Welcome.js";
+
+
 import Statistics from "./Component/Statistics.js";
 import StatWeekly from "./Component/StatWeekly.js";
 import SearchRecipe from "./Component/addRecipe.js";
@@ -34,9 +33,8 @@ function App() {
       <BrowserRouter>
         <div className="Main">
           <Switch>
-            <Route path="/" exact component={Welcome} />
-            <Route path="/Register" exact component={Register} />
-            <Route path="/Login" exact component={Login} />
+
+
 
             <Route path="/Home/:id/:password" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />
