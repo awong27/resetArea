@@ -98,6 +98,7 @@ deleteItems(id) {
     *   the other should have notifications of expiring items from inv
     *     current meal plan and recent recipes
     *     current meal plan should know the day and content
+    * stats chart and table should be grabbing user data and populating
     */
     return (
       <div align = "center" className="container"> <TopBar username={this.state.username} password={this.state.password}/>
