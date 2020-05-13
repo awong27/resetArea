@@ -1,77 +1,69 @@
 import React, {Component} from 'react';
+import MediaHandler from './MediaHandler';
+import { Button } from 'reactstrap';
 import axios from 'axios';
-export default class Scan extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedFile: null,
-            context: null,
-            videoSrc: null
-        }
-    }
-    componentDidMount() {
-        navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
-        if (navigator.getUserMedia) {
-            navigator.getUserMedia({video: true}, this.handleVideo, this.videoError);
-        }
-        
-    }
-    handleVideo (stream) {
-        // Update the state, triggering the component to re-render with the correct stream
-        this.setState({ videoSrc: window.URL.createObjectURL(stream) });
-        this.videoElement.play();
-      }
-    videoError() {
-        console.log("video error");
-    }
-    //grabs target file from event and store in selectedFile
-    fileSelectHandler = event => {
-        console.log(event);
-        this.setState({
-            selectedFile: event.target.files[0]
-        })
-    }
-    //grabs selectedFile -> stores in fd
-    //Post sends file fd -> '/api/scan' - backend point
-    //console log should show upload progress 
-    fileUploadHandler = () => {
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        axios.post('/api/scan', fd, {
-            onUploadProgress: progressEvent => {
-                console.log('Upload Progress ' + Math.round(progressEvent.loaded/progressEvent.total *100) + '%')
-            } 
-        })
-            .then(res => {
-                console.log(res);
-            });
 
-    }
-    setTimeout=() => {
-            if (!this.props.isOpen) {
-                return;
-            }
-            this.context = this.canvasElement.getContext('2d');
-            this.context.drawImage(this.props.video, 0, 0, 640, 480);
+const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
+
+export default class Scan extends Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            hasMedia: false
         };
+
+        this.mediaHandler = new MediaHandler();
+    }
+
+    componentDidMount() {
+        this.mediaHandler.getPermissions()
+        .then( (stream) => {
+            this.setState({hasMedia : true});
+
+            try {
+                this.myVideo.srcObject = stream;
+            } catch (e) {
+                this.myVideo.src = URL.createObjectURL(stream);
+            }
+            this.myVideo.play();
+        })
+    }
+
+    captureImage = () => {
+        const context = this.canvas.getContext('2d');
+        context.drawImage(this.myVideo, 0, 0, 400, 350);
+        const image = this.canvas.toDataURL('image/jpeg', 0.5);
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type' : 'application/json'},
+            body: JSON.stringify({ user: 'userName'}),
+          }
+          fetch('http://localhost:3010/api/image/save', requestOptions)
+            .then(res => res.json())
+            .then( data => {
+                console.log(data);
+            })
+            .catch( console.log)
+        return image;
+    }
+
+
     render() {
-        const video = (<video id="video" width="640" height="480" className="cameraFrame" src={this.state.videoSrc} autoPlay={true}
-        ref={(input) => { this.videoElement = input; }}></video>);
         
-        const canvasEl = (<canvas id="canvas" width="640" height="480" className="photoCard" ref={(input) => this.canvasElement = this.context} />);
         return (
-            <div>
-                {video}
-                {canvasEl}
-                <input style={{display: 'none'}} 
-                    type="file" 
-                    onChange={this.fileSelectedHandler} 
-                    ref={fileInput => this.fileInput = fileInput}/>
-                    <br/>
-                <button onClick={() => this.fileInput.click()}>Pick File</button>
-                <button onClick={this.fileUploadHandler}>Upload</button>
+            <div className="container">
+                <div className="video-container">
+                    <video className="video" width="400" height="350" ref={(ref) => {this.myVideo = ref;}}></video>
+                </div>
+                <Button onClick={this.captureImage}>Capture</Button>
+                <div className="image-container">
+                    <canvas ref={ (canvas) => {this.canvas = canvas}} width='400' height= '350' ></canvas>
+                </div>
             </div>
-        );
+        )
     }
 
 

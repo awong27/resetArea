@@ -22,6 +22,13 @@ module.exports = {
             watch: true,
         },
         {
+            name: "processImage",
+            script: "./imageServer.js",
+            watch: true,
+            ignore_watch: ["node_modules"],
+            watch: true,
+        },
+        {
             name: "gateway",
             script: "./gateway.js",
             watch: true,
