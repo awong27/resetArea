@@ -38,7 +38,7 @@ export default class EditUser extends Component{
         </Row>
         <Row>
         <Col>
-          <Button href="/" color="danger" >Sign Out</Button>
+          <Button href="/" size="lg">Log Out</Button>
         </Col>
         </Row>
       </Container>
