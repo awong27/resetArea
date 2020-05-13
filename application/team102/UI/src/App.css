@@ -2,12 +2,12 @@
   text-align: center;
 }
 .Main {
-  background-color: rgb(255, 255, 255);
-  height: 100vh;
+  background-color: #bae8e8;
+  height: 200%;
+  min-height: 100vh;
 }
-
 .upperbox {
-  background-color: silver;
+  background-color: #e3f6f5;
   box-shadow: inset rgb(0, 0, 0);
   width: 100vw;
   height: 50vh;
@@ -19,13 +19,13 @@
   text-align: left;
 }
 .lowerbox {
-  background-color: rgb(126, 125, 125);
+  background-color: #97c6f1;
   box-shadow: rgb(241, 239, 239);
   width: 100vw;
   height: 50vh;
   box-sizing: border-box;
   border-radius: 10%;
-  padding: 20%;
+
 }
 .lowerbox > a:link , a:visited {
   padding:3vh 7vw;
@@ -35,39 +35,38 @@
   border-color: silver;
   margin: 10px;
 }
-.invBar {
-  width: 100vw;  
-  background-color: #DADADA !important;
-  border-color: silver !important;
-  color: black !important;
-  border-radius: 0% 30px 30px 0% !important;
-  margin-top: 2px;
-  margin-bottom: 6px;
-  height: 7vh;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
-}
-.btn-group {
-  left: 1vw;
-  right: 1vw;
-  align-content: center;
-  bottom: 53px;  
-  display: block !important;
-  position: fixed !important;
+
+.btn-secondary {
+  color: #272343 !important;
+  background-color: #e3f6f5 !important;
 }
 .container {
-  height: 100vh;
+  background-color: #bae8e8;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  min-height: 100vh;
+  height: 100% !important;
+  margin: 0 !important;
+  width: 100vw;
 }
-.listItem {
-  width: 100vw !important;
-  padding-right: 5vw !important;
-  height: fit-content;
-  background-color: rgb(255, 252, 242);  
+
+.lightState {
+  background-color: rgb(96, 152, 204) !important;
+  box-shadow: cadetblue !important;
 }
-.bigdes {
-  margin: 20px 20px 0px 20px; 
-  width: 90vw;
-  height: 25vh;
-  background-color: silver !important;
-  border-radius: 30px !important;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25) !important;
+
+.row {
+  margin: 0 !important;
+}
+.SignSpace {
+  
+  width: 80vw;
+  align-content: center;
+  position: relative;
+  margin-top: 10vh;
+  padding-left: 10vw !important;
+  padding-right: 10vw !important;
+}
+.lowerbox > .btn-group {
+  box-sizing: content-box !important;
 }
