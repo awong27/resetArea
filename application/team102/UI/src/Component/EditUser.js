@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
 import Tphoto from "./thanos.png";
+
 import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem} from "reactstrap";
 
 import "./Home.css"
 
 export default class EditUser extends Component{
-    
-  render() { 
+
+  render() {
     return (
       <Container > 
         <ListGroup className="profile">
@@ -102,7 +103,7 @@ export default class EditUser extends Component{
               <ListGroupItem>
                 <Row>
                   <Col>
-                    <Button size="lg">Log Out</Button>
+                    <Button href="/" size="lg">Log Out</Button>
                   </Col>
                 </Row>              
               </ListGroupItem>
@@ -111,7 +112,6 @@ export default class EditUser extends Component{
                  
       </Container>      
      
-
     );
   }
 }
