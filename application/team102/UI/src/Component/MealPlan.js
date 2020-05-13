@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Input, NavLink, TabPane, Nav, NavItem, TabContent} from 'reactstrap';
+import {Container, Row, Col, Input, NavLink, TabPane, Nav, NavItem, TabContent, Button} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar"; 
 import classnames from 'classnames';
@@ -103,9 +103,9 @@ export default class MealPlan extends Component {
       <div className="container"><TopBar username={this.state.username} password={this.state.password}/>        
       <Container>  <br/><br/><br/>
       <Row><Col><h1>Meal Plan</h1></Col></Row>
-      <Row><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col></Row>
-      <br/>
-      <h3>Weekly Total Calories: 23,431</h3>
+      
+ 
+      <h3>Total Calories: 3,431</h3>
       <Nav tabs justified className="plan">
         <NavItem>
           <NavLink className={classnames({ active: this.state.activeTab === '1' })}
@@ -186,15 +186,14 @@ export default class MealPlan extends Component {
         <TabPane tabId="2">
           <Row/>
           <Row><h3>Breakfast</h3></Row>
-          <Row><Col/>Add Item</Row>
+          <Row><Col>- - -</Col><Col/><Button>Add Item</Button></Row>
           <Row/>
           <Row><h3>Lunch</h3></Row>
-          <Row><Col/>Add Item</Row>
+          <Row><Col>- - -</Col><Col/><Button>Add Item</Button></Row>
           <Row/>
           <Row><h3>Dinner</h3></Row>
-          <Row><Col/>Add Item</Row>
-          <Row/>
-          <Row><Col/>Total Calories: 0</Row>
+          <Row><Col>- - -</Col><Col/><Button>Add Item</Button></Row>
+          <Row/>          
           <Row className="bottom"></Row>
         </TabPane>
         <TabPane tabId="3">
