@@ -24,11 +24,12 @@ export default class inventory extends Component {
     super(props);
 
     this.deleteItems = this.deleteItems.bind(this);
-
+    const {match:{params}} = this.props;
     this.state = {
-      fooddata: []
-    };
-
+      fooddata: [],
+      username: params.id,
+      password: params.password
+      };
   }
 
   componentDidMount() {
@@ -397,7 +398,7 @@ export default class inventory extends Component {
 
       <br/><br/>
       <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
-      <Navi/>
+      <Navi username={this.state.username} password={this.state.password}/>
       </div>
     )
   }
