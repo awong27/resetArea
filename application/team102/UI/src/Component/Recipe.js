@@ -277,7 +277,7 @@ export default class Recipe extends Component {
 
         </Row>
       </Container>
-      <Navi/>
+      <Navi username={this.state.creator} password={this.state.password}/>
       </div>
     );
   }
