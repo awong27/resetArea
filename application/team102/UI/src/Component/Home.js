@@ -129,7 +129,7 @@ deleteItems(id) {
             </ListGroup>
             </Col>
             <Col className="homeSquare">
-              <NavLink href="/mealplan">
+              <NavLink href="/mealplan/:id/:password">
                 <h3>MealPlan</h3>
                 <h3>Chicken Quesadilla</h3>
                 <h3>Duck</h3>
@@ -139,7 +139,7 @@ deleteItems(id) {
           </Row>   
           <Row className="homeRow">  
             <Col className="homeSquare">        
-              <NavLink href="/Recipes">
+              <NavLink href="/Recipes/:id/:password">
                 <h3>Recent Recipes</h3>
                 <h3>Tiramisu</h3>
                 <h3>PotPies</h3>

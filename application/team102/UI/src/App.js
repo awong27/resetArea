@@ -1,18 +1,21 @@
 import React from "react";
 import { Switch, Route, BrowserRouter} from "react-router-dom";
+//import Navi from "./Component/Navigation.js";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./Component/About.js";
 import SList from "./Component/ShoppingList.js";
 import SHist from "./Component/ShoppingHistory.js";
-import inventory from "./Component/inventory.js";
+import Inventory from "./Component/inventory.js";
 import mealplan from "./Component/MealPlan.js";
 import inRep from "./Component/RecipeInner.js"
 import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
 import EditUser from "./Component/EditUser.js"
 import SignIn from "./SignIn.js";
+import SearchRecipe from "./Component/addRecipe.js";
 import CreateFood from "./Component/create-fooddata.component.js";
+import FoodCard from "./Component/user-inventory.component.js";
 
 function App() {
   /*
@@ -23,6 +26,7 @@ function App() {
       <BrowserRouter>
         <div className="Main">
           <Switch>
+
             <Route path="/" exact component={SignIn} />
 
             <Route path="/Home/:id/:password" exact component={Home} />
@@ -30,19 +34,25 @@ function App() {
             <Route path="/About" exact component={About} />
 
             <Route path="/SList/:id/:password" exact component={SList} />
-            <Route path="/SHist/:id/:password" exact component={SHist} />
-            <Route path="/inventory/:id/:password" exact component={inventory} />
-
+            <Route path="/SHist" exact component={SHist} />
+            <Route path="/inventory/:id/:password" exact component={Inventory} />
+            <Route path="/user-item/:id" component={FoodCard}/>
             <Route path="/mealplan/:id/:password" exact component={mealplan} />
-            <Route path="/Recipe/:id/:password" exact component={Recipe} />
-            <Route path="/inRep" exact component={inRep} />
 
-            <Route path="/create" exact component={CreateFood}/>
+            <Route path="/Recipe/:id/:password" exact component={Recipe} />
+            <Route path="/addRecipe/:id/:password/:search/:sugar/:fat/:carbs/:calories" exact component={SearchRecipe} />
+            <Route path="/inRep/:id/:password/:recipeName" exact component={inRep} />
+
+            <Route path="/create/:id/:password" exact component={CreateFood}/>
+
+
           </Switch>
         </div>
       </BrowserRouter>
     </div>
   );
 }
-
+//<Nav2/>
+//<Route path="/" exact component={Inventory}/>
+//<Route path="/edit/:id" exact component={EditFoodData}/>
 export default App;

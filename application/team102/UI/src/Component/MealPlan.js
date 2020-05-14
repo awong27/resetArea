@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Container, Row, Col, Input, NavLink, TabPane, Nav, NavItem, TabContent, Button} from 'reactstrap';
 import Navi from "./Navigation";
-import TopBar from "./TopBar"; 
+import TopBar from "./TopBar";
 import classnames from 'classnames';
 import "./mealplan.css";
 import axios from "axios";
@@ -42,16 +42,16 @@ export default class MealPlan extends Component {
       username: params.id,
       password: params.password,
       activeTab: '1'
-     };  
+     };
   }
 
   toggle(tab) {
     if (this.state.activeTab !== tab) {
-      this.setState({ 
-        activeTab: tab 
+      this.setState({
+        activeTab: tab
       });
     }
-  }  
+  }
 
   componentDidMount() {
     const {match:{params}} = this.props;
@@ -153,34 +153,34 @@ export default class MealPlan extends Component {
       <TabContent activeTab={this.state.activeTab}>
         <TabPane tabId="1">
           <Row>
-            <Col></Col><Col></Col><Col><p>Calories</p></Col>      
+            <Col></Col><Col></Col><Col><p>Calories</p></Col>
           </Row>
           <Row>
-            <Col><h3>Breakfast</h3></Col><Col><Col></Col></Col>      
+            <Col><h3>Breakfast</h3></Col><Col><Col></Col></Col>
           </Row>
           <Row>
-            <Col><p>Cereal</p></Col><Col></Col><Col>235</Col>      
+            <Col><p>Cereal</p></Col><Col></Col><Col>235</Col>
           </Row>
           <Row>
-            <Col><p>Milk</p></Col><Col></Col><Col>54</Col>      
+            <Col><p>Milk</p></Col><Col></Col><Col>54</Col>
           </Row>
           <Row>
-            <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>      
+            <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
           </Row>
           <Row>
-            <Col><p>Chicken Pot Pie</p></Col><Col></Col><Col>900</Col>      
+            <Col><p>Chicken Pot Pie</p></Col><Col></Col><Col>900</Col>
           </Row>
           <Row>
-            <Col><p>Soda</p></Col><Col></Col><Col>120</Col>      
+            <Col><p>Soda</p></Col><Col></Col><Col>120</Col>
           </Row>
           <Row>
-            <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>      
+            <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
           </Row>
           <Row>
-            <Col><p>Corn Hen</p></Col><Col></Col><Col>608</Col>      
+            <Col><p>Corn Hen</p></Col><Col></Col><Col>608</Col>
           </Row>
           <Row>
-            <Col><p>Mashed Potatoes</p></Col><Col></Col><Col>348</Col>      
+            <Col><p>Mashed Potatoes</p></Col><Col></Col><Col>348</Col>
           </Row>
         </TabPane>
         <TabPane tabId="2">
@@ -211,7 +211,7 @@ export default class MealPlan extends Component {
         <TabPane tabId="7">
           this is Saturday
         </TabPane>
-      </TabContent>  
+      </TabContent>
       </Container>
       <Navi username={this.state.username} password={this.state.password} />
       </div>
