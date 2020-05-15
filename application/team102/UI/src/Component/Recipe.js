@@ -1,14 +1,13 @@
-import React, {Component} from 'react';
-import {Container, Row, Col, Input, Card, CardImg, Form, FormGroup} from 'reactstrap';
+import React, {useState, Component} from 'react';
+import {Container, Row, Col, Input, Button, ButtonGroup, Card, CardImg, Form, CardText, CardFooter, CardHeader, FormGroup, NavLink,  Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
-import {Link} from "react-router-dom";
 import axios from "axios";
 
 
-const Fooddata = props => (
+const Fooddata = props => {
 /*  <tr>
-    <td>{props.food.recipeName}</td>
+    <td></td>
     <td>{props.food.recipeImage}</td>
     <td>{props.food.recipeCarbs}</td>
     <td>{props.food.recipeProtein}</td>
@@ -22,19 +21,75 @@ const Fooddata = props => (
       >
         delete
       </a>
-    </td>
+    </td><NavLink to = {"/inRep/"+props.username+"/"+props.password+"/"+props.food.recipeName}></NavLink>
   </tr>*/
+  const {className} = props;
+  const [modal, setModal] = useState(false);
+
+  const toggle = () => setModal(!modal);
+  return (
   <Card className="bigdes ">
-    <Link to = {"/inRep/"+props.username+"/"+props.password+"/"+props.food.recipeName}><CardImg alt="recipeItem" src={props.food.recipeImage}/></Link>
+    <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage}/>
+    <Modal isOpen={modal} toggle={toggle} className={className}>
+        <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
+        <ModalBody>
+          <h4>Calories:{props.food.recipeCalories}</h4>
+          <h4>Carbs:{props.food.recipeCarbs}</h4>
+          <h4>Sugar:{props.food.recipeSugar}</h4>
+          <h4>Protein:{props.food.recipeProtein}</h4>
+          <h4>Fat:{props.food.recipeFat}</h4>
+          <img src={props.food.recipeImage} height="50%" width="100%"/>
+        </ModalBody>
+        <ModalFooter>
+          <ButtonGroup className="itemOptions">
+            <Button onClick={() => {props.deleteItems(props.food.recipe_id);}}>
+              <img alt="delete"  />
+            </Button>
+            <Button>
+              <CardText></CardText>
+            </Button>
+            <Button onClick={() => "/create" + props.food.recipe_id}>
+              <img alt="eat"  />
+            </Button>
+          </ButtonGroup>
+        </ModalFooter>
+      </Modal>
+
+      <CardHeader>
+        <ButtonGroup className="itemHead">
+          <Button>
+
+          </Button>
+          <Button>
+            <CardText>{props.food.recipeName}</CardText>
+          </Button>
+          <Button>
+            <CardText>{props.food.recipeCalories}</CardText>
+          </Button>
+        </ButtonGroup>
+      </CardHeader>
+      <CardBody position='center'>
+          
+      </CardBody>
+      <CardFooter>
+        <ButtonGroup className="itemOptions">
+          <Button onClick={() => {props.deleteItems(props.food.recipe_id);}}>
+            <img alt="delete"  />
+          </Button>
+          <Button>
+            <CardText></CardText>
+          </Button>
+          <Button onClick={() => "/create" + props.food.recipe_id}>
+            <img alt="eat"  />
+          </Button>
+        </ButtonGroup>
+      </CardFooter>
   </Card>
-
-
-);
-
+  );
+}
+//grabs search results
 const Recipedata = props =>(
   <tr>{props.food.recipe.label}</tr>
-
-
 );
 
 //grabs recipe photo and name
@@ -109,11 +164,8 @@ export default class Recipe extends Component {
     });
   }
 
-
   onSubmit(e){
     e.preventDefault();
-
-
         axios
           .get("https://api.edamam.com/search?q=chicken&app_id=b53160ee&app_key=5d9984e95c5c6968d5edfb7d02c83b46&from=0&to=3&calories=591-722&health=alcohol-free")
           .then(response => {
