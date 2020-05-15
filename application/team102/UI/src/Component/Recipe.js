@@ -130,9 +130,9 @@ export default class Recipe extends Component {
               console.log(newrec);
               currentfood.recipe.ingredients.map(currentingredient=>{
                 console.log(currentingredient.text);
-
+                return (null);
               })
-
+              return (null);
 
             })
             console.log(newrec);
@@ -207,7 +207,7 @@ export default class Recipe extends Component {
   inventory() {
     const {match:{params}} = this.props;
     return this.state.recipedata.map(currentfood => {
-      if(currentfood.creator==params.id){
+      if(currentfood.creator===params.id){
         return (
           <Fooddata
             food={currentfood}
@@ -217,7 +217,7 @@ export default class Recipe extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
             />
-          );}
+          );} return (null);
     });
   }
 
@@ -321,7 +321,7 @@ export default class Recipe extends Component {
 
         {this.inventory()}        
       </Container>    
-        <Navi username={this.state.creator} password={this.state.password}/>
+        <Navi username={this.state.password} password={this.state.password}/>
       </div>  
     )
   }

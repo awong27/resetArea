@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Input, NavLink, TabPane, Nav, NavItem, TabContent, Button} from 'reactstrap';
+import {Container, Row, Col, NavLink, TabPane, Nav, NavItem, TabContent, Button} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import classnames from 'classnames';
