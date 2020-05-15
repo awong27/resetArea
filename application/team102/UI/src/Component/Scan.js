@@ -35,20 +35,19 @@ export default class Scan extends Component {
         const context = this.canvas.getContext('2d');
         context.drawImage(this.myVideo, 0, 0, 400, 350);
         const image = this.canvas.toDataURL('image/jpeg', 0.5);
+        const url = 'http://localhost:3010/api/image/save';
 
-        const requestOptions = {
-            method: 'POST',
-            headers: { 'Content-Type' : 'application/json'},
-            body: JSON.stringify({ user: 'userName'}),
-          }
-          fetch('http://localhost:3010/api/image/save', requestOptions)
-            .then(res => res.json())
-            .then( data => {
-                console.log(data);
-            })
-            .catch( console.log)
+        let formData = new FormData();
+        formData.set('file', image);
+
+
+        axios.post(url, formData, {
+            headers: {'Content-Type' : 'multipart/form-data' }
+        });
+
         return image;
     }
+
 
 
     render() {
