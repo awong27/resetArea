@@ -8,7 +8,7 @@ import { NavLink } from "reactstrap";
 export default class Create extends Component {
   constructor(props) {
     super(props);
-
+    const {match:{params}} = this.props;
 
     this.onChangeFoodname = this.onChangeFoodname.bind(this);
     this.onChangeExpirationdate = this.onChangeExpirationdate.bind(this);
@@ -29,12 +29,12 @@ export default class Create extends Component {
       fat:"",
       protein:0,
       foods:[],
-
+      userdata: [],
+      password:params.password,
+      username:params.id
     };
   }
-
-
-
+  
   onChangeFoodname(e) {
     this.setState({
       foodname: e.target.value
@@ -127,11 +127,11 @@ export default class Create extends Component {
 
   render(){
 
-
+    var inv = "/inventory/"+this.state.username+"/"+this.state.password
     return (
       <div>
         <h3>Create New Food Items</h3>
-        <NavLink href="/inventory/:id/:password">Back</NavLink>
+        <NavLink href={inv}>Back</NavLink>
         <form onSubmit={this.onSubmit}>
           <div className="form-group">
             <label>Food Name: </label>

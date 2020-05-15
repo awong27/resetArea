@@ -85,12 +85,16 @@ export default class inventory extends Component {
     return (
       /*
       * Shopping List Pulls info and displays as buttons
-      *
-      *
-      *
+      * should be able to see main list and sublist at the bottom
+      * need main user and sub users id
+      * 
+      * needs to grab date when list is clear and send to shopping history
+      * 
+      * scan to match list with what was bought and populate with values
+      * bring up things not grabbed by scan but on shopping list
       */
-      <div><TopBar/><br/><br/><br/> <div className="midCon">
-      <div><h1>Shopping List</h1></div>
+      <div><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/> <div className="midCon">
+      <div><h1>Shopping List</h1></div>  
       <Row><Col xs='1'/><Col  align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
       <div className="listItem">
         {this.inventory()}

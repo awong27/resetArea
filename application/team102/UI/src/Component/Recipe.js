@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Container, Row, Col, Input, Button,Table,Image,Card,CardImg} from 'reactstrap';
+import {Container, Row, Col, Input, Card, CardImg, Form, FormGroup} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import {Link} from "react-router-dom";
@@ -37,6 +37,13 @@ const Recipedata = props =>(
 
 );
 
+//grabs recipe photo and name
+/*const RecipeData = (props) => (
+  <Row>
+    <Card className="bigdes ">
+      <CardImg alt="recipeItem" src={Tphoto}/>            
+    </Card>  
+  </Row>*/
 export default class Recipe extends Component {
 
   constructor(props) {
@@ -259,26 +266,64 @@ export default class Recipe extends Component {
 
           }*/
 
-
-
-
-
-
-
-  render() {
+  
+  restrictions() {
     return (
-      <div><TopBar/> <br/><br/><br/>
-      <Container className="fit-content">
-        <Row><Col><h1>Recipes</h1></Col></Row>
-        <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
-        <Row>
-          {this.inventory()}
-
-
-        </Row>
-      </Container>
-      <Navi username={this.state.creator} password={this.state.password}/>
-      </div>
+      <Form inline justified>
+        <FormGroup>
+          <Input type="select">
+            <option>Calories</option>
+            <option>250  Cal</option>
+            <option>500  Cal</option>
+            <option>750  Cal</option>
+            <option>1000  Cal</option>
+            <option>1500  Cal</option>
+          </Input>
+        </FormGroup> 
+        <FormGroup>
+          <Input type="select">
+            <option>Fat</option>
+            <option>Fat</option>
+            <option>Fat</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Input type="select">
+            <option>Carbs</option>
+            <option>Carbs</option>
+            <option>Carbs</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Input type="select">
+            <option>Sodium</option>
+            <option>Sodium</option>
+            <option>Sodium</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Input type="select">
+            <option>Sugar</option>
+            <option>Sugar</option>
+            <option>Sugar</option>
+          </Input>
+        </FormGroup>
+      </Form>
     );
   }
+  render() {
+    return (        
+      <div><TopBar username={this.state.username} password={this.state.password}/> <br/><br/><br/>
+      <Container className="fit-content"> 
+        <Row><Col><h1>Recipes</h1></Col></Row>
+        <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
+        {this.restrictions()}
+
+        {this.inventory()}        
+      </Container>    
+        <Navi username={this.state.creator} password={this.state.password}/>
+      </div>  
+    )
+  }
 }
+//<Navi username={this.state.username} password={this.state.password}/>

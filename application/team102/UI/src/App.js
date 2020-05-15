@@ -8,33 +8,26 @@ import SList from "./Component/ShoppingList.js";
 import SHist from "./Component/ShoppingHistory.js";
 import Inventory from "./Component/inventory.js";
 import mealplan from "./Component/MealPlan.js";
-import mealDay from "./Component/MealDay.js";
 import inRep from "./Component/RecipeInner.js"
 import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
 import EditUser from "./Component/EditUser.js"
-
-
-import Statistics from "./Component/Statistics.js";
-import StatWeekly from "./Component/StatWeekly.js";
+import SignIn from "./SignIn.js";
 import SearchRecipe from "./Component/addRecipe.js";
-//import Nav2 from "./components/navbar.component";
-//import Inventory from "./components/inventory.component";
-//import EditFoodData from "./components/edit-fooddata.component";
 import CreateFood from "./Component/create-fooddata.component.js";
 import FoodCard from "./Component/user-inventory.component.js";
 
 function App() {
-  /** */
-    //const[visibility,inVis] = useState(false);
-
+  /*
+  * has all the routes
+  */
     return (
       <div align="center">
       <BrowserRouter>
         <div className="Main">
           <Switch>
 
-
+            <Route path="/" exact component={SignIn} />
 
             <Route path="/Home/:id/:password" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />
@@ -45,14 +38,11 @@ function App() {
             <Route path="/inventory/:id/:password" exact component={Inventory} />
             <Route path="/user-item/:id" component={FoodCard}/>
             <Route path="/mealplan/:id/:password" exact component={mealplan} />
-            <Route path="/mealDay" exact component={mealDay} />
 
             <Route path="/Recipe/:id/:password" exact component={Recipe} />
             <Route path="/addRecipe/:id/:password/:search/:sugar/:fat/:carbs/:calories" exact component={SearchRecipe} />
             <Route path="/inRep/:id/:password/:recipeName" exact component={inRep} />
 
-            <Route path="/Statistics/:id/:password" exact component={Statistics} />
-            <Route path="/StatWeekly" exact component={StatWeekly} />
             <Route path="/create/:id/:password" exact component={CreateFood}/>
 
 
