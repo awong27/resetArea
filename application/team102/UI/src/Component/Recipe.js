@@ -4,25 +4,10 @@ import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
 
-
+//grabs recipe information
+//displays as a rectangular picture with overlay text
+//when clicked with have a pop up with more info
 const Fooddata = props => {
-/*  <tr>
-    <td></td>
-    <td>{props.food.recipeImage}</td>
-    <td>{props.food.recipeCarbs}</td>
-    <td>{props.food.recipeProtein}</td>
-    <td>
-      <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-      <a
-        href="/create"
-        onClick={() => {
-          props.deleteItems(props.food._id);
-        }}
-      >
-        delete
-      </a>
-    </td><NavLink to = {"/inRep/"+props.username+"/"+props.password+"/"+props.food.recipeName}></NavLink>
-  </tr>*/
   const {className} = props;
   const [modal, setModal] = useState(false);
 
@@ -92,13 +77,6 @@ const Recipedata = props =>(
   <tr>{props.food.recipe.label}</tr>
 );
 
-//grabs recipe photo and name
-/*const RecipeData = (props) => (
-  <Row>
-    <Card className="bigdes ">
-      <CardImg alt="recipeItem" src={Tphoto}/>            
-    </Card>  
-  </Row>*/
 export default class Recipe extends Component {
 
   constructor(props) {
@@ -195,9 +173,6 @@ export default class Recipe extends Component {
           })
     var addRec="/addRecipe/"+this.state.creator+"/"+this.state.password+"/"+this.state.searches+"/"+this.state.recipeSugar+"/"+this.state.recipeFat+"/"+this.state.recipeCarbs+"/"+this.state.recipeCalories
     window.location=addRec
-
-
-
 }
   componentDidMount() {
     axios
@@ -255,7 +230,7 @@ export default class Recipe extends Component {
 
 
   }*/
-
+  
   inventory() {
     const {match:{params}} = this.props;
     return this.state.recipedata.map(currentfood => {
@@ -274,9 +249,7 @@ export default class Recipe extends Component {
   }
 
   searchedRecipes() {
-
     return this.state.newrecipedata.map(currentfood => {
-
         return (
           <Recipedata
             food={currentfood}
@@ -324,12 +297,12 @@ export default class Recipe extends Component {
       <Form inline justified>
         <FormGroup>
           <Input type="select">
-            <option>Calories</option>
-            <option>250  Cal</option>
-            <option>500  Cal</option>
-            <option>750  Cal</option>
-            <option>1000  Cal</option>
-            <option>1500  Cal</option>
+            <option>Cal</option>
+            <option>250Cal</option>
+            <option>500Cal</option>
+            <option>750Cal</option>
+            <option>1000Cal</option>
+            <option>1500Cal</option>
           </Input>
         </FormGroup> 
         <FormGroup>

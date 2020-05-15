@@ -25,8 +25,9 @@ const Fooddata = props => (
       </a>
     </td>
   </tr>*/
-  <Button className="invBar"><Row>
+  <Button className="invBar" ><Row>
     <NavLink to = {"/user-item/"+ props.food._id}>{props.food.foodName}</NavLink>
+    <Button onClick={() => {props.deleteItems(props.food._id);}}>X</Button>
   </Row></Button>
 
 );
@@ -80,7 +81,7 @@ export default class inventory extends Component {
       return (null);
     });
   }
-
+  
   render() {
     return (
       /*
@@ -96,8 +97,10 @@ export default class inventory extends Component {
       <div><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/> <div className="midCon">
       <div><h1>Shopping List</h1></div>  
       <Row><Col xs='1'/><Col  align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
+      <h3>Main</h3>
       <div className="listItem">
         {this.inventory()}
+        {this.subInventory()}
       </div>
 
       </div>
@@ -105,6 +108,52 @@ export default class inventory extends Component {
       <Navi username={this.state.username} password={this.state.password}/>
       </div>
     )
+  }
+  subInventory() {
+    return ( <>
+    <h3>Hatchet</h3>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    <Button className="subBar" ><Row>
+      <NavLink>Ducks</NavLink>
+      <Button>X</Button>
+      <Button>+</Button>
+    </Row></Button>
+    </>
+    );
   }
 }
 /*<ButtonGroup size='lg' >
