@@ -117,18 +117,20 @@ export default class Recipe extends Component {
 
   onChangeCalories(e){
     this.setState({
-      recipeCalories:e.target.value
+      recipeCalories:e.target.value.replace(/\D/g,'')
     });
+    console.log(this.state.recipeCalories)
+
   }
 
   onChangeCarbs(e){
     this.setState({
-      recipeCarbs:e.target.value
+      recipeCarbs:e.target.value.replace(/\D/g,'')
     });
   }
   onChangeSugar(e){
     this.setState({
-      recipeSugar:e.target.value
+      recipeSugar:e.target.value.replace(/\D/g,'')
     });
   }
   onChangeProtein(e){
@@ -138,7 +140,7 @@ export default class Recipe extends Component {
   }
   onChangeFat(e){
     this.setState({
-      recipeFat:e.target.value
+      recipeFat:e.target.value.replace(/\D/g,'')
     });
   }
 
@@ -291,64 +293,137 @@ export default class Recipe extends Component {
 
           }*/
 
-  
+
   restrictions() {
     return (
-      <Form inline justified>
+      <Form inline justified onSubmit={this.onSubmit}>
         <FormGroup>
-          <Input type="select">
-            <option>Cal</option>
-            <option>250Cal</option>
-            <option>500Cal</option>
-            <option>750Cal</option>
-            <option>1000Cal</option>
-            <option>1500Cal</option>
-          </Input>
-        </FormGroup> 
+          <Row><Label>New Recipe: </Label>
+          <Input
+          type="text"
+          required
+          className="form-control"
+          value={this.state.searches}
+          onChange={this.onChangeSearch}
+          /></Row>
+      </FormGroup>
+      <FormGroup>
+      <Input
+      type="select"
+      onChange={this.onChangeCalories}
+      value = {this.state.recipeCalories}>
+        <option>Calories</option>
+        <option>250  Cal</option>
+        <option>500  Cal</option>
+        <option>750  Cal</option>
+        <option>1000  Cal</option>
+        <option>1500  Cal</option>
+      </Input>
+      </FormGroup>
         <FormGroup>
-          <Input type="select">
+          <Input
+          type="select"
+          onChange={this.onChangeFat}
+          value = {this.state.recipeFat}
+          >
             <option>Fat</option>
-            <option>Fat</option>
-            <option>Fat</option>
+            <option>5 g</option>
+            <option>10 g</option>
+            <option>15 g</option>
+            <option>20 g</option>
+            <option>25 g</option>
+            <option>30 g</option>
+            <option>35 g</option>
+            <option>40 g</option>
+            <option>45 g</option>
+            <option>50 g</option>
+            <option>55 g</option>
+            <option>60 g</option>
+          </Input>
+        </FormGroup>
+        <FormGroup>
+          <Input
+          type="select"
+          value={this.state.recipeCarbs}
+          onChange={this.onChangeCarbs}
+          >
+          <option>Carbs</option>
+          <option>5 g</option>
+          <option>10 g</option>
+          <option>15 g</option>
+          <option>20 g</option>
+          <option>25 g</option>
+          <option>30 g</option>
+          <option>35 g</option>
+          <option>40 g</option>
+          <option>45 g</option>
+          <option>50 g</option>
+          <option>55 g</option>
+          <option>60 g</option>
           </Input>
         </FormGroup>
         <FormGroup>
           <Input type="select">
-            <option>Carbs</option>
-            <option>Carbs</option>
-            <option>Carbs</option>
+          <option>Sodium</option>
+          <option>5 g</option>
+          <option>10 g</option>
+          <option>15 g</option>
+          <option>20 g</option>
+          <option>25 g</option>
+          <option>30 g</option>
+          <option>35 g</option>
+          <option>40 g</option>
+          <option>45 g</option>
+          <option>50 g</option>
+          <option>55 g</option>
+          <option>60 g</option>
           </Input>
         </FormGroup>
         <FormGroup>
-          <Input type="select">
-            <option>Sodium</option>
-            <option>Sodium</option>
-            <option>Sodium</option>
+          <Input
+          type="select"
+          value= {this.state.recipeSugar}
+          onChange={this.onChangeSugar}
+          >
+          <option>Sugar</option>
+          <option>5 g</option>
+          <option>10 g</option>
+          <option>15 g</option>
+          <option>20 g</option>
+          <option>25 g</option>
+          <option>30 g</option>
+          <option>35 g</option>
+          <option>40 g</option>
+          <option>45 g</option>
+          <option>50 g</option>
+          <option>55 g</option>
+          <option>60 g</option>
           </Input>
         </FormGroup>
+
         <FormGroup>
-          <Input type="select">
-            <option>Sugar</option>
-            <option>Sugar</option>
-            <option>Sugar</option>
-          </Input>
+          <Row><Input
+          type="submit"
+          value="Find New Recipe"
+          className="btn btn-primary"
+          /></Row>
         </FormGroup>
+
       </Form>
     );
   }
   render() {
-    return (        
-      <div><TopBar username={this.state.username} password={this.state.password}/> <br/><br/><br/>
-      <Container className="fit-content"> 
+    return (
+      <div><TopBar username={this.state.creator} password={this.state.password}/> <br/><br/><br/>
+      <Container className="fit-content">
         <Row><Col><h1>Recipes</h1></Col></Row>
-        <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
-        {this.restrictions()}
 
-        {this.inventory()}        
-      </Container>    
-        <Navi username={this.state.password} password={this.state.password}/>
-      </div>  
+        {this.restrictions()}
+          <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
+        {this.inventory()}
+      </Container>
+        <Navi username={this.state.creator} password={this.state.password}/>
+      </div>
     )
   }
 }
-//<Navi username={this.state.username} password={this.state.password}/>
