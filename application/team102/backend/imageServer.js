@@ -13,21 +13,24 @@ app.use(bodyParser());
 app.use(fileUpload());
 
 
-app.post('/api/image/save', (req, res) => {
+app.post('/api/image/save', (req, response) => {
     
     let file = req.body.file.split(';base64,').pop();
     fs.writeFile('./visionAssets/receipts/image.jpeg', file, {encoding: 'base64'}, function(err) {
         if(err) {
-
+            console.log(err);
         } else {
             axios.get('http://localhost:3004/api/scan?name=image.jpeg')
-            .then()
-            .catch();
+            .then((res) => {
+                console.log(res.data);
+                response.send(res.data);
+            })
+            .catch((e) => {
+                console.log(e);
+            });
         }
     });
-   // console.log(file);
-    axios
-    res.send('file');
+
 });
 
 
