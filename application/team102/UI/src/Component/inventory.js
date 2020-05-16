@@ -1,5 +1,7 @@
 import React, { useState, Component } from 'react';
-import { Button, Badge, ButtonGroup, Card, CardImg, CardText, CardFooter, CardHeader, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, CardBody } from 'reactstrap';
+import { Button, Badge, ButtonGroup, 
+  Card, CardImg, CardText, CardFooter, CardHeader, CardBody, 
+  NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -7,7 +9,13 @@ import "./inv.css";
 import consume from "./pizzaIcon.png";
 import trash from "./trashIcon.png";
 import plusbtn from "./plus.svg";
-
+/**
+   * add item to inventory page
+   * Modal will display a detailed description in a pop up window
+   * CardImg will pull the large display pic
+   * CardHeader and CardFooter 
+   * display buttons, name and exp date 
+   */
 const Fooddata = props => {
   const { className } = props;
   const [modal, setModal] = useState(false);
@@ -16,7 +24,7 @@ const Fooddata = props => {
     <Card className="invItem">
       <CardImg alt="FridgeItem" onClick={toggle} src={props.food.foodPic} />
       <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}><h3>{props.food.foodName}</h3>{props.food.numOfItems}</ModalHeader>
+        <ModalHeader toggle={toggle}><h3>{props.food.foodName}</h3></ModalHeader>
         <ModalBody>
           <td>Expires:{props.food.expirationDate}</td>
           <h4>Calories:{props.food.calories}</h4>
@@ -27,7 +35,7 @@ const Fooddata = props => {
           <img alt={props.food.foodName} src={props.food.foodPic} height="50%" width="100%" />
         </ModalBody>
         <ModalFooter>
-          <ButtonGroup className="itemOptions">
+          <ButtonGroup>
             <Button onClick={() => { props.deleteItems(props.food._id); }}>
               <img alt="delete" src={trash} />
             </Button>
@@ -87,6 +95,9 @@ export default class inventory extends Component {
     };
   }
   //${params.id}
+  /**
+   * grabs list of food data
+   */
   componentDidMount() {
     const { match: { params } } = this.props;
     axios
@@ -106,6 +117,10 @@ export default class inventory extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
+  /**
+   * matches food data list with personal id for personal food list
+   * populates individually Fooddata by sending food_id
+   */
   inventory() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -121,6 +136,7 @@ export default class inventory extends Component {
     });
   }  
   render() {
+    const create = "/Create/"+this.state.username+"/"+this.state.password;
     return (
       <div><TopBar username={this.state.username} password={this.state.password} />
         <br /><br /><br />
@@ -129,7 +145,7 @@ export default class inventory extends Component {
           {this.inventory()}
         </div>
         <br /><br />
-        <NavLink href="/Scan"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
+        <NavLink href={create}><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
         <Navi username={this.state.username} password={this.state.password} />
       </div>
     )

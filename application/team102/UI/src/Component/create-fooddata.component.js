@@ -26,91 +26,81 @@ export default class Create extends Component {
       carbs: "",
       sugar: "",
       fat: "",
-      protein: 0,
+      protein: "",
+      sodium: "",
       foods: [],
       userdata: [],
       password: params.password,
       username: params.id
     };
   }
-  onChangeFoodname(e) {
-    this.setState({
-      foodname: e.target.value
-    });
-  }
-  onChangeFat(e) {
-    this.setState({
-      fat: e.target.value
-    });
-  }
-  onChangeSugar(e) {
-    this.setState({
-      sugar: e.target.value
-    });
-  }
-  onChangeProtein(e) {
-    this.setState({
-      protein: e.target.value
-    });
-  }
-  onChangeCarbs(e) {
-    this.setState({
-      carbs: e.target.value
-    });
-  }
-  onChangeExpirationdate(e) {
-    this.setState({
-      expirationdate: e.target.value
-    });
-  }
-  onChangeCalories(e) {
-    this.setState({
-      calories: e.target.value
-    });
-  }
-  onChangeNumberOfItems(e) {
-    this.setState({
-      numberOfItems: e.target.value
-    });
-  }
+  // change activations for prop states
+  onChangeFoodname(e) {this.setState({foodname: e.target.value});}
+  onChangeExpirationdate(e) {this.setState({expirationdate: e.target.value});}
+  onChangeCalories(e) {this.setState({calories: e.target.value});}
+  onChangeNumberOfItems(e) {this.setState({numberOfItems: e.target.value});}
+  onChangeCarbs(e) {this.setState({carbs: e.target.value});}
+  onChangeSugar(e) {this.setState({sugar: e.target.value});}
+  onChangeFat(e) {this.setState({fat: e.target.value});}  
+  onChangeProtein(e) {this.setState({protein: e.target.value});}  
+  onChangeSodium(e) {this.setState({sodium: e.target.value});}
+  
   onSubmit(e) {
     e.preventDefault();
-    var proteins;
     axios
+      /* Searches food name param in Api returns all types matching
+       * foods -> array going to be loaded with first result info
+       * has all nutrition facts
+       */
       .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query=" + this.state.foodname)
       .then(response => {
         console.log(response.data.foods[0].foodNutrients[0]);
         this.setState({
           foods: response.data.foods[0].foodNutrients
         });
+        /* Searches array for matching nutrient name, only exact 
+         * calls funct to change value once found
+         */
         this.state.foods.map(currentfood => {
-          //if(currentfood.nutrientName=="Protein"){
-          //this.state.protein=currentfood.value
-          console.log(currentfood.value);
-          proteins = currentfood.value;
-          return (null);
-          //}
+          console.log(currentfood.nutrientName, currentfood.value);
+          if(currentfood.nutrientName === 'Energy'){
+            this.onChangeCalories(currentfood.value);
+          }else if(currentfood.nutrientName === 'Carbohydrate, by difference'){
+            this.onChangeCarbs(currentfood.value);
+          }else if(currentfood.nutrientName === 'Total lipid (fat)'){
+            this.onChangeFat(currentfood.value);
+          }else if(currentfood.nutrientName === 'Protein'){
+            this.onChangeProtein(currentfood.value);
+          }else if(currentfood.nutrientName === 'Sugars, total including NLEA'){
+            this.onChangeSugar(currentfood.value);
+          }else if(currentfood.nutrientName === 'Sodium, Na'){
+            this.onChangeSodium(currentfood.value);
+          }      
         })
+        /* adds all values into a temp list
+         * sends to backend to be added to personal id food list
+         */
+        const food = {
+          foodName: this.state.foodname,
+          expirationDate: this.state.expirationdate,
+          calories: this.state.calories,
+          numOfItems: this.state.numberOfItems,
+          carbs: this.state.carbs,
+          protein: this.state.protein,
+          fat: this.state.fat,
+          sugar: this.state.sugar,
+          sodium: this.state.sodium
+        };
+        console.log(food);
+        axios
+          .post("/fooddata/add", food)
+          .then(res => console.log(res.data));
       })
       .catch(error => {
         console.log(error);
       });
-    const food = {
-      foodName: this.state.foodname,
-      expirationDate: this.state.expirationdate,
-      calories: this.state.calories,
-      numOfItems: this.state.numberOfItems,
-      carbs: this.state.carbs,
-      protein: proteins,
-      fat: this.state.fat,
-      sugar: this.state.sugar,
-    };
-    console.log(food);
-    axios
-      .post("/fooddata/add", food)
-      .then(res => console.log(res.data));
-    //window.location = "/";
   }
+  
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
     return (
