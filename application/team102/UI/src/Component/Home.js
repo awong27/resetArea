@@ -1,11 +1,22 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, NavLink, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert } from "reactstrap";
+import { Container, Row, Col, NavLink, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert, Button } from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./Home.css";
 import classnames from 'classnames';
 import axios from "axios";
 import { Pie, Doughnut } from 'react-chartjs-2';
+
+const Fooddata = props => (
+  <Row>
+    <Col><p>{props.food.mealName}</p></Col><Col></Col><Col>Calories: {props.food.planCalories}</Col><Col xs='1' />
+  </Row>
+);
+const Recipedata = props => (
+  <Row>
+    <Col><p>{props.food.recipeName}</p></Col><Col></Col><Col>Calories: {props.food.recipeCalories}</Col><Col xs='1' />
+  </Row>
+);
 
 export default class Home extends Component {
 
@@ -17,6 +28,10 @@ export default class Home extends Component {
       userdata: [],
       password: params.password,
       username: params.id,
+      fooddata: [],
+      recipedata: [],
+      today: new Date(Date.now()),
+      date: "",
       activeTab: '1',
       labels: ['Fats', 'Protein', 'Sugar',
         'Carbs', 'Sodium'],
@@ -41,6 +56,9 @@ export default class Home extends Component {
         }
       ]
     };
+    var date = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.today.getDate()).toString() + "/" + (this.state.today.getFullYear()).toString();
+    this.state.date = date
+    console.log(this.state.date)
   }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
@@ -51,8 +69,6 @@ export default class Home extends Component {
   }
   componentDidMount() {
     const { match: { params } } = this.props;
-    console.log(params.id);
-    //console.log({itemid});
     axios
       .get(`http://localhost:8080/userdata/${params.id}`)
       .then(response => {
@@ -85,17 +101,65 @@ export default class Home extends Component {
     </>
     );
   }
+  todaysMeals() {
+    const { match: { params } } = this.props;
+    axios
+      .get("http://localhost:8080/mealplan/")
+      .then(response => {
+        this.setState({
+          fooddata: response.data,
+        });
+      })
+    return this.state.fooddata.map(currentfood => {
+      if (currentfood.creator === params.id && currentfood.date === this.state.date) {
+        return (
+          <Fooddata
+            food={currentfood}
+            deleteItems={this.deleteItems}
+            key={currentfood._id}
+          />
+        );
+      }
+    });
+  }
+  myRecipes() {
+    var count = 4;
+    const { match: { params } } = this.props;
+    axios
+      .get("http://localhost:8080/recipedata/")
+      .then(response => {
+        this.setState({
+          recipedata: response.data,
+        });
+      })
+    return this.state.recipedata.map(currentfood => {
+      if (currentfood.creator === params.id) {
+        count = count - 1;
+        console.log(count);
+        if (count < 0) {
+          return (null);
+        }
+        return (
+          <Recipedata
+            food={currentfood}
+            deleteItems={this.deleteItems}
+            key={currentfood._id}
+          />
+        );
+      }
+    });
+  }
   render() {
     const { match: { params } } = this.props;
-    console.log(this.state.username);
-    console.log(this.state.password);
+
     var inv = "/inventory/" + params.id + "/" + params.password;
     var stat = "/Statistics/" + params.id + "/" + params.password;
     var meal = "/mealplan/" + params.id + "/" + params.password;
+
     //console.log(user);
     /*
     * homepage should load with user data
-    * there should be two tabs 
+    * there should be two tabs
     *   one for current statistics of user
     *   the other should have notifications of expiring items from inv
     *     current meal plan and recent recipes
@@ -105,7 +169,7 @@ export default class Home extends Component {
     return (
       <div className="container"> <TopBar username={this.state.username} password={this.state.password} />
         <Container className="HomePage">  <br />
-          <h2>Welcome, {this.state.username}</h2>
+          <h2>Welcome, Person</h2>
           {this.notifications()}
           <Nav tabs justified className="plan">
             <NavItem>
@@ -125,16 +189,13 @@ export default class Home extends Component {
             <TabPane tabId="1">
               <h3>Meal Plan For Today</h3>
               <Row className="homeRow">
-                <Col>Chicken Quesadilla</Col>
-                <Col>Duck</Col>
+                <Col>{this.todaysMeals()}</Col>
+
               </Row>
               <Row className="homeRow">
                 <Col className="homeSquare">
                   <NavLink href="/Recipes/:id/:password">
-                    <h3>Recent Recipes</h3>
-                    <h3>Tiramisu</h3>
-                    <h3>PotPies</h3>
-                    <h3>Omelete</h3>
+                    {this.myRecipes()}
                   </NavLink>
                 </Col>
               </Row>

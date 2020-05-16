@@ -7,7 +7,6 @@ import axios from "axios";
 
 const Recipedata = props => (
   <tr>
-
     <td>
       <a href={"/Recipe/" + props.username + "/" + props.password} onClick={() => {
         props.addRecipe(props.recipedata.label, props.food, props.username)
@@ -51,7 +50,8 @@ export default class Recipe extends Component {
       recipeProtein: "",
       addedRecipe: "",
       ingredients: [],
-      recipeImage: ""
+      recipeImage: "",
+      recipeSugar: ""
     };
   }
 
@@ -93,28 +93,9 @@ export default class Recipe extends Component {
           recipedata: response.data.hits
         });
         console.log(this.state.recipedata);
-        /*    this.state.newrecipedata.map(currentfood=>{
-            console.log(currentfood.recipe.label);
-            label = currentfood.recipe.label;
-            console.log(label);
-            currentfood.recipe.ingredients.map(currentingredient=>{
-              console.log(currentingredient.text);
-              newrec.push(currentingredient.text);
-              console.log(newrec);
-            })
-          })
-          console.log(newrec);
-          this.setState({
-            newRecipes: newrec
-          })*/
-        //console.log(this.state.newRecipes);
-        this.searchedRecipes();
       })
-    /*console.log(recipe);
-    axios
-      .post("http://localhost:8080/recipedata/add", recipe)
-      .then(res => console.log(res.data));*/
   }
+
   addRecipe(name, recipedata, user) {
     console.log(recipedata);
     var ingred = "";
@@ -123,26 +104,24 @@ export default class Recipe extends Component {
       recipeName: "",
       recipeImage: "",
       recipeCalories: "",
+      recipeProtein: "",
+      recipeFat: "",
       recipeCarbs: "",
       recipeSugar: "",
       creator: user,
     };
-    //const {match:{params}} = this.props;
     newR.recipeName = recipedata.recipe.label;
+    newR.recipeProtein = recipedata.recipe.totalNutrients.PROCNT.quantity;
     newR.recipeImage = recipedata.recipe.image;
     newR.recipeCalories = recipedata.recipe.calories;
+    newR.recipeFat = recipedata.recipe.totalNutrients.FAT.quantity;
+    newR.recipeCarbs = recipedata.recipe.totalNutrients.CHOCDF.quantity;
+    newR.recipeSugar = recipedata.recipe.totalNutrients.SUGAR.quantity;
     recipedata.recipe.ingredients.map(currentingredient => {
       ingred = currentingredient.text;
       newR.ingredients.push(ingred);
       console.log(newR.ingredients);
     })
-    /* 
-              const newR = {
-                recipeName : this.state.recipename,
-                ingredients : this.state.newrec,
-              } 
-              console.log(newR);
-    */
     console.log(newR);
     axios
       .post("http://localhost:8080/recipedata/add", newR)
@@ -163,7 +142,6 @@ export default class Recipe extends Component {
         <Recipedata
           recipedata={this.state.recipedata}
           password={this.state.password}
-
           username={params.id}
           food={currentfood}
           deleteItems={this.deleteItems}

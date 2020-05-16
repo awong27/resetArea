@@ -12,13 +12,14 @@ router.route("/add").post((req, res) => {
 
   const planCalories = req.body.planCalories;
   const restrictions = req.body.restrictions;
-
+  const mealType = req.body.mealType;
   const creator = req.body.creator;
-
+  const mealName = req.body.mealName;
   const planCarbs = req.body.planCarbs;
   const planProtein = req.body.planProtein;
   const planFat = req.body.planFat;
   const planSugar = req.body.planSugar;
+  const date = req.body.date;
 
 
 
@@ -26,12 +27,14 @@ router.route("/add").post((req, res) => {
     planCalories,
     restrictions,
     creator,
-
+    mealType,
     planCarbs,
     planProtein,
     planFat,
     planSugar,
     creator,
+    mealName,
+    date
 
   });
 
@@ -58,14 +61,15 @@ router.route("/update/:id").post((req, res) => {
     .then(mealplandata => {
 
       mealplandata.planCalories = req.body.planCalories;
-
+      mealplandata.mealType = req.body.mealType;
       mealplandata.restrictions = req.body.restrictions;
       mealplandata.creator=req.body.creator;
-
+      mealplandata.mealName = req.body.mealName;
       mealplandata.planCarbs =req.body.planCarbs;
       mealplandata.planProtein= req.body.planProtein;
       mealplandata.planSugar= req.body.planSugar;
       mealplandata.planFat= req.body.planFat;
+      mealplandata.date = req.body.date;
 
       mealplandata
         .save()
