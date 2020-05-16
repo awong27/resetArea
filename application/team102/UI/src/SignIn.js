@@ -19,8 +19,7 @@ export default class SignIn extends Component {
       FamilyName: "",
       ProfilePic: "",
       count: 0     
-    };  
-  
+    };    
   }
   
   componentDidMount() {
@@ -85,7 +84,8 @@ export default class SignIn extends Component {
   
     this.state.logindata.map(currentuser=>{
       if(currentuser.password===user.password && currentuser.username===user.username){
-        window.location = "/Home/"+user.username+"/"+user.password;
+        var home = "/Home/"+user.username+"/"+user.password;
+        window.location = home;
       }else{
         return(
           <div>
@@ -93,6 +93,7 @@ export default class SignIn extends Component {
           </div>
         );
       }
+      return (null);
     }); 
   
   }
@@ -128,6 +129,10 @@ export default class SignIn extends Component {
           </FormGroup>
         </> : <>
         <FormGroup>
+          <Label for="exampleEmail">Email</Label>
+          <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
+        </FormGroup>
+        <FormGroup>
             <Label for="exampleUsername">Username</Label>
             <Input
               type="username"
@@ -146,25 +151,17 @@ export default class SignIn extends Component {
               placeholder="Password"
               value={this.state.Password}
               onChange={this.onChangepassword} />
-          </FormGroup>
-        <FormGroup>
-          <Label for="exampleEmail">UserName</Label>
-          <Input type="email" name="email" id="exampleEmail" placeholder="Email or Phone" />
-        </FormGroup>
-        <FormGroup>
-          <Label for="examplePassword">Picture</Label>
-          <Input type="password" name="password" id="examplePassword" placeholder="Password" />
-        </FormGroup> 
+          </FormGroup> 
         </>}
         </div> 
         <div className="lowerbox">
-        <Button size='lg' className="submitBtn"><Input
+        <Button size='lg' className="SignSpace"><Input
           type="submit"
           value="Submit"
           className="btn"
           /></Button>
         
-      <ButtonGroup size='lg' className="d-block size-fitcontent">
+      <ButtonGroup size='lg' className="SignSpace">
       {this.state.count===0?<>
         <Button className="lightState"  onClick={()=> this.setState({count: 0})} >Login</Button>
         <Button onClick={()=> this.setState({count: 1})} >Register</Button>
