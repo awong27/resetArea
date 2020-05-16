@@ -62,6 +62,10 @@
   margin-top: 10vh;
   padding-left: 10vw !important;
   padding-right: 10vw !important;
+  border-color: transparent !important;
+}
+.SignSpace > .btn{
+  border-color: transparent !important;
 }
 .lowerbox > .btn-group {
   box-sizing: content-box !important;

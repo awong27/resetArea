@@ -89,11 +89,14 @@ export default class SignIn extends Component {
       profilePic: this.state.ProfilePic,
       email: this.state.Email
     };
+    var flag = false;
     this.state.logindata.map(currentuser => {
       if (currentuser.password === user.password && currentuser.username === user.username) {
         var home = "/Home/" + user.username + "/" + user.password;
         window.location = home;
-      } else {
+      }else if(currentuser.username === user.username) {
+        flag = true;
+      }else {
         return (
           <div>
             <h3>Wrong Password</h3>
@@ -101,15 +104,17 @@ export default class SignIn extends Component {
         );
       }
       return (null);
-    });
-    if (user.email !== null) {
+    }); 
+    if (user.email !== "") {
+      if(!flag) {
       console.log(user);
       axios
         .post("http://localhost:8080/userdata/add", user)
         .then(res => console.log(res.data));
+        var home = "/Home/" + user.username + "/" + user.password;
+        window.location = home;
+      }     
     }
-    var home = "/Home/" + user.username + "/" + user.password;
-    window.location = home;
   }
   render() {
     /* Form fields
