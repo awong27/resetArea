@@ -52,7 +52,8 @@ export default class Recipe extends Component {
       recipeProtein: "",
       addedRecipe: "",
       ingredients: [],
-      recipeImage:""
+      recipeImage:"",
+      recipeSugar:""
 
 
     };
@@ -139,6 +140,8 @@ addRecipe(name, recipedata,user){
            recipeName:"",
            recipeImage:"",
            recipeCalories: "",
+           recipeProtein: "",
+           recipeFat:"",
            recipeCarbs:"",
            recipeSugar:"",
            creator:user,
@@ -147,8 +150,12 @@ addRecipe(name, recipedata,user){
           //const {match:{params}} = this.props;
 
           newR.recipeName= recipedata.recipe.label;
+          newR.recipeProtein = recipedata.recipe.totalNutrients.PROCNT.quantity;
           newR.recipeImage=recipedata.recipe.image;
           newR.recipeCalories = recipedata.recipe.calories;
+          newR.recipeFat = recipedata.recipe.totalNutrients.FAT.quantity;
+          newR.recipeCarbs = recipedata.recipe.totalNutrients.CHOCDF.quantity;
+          newR.recipeSugar = recipedata.recipe.totalNutrients.SUGAR.quantity;
 
           recipedata.recipe.ingredients.map(currentingredient=>{
                 ingred = currentingredient.text;
