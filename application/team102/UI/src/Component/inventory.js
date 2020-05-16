@@ -26,7 +26,7 @@ const Fooddata = props => {
           <h4>Sugar:{props.food.sugar}</h4>
           <h4>Protein:{props.food.protein}</h4>
           <h4>Fat:{props.food.fat}</h4>
-          <img src={props.food.foodPic} height="50%" width="100%"/>
+          <img alt={props.food.foodName} src={props.food.foodPic} height="50%" width="100%"/>
         </ModalBody>
         <ModalFooter>
           <ButtonGroup className="itemOptions">
@@ -142,10 +142,8 @@ export default class inventory extends Component {
       <div className="FridgeList">
         {this.inventory()}
       </div>
-      
-
       <br/><br/>
-      <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
+      <NavLink href="/Scan"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
       <Navi username={this.state.username} password={this.state.password}/>
       </div>
     )

@@ -15,6 +15,7 @@ import EditUser from "./Component/EditUser.js"
 import SignIn from "./SignIn.js";
 import SearchRecipe from "./Component/addRecipe.js";
 import CreateFood from "./Component/create-fooddata.component.js";
+import Scan from "./Component/Scan.js";
 import FoodCard from "./Component/user-inventory.component.js";
 
 function App() {
@@ -44,7 +45,8 @@ function App() {
             <Route path="/inRep/:id/:password/:recipeName" exact component={inRep} />
 
             <Route path="/create/:id/:password" exact component={CreateFood}/>
-
+            <Route path="/create" exact component={CreateFood}/>
+            <Route path="/Scan" exact component={Scan} />
 
           </Switch>
         </div>

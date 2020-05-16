@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, NavLink, ListGroup, ListGroupItem, Badge, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert} from "reactstrap";
+import { Container, Row, Col, NavLink, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./Home.css";

@@ -1,7 +1,7 @@
 import React, {useState, Component} from 'react';
 import {Container, Label, Row, Col, Input, Button, ButtonGroup, 
   Card, CardImg, Form, CardText, CardFooter, CardHeader, 
-  FormGroup, NavLink,  Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
+  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -25,7 +25,7 @@ const Fooddata = props => {
           <h4>Sugar:{props.food.recipeSugar}</h4>
           <h4>Protein:{props.food.recipeProtein}</h4>
           <h4>Fat:{props.food.recipeFat}</h4>
-          <img src={props.food.recipeImage} height="50%" width="100%"/>
+          <img alt={props.food.recipeName} src={props.food.recipeImage} height="50%" width="100%"/>
         </ModalBody>
         <ModalFooter>
           <ButtonGroup className="itemOptions">
