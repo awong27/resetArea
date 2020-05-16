@@ -15,6 +15,14 @@ const Fooddata = props => (
 
 );
 
+const Recipedata = props => (
+
+  <Row>
+    <Col><p>{props.food.recipeName}</p></Col><Col></Col><Col>Calories: {props.food.recipeCalories}</Col><Col xs='1'/>
+  </Row>
+
+);
+
 
 export default class Home extends Component{
 
@@ -30,6 +38,7 @@ export default class Home extends Component{
     password:params.password,
     username:params.id,
     fooddata:[],
+    recipedata:[],
     today: new Date(Date.now()),
     date:"",
     activeTab: '1',
@@ -135,9 +144,42 @@ export default class Home extends Component{
 
         });
 
+  }
+myRecipes(){
+  var count = 4;
+    const {match:{params}} = this.props;
+    axios
+      .get("http://localhost:8080/recipedata/")
+      .then(response => {
 
+        this.setState({
+          recipedata: response.data,
+
+         });
+
+
+
+        })
+        return this.state.recipedata.map(currentfood => {
+          if(currentfood.creator===params.id ){
+            count=count-1;
+            console.log(count);
+            if(count<0){
+              return(null);
+            }
+            return (
+              <Recipedata
+                food={currentfood}
+                deleteItems={this.deleteItems}
+                key={currentfood._id}
+                />
+              );}
+
+
+        });
 
   }
+
   render() {
 
     const {match:{params}} = this.props;
@@ -185,10 +227,7 @@ export default class Home extends Component{
           <Row className="homeRow">
             <Col className="homeSquare">
               <NavLink href="/Recipes/:id/:password">
-                <h3>Recent Recipes</h3>
-                <h3>Tiramisu</h3>
-                <h3>PotPies</h3>
-                <h3>Omelete</h3>
+              {this.myRecipes()}
               </NavLink>
             </Col>
         </Row>
