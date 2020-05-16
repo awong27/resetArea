@@ -1,13 +1,6 @@
 module.exports = {
     apps: [
         {
-            name: "server",
-            script: "./server.js",
-            watch: true,
-            ignore_watch: ["node_modules"],
-            watch: true,
-        },
-        {
             name: "vision",
             script: "./visionServer.js",
             watch: true,
@@ -17,6 +10,20 @@ module.exports = {
         {
             name: "costco",
             script: "./costcoServer.js",
+            watch: true,
+            ignore_watch: ["node_modules"],
+            watch: true,
+        },
+        {
+            name: "processImage",
+            script: "./imageServer.js",
+            watch: true,
+            ignore_watch: ["node_modules"],
+            watch: true,
+        },
+        {
+            name: "main server",
+            script: ".server.js",
             watch: true,
             ignore_watch: ["node_modules"],
             watch: true,

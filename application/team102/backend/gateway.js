@@ -56,6 +56,13 @@ app.all('/api/scan', (req, res) => {
   });
 });
 
+app.all('/api/image/save', (req, res) =>{
+  console.log('redirecting to port 3010')
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3010'
+  });
+});
+
 app.all("*", (req, res) => {
   // front end server / react
   apiProxy.web(req, res, {

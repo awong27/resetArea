@@ -96,8 +96,6 @@ export default class inventory extends Component {
       <div className="FridgeList">
         {this.inventory()}
       </div>
-      
-
       <br/><br/>
       <NavLink href="/create"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
       <Navi username={this.state.username} password={this.state.password}/>
