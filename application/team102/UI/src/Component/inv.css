@@ -6,7 +6,7 @@
 .invItem {
     width: 45vw !important;
     height: 45vw !important;
-    border-color: cornflowerblue !important;
+    border-color:rgba(96, 116, 158, 0.247) !important;
     background-color: rgb(103, 238, 243) !important;
     border-radius: 10%;      
     overflow: hidden !important;

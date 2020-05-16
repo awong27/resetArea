@@ -49,7 +49,7 @@ const Fooddata = props => {
             <CardText>{props.food.recipeName}</CardText>
           </Button>
           <Button>
-            <CardText>{props.food.recipeCalories}</CardText>
+            <CardText>{props.food.recipeCalories < 0? Math.round(props.food.recipeCalories):0}</CardText>
           </Button>
         </ButtonGroup>
       </CardHeader>

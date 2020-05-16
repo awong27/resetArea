@@ -1,12 +1,12 @@
 .plan > .nav-item > .nav-link.active {
     color: #495057;
-    background-color: rgb(102, 170, 180);
-    border-color: rgba(102, 170, 180, 0);
+    background-color: rgba(96, 116, 158, 0.247);
+    border-color: rgba(96, 116, 158, 0.247);
 }
 .plan {
     color: #495057;
-    background-color: rgba(96, 116, 158, 0.247); 
-    border-color: rgba(102, 170, 180, 0);
+    background-color: #bae8e8;
+    border-color: rgba(96, 116, 158, 0.247);
     overflow-x: scroll;
     overflow-y: hidden;
     flex-wrap: nowrap;
@@ -16,7 +16,7 @@
     flex: 0 0 auto;
 }
 .tab-content {
-    background-color: rgb(102, 170, 180);
+    background-color: rgba(96, 116, 158, 0.247);
     height: 100%;
 
 }

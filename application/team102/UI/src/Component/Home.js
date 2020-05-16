@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, Row, Col, NavLink, ListGroup, ListGroupItem, Badge, Table, TabPane, Nav, NavItem, TabContent} from "reactstrap";
+import { Container, Row, Col, NavLink, ListGroup, ListGroupItem, Badge, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./Home.css";
@@ -44,42 +44,54 @@ export default class Home extends Component{
       }
     ]
    };
+  }
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({ 
+        activeTab: tab 
+      });
+    }
+  }  
+  componentDidMount() {
+    const {match:{params}} = this.props;
+    console.log(params.id);
+    //console.log({itemid});
+    axios
+      .get(`http://localhost:8080/userdata/${params.id}`)
+      .then(response => {
+        this.setState({ userdata: response.data });
+        console.log(this.state.userdata)
 
-}
-toggle(tab) {
-  if (this.state.activeTab !== tab) {
-    this.setState({ 
-      activeTab: tab 
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+  }
+
+
+  deleteItems(id) {
+    axios
+      .delete("http://localhost:8080/userdata/" + id)
+      .then(res => console.log(res.data));
+    this.setState({
+      userdata: this.state.userdata.filter(el => el._id !== id)
     });
   }
-}  
-componentDidMount() {
-  const {match:{params}} = this.props;
-  console.log(params.id);
-  //console.log({itemid});
-  axios
-    .get(`http://localhost:8080/userdata/${params.id}`)
-    .then(response => {
-      this.setState({ userdata: response.data });
-      console.log(this.state.userdata)
-
-    })
-    .catch(error => {
-      console.log(error);
-    });
-
-}
-
-
-deleteItems(id) {
-  axios
-    .delete("http://localhost:8080/userdata/" + id)
-    .then(res => console.log(res.data));
-  this.setState({
-    userdata: this.state.userdata.filter(el => el._id !== id)
-  });
-}
-
+  notifications() {
+    return(<>
+      <UncontrolledAlert color="info">
+        Expiring Soon
+      </UncontrolledAlert>
+      <UncontrolledAlert color="info">
+        Expiring Soon
+      </UncontrolledAlert>
+      <UncontrolledAlert color="info">
+        Expiring Soon
+      </UncontrolledAlert>
+      </>
+    );
+  }
   render() {
     const {match:{params}} = this.props;
     console.log(this.state.username);
@@ -101,8 +113,10 @@ deleteItems(id) {
     * stats chart and table should be grabbing user data and populating
     */
     return (
-      <div align = "center" className="container"> <TopBar username={this.state.username} password={this.state.password}/>
-      <Container className="HomePage">  <br/>
+      <div className="container"> <TopBar username={this.state.username} password={this.state.password}/>
+      <Container className="HomePage">  <br/> 
+      <h2>Welcome, Person</h2>
+      {this.notifications()}
       <Nav tabs justified className="plan">
         <NavItem>
           <NavLink className={classnames({ active: this.state.activeTab === '1' })}
@@ -118,24 +132,11 @@ deleteItems(id) {
         </NavItem>
       </Nav>
       <TabContent activeTab={this.state.activeTab}>
-        <TabPane tabId="1">          
-          <Row className="homeRow">
-            <Col className="homeSquare">
-            <h3>Notifications</h3>
-            <ListGroup overflow="hidden">
-              <ListGroupItem className="justify-content-between">2 Weeks <Badge pill>14</Badge></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Expires Soon <Badge pill>2</Badge></ListGroupItem>
-              <ListGroupItem className="justify-content-between">Expired <Badge pill>1</Badge></ListGroupItem>
-            </ListGroup>
-            </Col>
-            <Col className="homeSquare">
-              <NavLink href="/mealplan/:id/:password">
-                <h3>MealPlan</h3>
-                <h3>Chicken Quesadilla</h3>
-                <h3>Duck</h3>
-                <h3>Rice and Beans</h3>
-              </NavLink>            
-            </Col>          
+        <TabPane tabId="1">   
+          <h3>Meal Plan For Today</h3>       
+          <Row className="homeRow">            
+            <Col>Chicken Quesadilla</Col> 
+            <Col>Duck</Col>         
           </Row>   
           <Row className="homeRow">  
             <Col className="homeSquare">        
