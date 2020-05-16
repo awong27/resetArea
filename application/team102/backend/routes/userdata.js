@@ -35,7 +35,7 @@ router.route("/add").post((req, res) => {
 });
 
 router.route("/:id").get((req, res) => {
-  Userdata.findById(req.params.id)
+  Userdata.findOne({username:req.params.id})
     .then(userdata => res.json(userdata))
     .catch(err => res.status(400).json("Error: " + err));
 });
@@ -57,7 +57,7 @@ router.route("/update/:id").post((req, res) => {
       userdata.email = req.body.email;
       userdata.familyName = req.body.familyName;
       userdata.profilePic = req.body.profilePic;
-      
+
 
       userdata
         .save()

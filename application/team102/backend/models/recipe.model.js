@@ -19,6 +19,7 @@ const recipeSchema = new Schema(
     access:{type:String},
     recipeCalories:{type:String},
     recipeCarbs:{type:String},
+    recipeSugar:{type:String},
     recipeProtein:{type:String},
     recipeFat:{type:String},
     ingredients:[String],
