@@ -1,24 +1,23 @@
 .plan > .nav-item > .nav-link.active {
     color: #495057;
-    background-color: rgba(96, 116, 158, 0.247);
-    border-color: rgba(96, 116, 158, 0.247);
+    background-color: rgba(12, 168, 240, 0.247);
+    border-color: rgba(12, 168, 240, 0.247);
 }
+/*background-color: rgba(96, 116, 158, 0.247);*/
 .plan {
     color: #495057;
     background-color: #bae8e8;
-    border-color: rgba(96, 116, 158, 0.247);
+    border-color: rgba(12, 168, 240, 0.247);
     overflow-x: scroll;
     overflow-y: hidden;
-    flex-wrap: nowrap;
-    
+    flex-wrap: nowrap;    
 }
 .plan > .nav-item {
     flex: 0 0 auto;
 }
 .tab-content {
-    background-color: rgba(96, 116, 158, 0.247);
+    background-color: rgba(12, 168, 240, 0.247);
     height: 100%;
-
 }
 .tab-pane.active {
     height: 100%;

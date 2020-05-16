@@ -1,5 +1,7 @@
 import React, {useState, Component} from 'react';
-import {Container, Row, Col, Input, Button, ButtonGroup, Card, CardImg, Form, CardText, CardFooter, CardHeader, FormGroup, NavLink,  Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
+import {Container, Label, Row, Col, Input, Button, ButtonGroup, 
+  Card, CardImg, Form, CardText, CardFooter, CardHeader, 
+  FormGroup, NavLink,  Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
