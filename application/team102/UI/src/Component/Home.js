@@ -105,7 +105,7 @@ export default class Home extends Component {
     return (
       <div className="container"> <TopBar username={this.state.username} password={this.state.password} />
         <Container className="HomePage">  <br />
-          <h2>Welcome, Person</h2>
+          <h2>Welcome, {this.state.username}</h2>
           {this.notifications()}
           <Nav tabs justified className="plan">
             <NavItem>
