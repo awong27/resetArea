@@ -8,59 +8,56 @@ import { NavLink } from "reactstrap";
 export default class Create extends Component {
   constructor(props) {
     super(props);
-    const {match:{params}} = this.props;
-
+    const { match: { params } } = this.props;
     this.onChangeFoodname = this.onChangeFoodname.bind(this);
     this.onChangeExpirationdate = this.onChangeExpirationdate.bind(this);
     this.onChangeCalories = this.onChangeCalories.bind(this);
     this.onChangeCarbs = this.onChangeCarbs.bind(this);
     this.onChangeNumberOfItems = this.onChangeNumberOfItems.bind(this);
-    this.onChangeSugar=this.onChangeSugar.bind(this);
-    this.onChangeFat=this.onChangeFat.bind(this);
-    this.onChangeProtein=this.onChangeProtein.bind(this);
+    this.onChangeSugar = this.onChangeSugar.bind(this);
+    this.onChangeFat = this.onChangeFat.bind(this);
+    this.onChangeProtein = this.onChangeProtein.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.state = {
       foodname: "",
       expirationdate: "",
       calories: "",
       numberOfItems: "",
-      carbs:"",
-      sugar:"",
-      fat:"",
-      protein:0,
-      foods:[],
+      carbs: "",
+      sugar: "",
+      fat: "",
+      protein: 0,
+      foods: [],
       userdata: [],
-      password:params.password,
-      username:params.id
+      password: params.password,
+      username: params.id
     };
   }
-  
   onChangeFoodname(e) {
     this.setState({
       foodname: e.target.value
     });
   }
-  onChangeFat(e){
+  onChangeFat(e) {
     this.setState({
-      fat:e.target.value
+      fat: e.target.value
     });
   }
-  onChangeSugar(e){
+  onChangeSugar(e) {
     this.setState({
-      sugar:e.target.value
+      sugar: e.target.value
     });
   }
-  onChangeProtein(e){
+  onChangeProtein(e) {
     this.setState({
-      protein:e.target.value
+      protein: e.target.value
     });
   }
-  onChangeCarbs(e){
+  onChangeCarbs(e) {
     this.setState({
-      carbs:e.target.value
+      carbs: e.target.value
     });
   }
-
   onChangeExpirationdate(e) {
     this.setState({
       expirationdate: e.target.value
@@ -76,58 +73,46 @@ export default class Create extends Component {
       numberOfItems: e.target.value
     });
   }
-
   onSubmit(e) {
     e.preventDefault();
     var proteins;
-
-
     axios
-      .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query="+this.state.foodname)
+      .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query=" + this.state.foodname)
       .then(response => {
         console.log(response.data.foods[0].foodNutrients[0]);
         this.setState({
-        foods:response.data.foods[0].foodNutrients});
-        this.state.foods.map(currentfood=>{
+          foods: response.data.foods[0].foodNutrients
+        });
+        this.state.foods.map(currentfood => {
           //if(currentfood.nutrientName=="Protein"){
-            //this.state.protein=currentfood.value
-            console.log(currentfood.value);
-            proteins=currentfood.value;
-            return(null);
+          //this.state.protein=currentfood.value
+          console.log(currentfood.value);
+          proteins = currentfood.value;
+          return (null);
           //}
         })
-        
       })
       .catch(error => {
         console.log(error);
       });
-
     const food = {
       foodName: this.state.foodname,
       expirationDate: this.state.expirationdate,
       calories: this.state.calories,
       numOfItems: this.state.numberOfItems,
-      carbs:this.state.carbs,
-      protein:proteins,
-      fat:this.state.fat,
-      sugar:this.state.sugar,
-
+      carbs: this.state.carbs,
+      protein: proteins,
+      fat: this.state.fat,
+      sugar: this.state.sugar,
     };
-
     console.log(food);
     axios
       .post("/fooddata/add", food)
       .then(res => console.log(res.data));
-
     //window.location = "/";
   }
-
-
-
-
-  render(){
-
-    var inv = "/inventory/"+this.state.username+"/"+this.state.password
+  render() {
+    var inv = "/inventory/" + this.state.username + "/" + this.state.password
     return (
       <div>
         <h3>Create New Food Items</h3>

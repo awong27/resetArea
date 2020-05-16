@@ -1,5 +1,5 @@
-import React, {useState, Component} from 'react';
-import {Button, Badge, ButtonGroup, Card, CardImg, CardText, CardFooter, CardHeader, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
+import React, { useState, Component } from 'react';
+import { Button, Badge, ButtonGroup, Card, CardImg, CardText, CardFooter, CardHeader, NavLink, Modal, ModalHeader, ModalBody, ModalFooter, CardBody } from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -8,15 +8,13 @@ import consume from "./pizzaIcon.png";
 import trash from "./trashIcon.png";
 import plusbtn from "./plus.svg";
 
-
 const Fooddata = props => {
-  const {className} = props;
+  const { className } = props;
   const [modal, setModal] = useState(false);
-
   const toggle = () => setModal(!modal);
-  return(
+  return (
     <Card className="invItem">
-      <CardImg alt="FridgeItem" onClick={toggle} src={props.food.foodPic}/>
+      <CardImg alt="FridgeItem" onClick={toggle} src={props.food.foodPic} />
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.foodName}</h3>{props.food.numOfItems}</ModalHeader>
         <ModalBody>
@@ -26,18 +24,18 @@ const Fooddata = props => {
           <h4>Sugar:{props.food.sugar}</h4>
           <h4>Protein:{props.food.protein}</h4>
           <h4>Fat:{props.food.fat}</h4>
-          <img alt={props.food.foodName} src={props.food.foodPic} height="50%" width="100%"/>
+          <img alt={props.food.foodName} src={props.food.foodPic} height="50%" width="100%" />
         </ModalBody>
         <ModalFooter>
           <ButtonGroup className="itemOptions">
-            <Button onClick={() => {props.deleteItems(props.food._id);}}>
-              <img alt="delete" src ={trash} />
+            <Button onClick={() => { props.deleteItems(props.food._id); }}>
+              <img alt="delete" src={trash} />
             </Button>
             <Button>
               <CardText>{props.food.numOfItems}</CardText>
             </Button>
             <Button onClick={() => "/create" + props.food._id}>
-              <img alt="eat" src ={consume} />
+              <img alt="eat" src={consume} />
             </Button>
           </ButtonGroup>
         </ModalFooter>
@@ -57,41 +55,40 @@ const Fooddata = props => {
         </ButtonGroup>
       </CardHeader>
       <CardBody position='center'>
-          
+
       </CardBody>
       <CardFooter>
         <ButtonGroup className="itemOptions">
-          <Button onClick={() => {props.deleteItems(props.food._id);}}>
-            <img alt="delete" src ={trash} />
+          <Button onClick={() => { props.deleteItems(props.food._id); }}>
+            <img alt="delete" src={trash} />
           </Button>
           <Button>
             <CardText>{props.food.numOfItems}</CardText>
           </Button>
           <Button onClick={() => "/create" + props.food._id}>
-            <img alt="eat" src ={consume} />
+            <img alt="eat" src={consume} />
           </Button>
         </ButtonGroup>
       </CardFooter>
-    </Card>  
+    </Card>
   );
 }
-
 export default class inventory extends Component {
 
   constructor(props) {
     super(props);
-    const {match:{params}} = this.props;
+    const { match: { params } } = this.props;
     this.deleteItems = this.deleteItems.bind(this);
 
     this.state = {
       fooddata: [],
       username: params.id,
       password: params.password
-      };
+    };
   }
   //${params.id}
   componentDidMount() {
-    const {match:{params}} = this.props;
+    const { match: { params } } = this.props;
     axios
       .get('http://localhost:8080/fooddata/')
       .then(response => {
@@ -101,7 +98,6 @@ export default class inventory extends Component {
         console.log(error);
       });
   }
-
   deleteItems(id) {
     axios
       .delete("http://localhost:8080/fooddata/" + id)
@@ -110,21 +106,36 @@ export default class inventory extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
-  
   inventory() {
-    const {match:{params}} = this.props;
+    const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
-      if(currentfood.creator===params.id){
+      if (currentfood.creator === params.id) {
         return (
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
             key={currentfood._id}
-            />
-          );} else return (null);
+          />
+        );
+      } else return (null);
     });
+  }  
+  render() {
+    return (
+      <div><TopBar username={this.state.username} password={this.state.password} />
+        <br /><br /><br />
+        <div><h1>Inventory</h1></div>
+        <div className="FridgeList">
+          {this.inventory()}
+        </div>
+        <br /><br />
+        <NavLink href="/Scan"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
+        <Navi username={this.state.username} password={this.state.password} />
+      </div>
+    )
   }
-  /*foodcard() {
+}
+/*foodcard() {
 
     return (
       <FoodStuff
@@ -134,21 +145,6 @@ export default class inventory extends Component {
       />
     );
   }  */
-  render() {
-    return (
-      <div><TopBar username={this.state.username} password={this.state.password}/>
-      <br/><br/><br/>
-      <div><h1>Inventory</h1></div>
-      <div className="FridgeList">
-        {this.inventory()}
-      </div>
-      <br/><br/>
-      <NavLink href="/Scan"><Button className="addbtn"><img alt="add" src={plusbtn} /></Button></NavLink>
-      <Navi username={this.state.username} password={this.state.password}/>
-      </div>
-    )
-  }
-}
 /* from food inner part -- need to add pop up card to it
   var name= this.state.fooddata.foodName;
     var expire= this.state.fooddata.expirationDate;
