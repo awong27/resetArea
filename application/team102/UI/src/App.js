@@ -45,8 +45,6 @@ function App() {
             <Route path="/inRep/:id/:password/:recipeName" exact component={inRep} />
 
             <Route path="/create/:id/:password" exact component={CreateFood}/>
-            <Route path="/statistics" exact component={Statistics} />
-            <Route path="/StatWeekly" exact component={StatWeekly} />
             <Route path="/create" exact component={CreateFood}/>
             <Route path="/Scan" exact component={Scan} />
 

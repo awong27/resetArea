@@ -1,8 +1,8 @@
-import React, {Component, useState} from 'react';
+import React, {Component} from 'react';
 import MediaHandler from './MediaHandler';
-import { Button, Modal } from 'reactstrap';
+import { Button } from 'reactstrap';
 import axios from 'axios';
-import Example from './scanModal';
+//import Example from './scanModal';
 
 const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
 
@@ -52,7 +52,7 @@ export default class Scan extends Component {
 
         const img = this.state.imageString;
 
-        if(img != ""){
+        if(img !== ""){
 
             let formData = new FormData();
             formData.set('file', img);

@@ -1,49 +1,84 @@
-import React, {Component} from 'react';
-import {Container,Label, Row, Col, Input, Card, CardImg, Form, FormGroup} from 'reactstrap';
+import React, {useState, Component} from 'react';
+import {Container, Label, Row, Col, Input, Button, ButtonGroup, 
+  Card, CardImg, Form, CardText, CardFooter, CardHeader, 
+  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
-import {Link} from "react-router-dom";
 import axios from "axios";
 
+//grabs recipe information
+//displays as a rectangular picture with overlay text
+//when clicked with have a pop up with more info
+const Fooddata = props => {
+  const {className} = props;
+  const [modal, setModal] = useState(false);
 
-const Fooddata = props => (
-/*  <tr>
-    <td>{props.food.recipeName}</td>
-    <td>{props.food.recipeImage}</td>
-    <td>{props.food.recipeCarbs}</td>
-    <td>{props.food.recipeProtein}</td>
-    <td>
-      <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-      <a
-        href="/create"
-        onClick={() => {
-          props.deleteItems(props.food._id);
-        }}
-      >
-        delete
-      </a>
-    </td>
-  </tr>*/
+  const toggle = () => setModal(!modal);
+  return (
   <Card className="bigdes ">
-    <Link to = {"/inRep/"+props.username+"/"+props.password+"/"+props.food.recipeName}><CardImg alt="recipeItem" src={props.food.recipeImage}/></Link>
+    <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage}/>
+    <Modal isOpen={modal} toggle={toggle} className={className}>
+        <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
+        <ModalBody>
+          <h4>Calories:{props.food.recipeCalories}</h4>
+          <h4>Carbs:{props.food.recipeCarbs}</h4>
+          <h4>Sugar:{props.food.recipeSugar}</h4>
+          <h4>Protein:{props.food.recipeProtein}</h4>
+          <h4>Fat:{props.food.recipeFat}</h4>
+          <img alt={props.food.recipeName} src={props.food.recipeImage} height="50%" width="100%"/>
+        </ModalBody>
+        <ModalFooter>
+          <ButtonGroup className="itemOptions">
+            <Button onClick={() => {props.deleteItems(props.food.recipe_id);}}>
+              <img alt="delete"  />
+            </Button>
+            <Button>
+              <CardText></CardText>
+            </Button>
+            <Button onClick={() => "/create" + props.food.recipe_id}>
+              <img alt="eat"  />
+            </Button>
+          </ButtonGroup>
+        </ModalFooter>
+      </Modal>
+
+      <CardHeader>
+        <ButtonGroup className="itemHead">
+          <Button>
+
+          </Button>
+          <Button>
+            <CardText>{props.food.recipeName}</CardText>
+          </Button>
+          <Button>
+            <CardText>{props.food.recipeCalories < 0? Math.round(props.food.recipeCalories):0}</CardText>
+          </Button>
+        </ButtonGroup>
+      </CardHeader>
+      <CardBody position='center'>
+          
+      </CardBody>
+      <CardFooter>
+        <ButtonGroup className="itemOptions">
+          <Button onClick={() => {props.deleteItems(props.food.recipe_id);}}>
+            <img alt="delete"  />
+          </Button>
+          <Button>
+            <CardText></CardText>
+          </Button>
+          <Button onClick={() => "/create" + props.food.recipe_id}>
+            <img alt="eat"  />
+          </Button>
+        </ButtonGroup>
+      </CardFooter>
   </Card>
-
-
-);
-
+  );
+}
+//grabs search results
 const Recipedata = props =>(
   <tr>{props.food.recipe.label}</tr>
-
-
 );
 
-//grabs recipe photo and name
-/*const RecipeData = (props) => (
-  <Row>
-    <Card className="bigdes ">
-      <CardImg alt="recipeItem" src={Tphoto}/>
-    </Card>
-  </Row>*/
 export default class Recipe extends Component {
 
   constructor(props) {
@@ -111,11 +146,8 @@ export default class Recipe extends Component {
     });
   }
 
-
   onSubmit(e){
     e.preventDefault();
-
-
         axios
           .get("https://api.edamam.com/search?q=chicken&app_id=b53160ee&app_key=5d9984e95c5c6968d5edfb7d02c83b46&from=0&to=3&calories=591-722&health=alcohol-free")
           .then(response => {
@@ -132,9 +164,9 @@ export default class Recipe extends Component {
               console.log(newrec);
               currentfood.recipe.ingredients.map(currentingredient=>{
                 console.log(currentingredient.text);
-
+                return (null);
               })
-
+              return (null);
 
             })
             console.log(newrec);
@@ -145,9 +177,6 @@ export default class Recipe extends Component {
           })
     var addRec="/addRecipe/"+this.state.creator+"/"+this.state.password+"/"+this.state.searches+"/"+this.state.recipeSugar+"/"+this.state.recipeFat+"/"+this.state.recipeCarbs+"/"+this.state.recipeCalories
     window.location=addRec
-
-
-
 }
   componentDidMount() {
     axios
@@ -205,11 +234,11 @@ export default class Recipe extends Component {
 
 
   }*/
-
+  
   inventory() {
     const {match:{params}} = this.props;
     return this.state.recipedata.map(currentfood => {
-      if(currentfood.creator==params.id){
+      if(currentfood.creator===params.id){
         return (
           <Fooddata
             food={currentfood}
@@ -219,14 +248,12 @@ export default class Recipe extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
             />
-          );}
+          );} return (null);
     });
   }
 
   searchedRecipes() {
-
     return this.state.newrecipedata.map(currentfood => {
-
         return (
           <Recipedata
             food={currentfood}
@@ -280,7 +307,7 @@ export default class Recipe extends Component {
           className="form-control"
           value={this.state.searches}
           onChange={this.onChangeSearch}
-/></Row>
+          /></Row>
       </FormGroup>
       <FormGroup>
       <Input

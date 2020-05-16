@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 
@@ -15,7 +15,7 @@ const FoodStuff = props => (
     <td>
       <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
       <a
-        href="#"
+        //href="#"
         onClick={() => {
           props.deleteItems(props.food._id);
         }}
@@ -62,7 +62,7 @@ export default class FoodCard extends Component {
       .delete("http://localhost:8080/fooddata/" + id)
       .then(res => console.log(res.data));
     this.setState({
-      fooddata: this.state.fooddata.filter(el => el._id != id)
+      fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
 

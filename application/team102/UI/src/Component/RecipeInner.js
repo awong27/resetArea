@@ -65,7 +65,7 @@ export default class RecipeInner extends Component {
         this.setState({
           recipedata: response.data });
           return this.state.recipedata.map(currentfood => {
-            if(currentfood.creator==params.id && currentfood.recipeName == params.recipeName){
+            if(currentfood.creator===params.id && currentfood.recipeName === params.recipeName){
               console.log(currentfood);
               this.setState({
                 recipeCalories: currentfood.recipeCalories,
@@ -76,7 +76,7 @@ export default class RecipeInner extends Component {
               })
               console.log(this.state.ingredients);
                 }
-
+                return (null);
       })
 
   })
@@ -96,7 +96,7 @@ export default class RecipeInner extends Component {
   inventory() {
     const {match:{params}} = this.props;
     return this.state.recipedata.map(currentfood => {
-      if(currentfood.creator==params.id && currentfood.recipeName == params.recipeName){
+      if(currentfood.creator===params.id && currentfood.recipeName === params.recipeName){
         this.setState({
           recipeCalories: currentfood.recipeCalories,
           recipeName: currentfood.recipeName,
@@ -110,7 +110,7 @@ export default class RecipeInner extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
             />
-          );}
+          );}return (null);
     });
   }
 
@@ -182,7 +182,7 @@ addMeal(){
       <div className="full"> <TopBar/> <br/><br/><br/>
       <div className="idk">
       <Row><Col><h1>Recipes</h1></Col></Row>
-
+      {this.inventory()}
       <div className="tabBox">
         <Row>
             <Col><h2>Recipe Type</h2></Col><Col><Col></Col></Col>

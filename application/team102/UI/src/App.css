@@ -52,7 +52,7 @@
 
 .lightState {
   background-color: rgb(96, 152, 204) !important;
-  box-shadow: cadetblue !important;
+  box-shadow: rgb(75, 113, 114) !important;
 }
 
 .row {
@@ -70,3 +70,15 @@
 .lowerbox > .btn-group {
   box-sizing: content-box !important;
 }
+.modal-content {
+  background-color: #bae8e8 !important;
+}
+.modal-body {
+  background-color: rgba(12, 168, 240, 0.247) !important;  
+}
+.modal-header, .modal-footer {
+  border-color: rgba(25, 89, 119, 0.247) !important;
+}
+/*.modal-header, .modal-body, .modal-footer {
+  background-color: rgba(12, 168, 240, 0.247) !important;
+}*/

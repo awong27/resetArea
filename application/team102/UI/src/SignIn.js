@@ -106,7 +106,7 @@ export default class SignIn extends Component {
     return (                    
       <Form align="centered" onSubmit={this.onSubmit}>         
       <div className="upperbox">  
-        {this.state.count===0?<>      
+              
           <FormGroup>
             <Label for="exampleUsername">Username</Label>
             <Input
@@ -127,32 +127,12 @@ export default class SignIn extends Component {
               value={this.state.Password}
               onChange={this.onChangepassword} />
           </FormGroup>
-        </> : <>
+        {this.state.count===1?
         <FormGroup>
           <Label for="exampleEmail">Email</Label>
           <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
-        </FormGroup>
-        <FormGroup>
-            <Label for="exampleUsername">Username</Label>
-            <Input
-              type="username"
-              name="username"
-              id="exampleUsername"
-              placeholder="Username"
-              value={this.state.Username}
-              onChange={this.onChangeusername} />
-          </FormGroup>
-          <FormGroup>
-            <Label for="examplePassword">Password</Label>
-            <Input
-              type="password"
-              name="password"
-              id="examplePassword"
-              placeholder="Password"
-              value={this.state.Password}
-              onChange={this.onChangepassword} />
-          </FormGroup> 
-        </>}
+        </FormGroup>        
+        :<></>}
         </div> 
         <div className="lowerbox">
         <Button size='lg' className="SignSpace"><Input
