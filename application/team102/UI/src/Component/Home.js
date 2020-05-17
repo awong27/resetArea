@@ -5,7 +5,7 @@ import TopBar from "./TopBar";
 import "./Home.css";
 import classnames from 'classnames';
 import axios from "axios";
-import { Pie, Doughnut } from 'react-chartjs-2';
+import { Bar, Doughnut } from 'react-chartjs-2';
 
 const Fooddata = props => (
   <Row>
@@ -35,8 +35,7 @@ export default class Home extends Component {
       activeTab: '1',
       labels: ['Fats', 'Protein', 'Sugar',
         'Carbs', 'Sodium'],
-      datasets: [
-        {
+      datasets: [{
           label: 'Nutrition',
           backgroundColor: [
             '#B21F00',
@@ -53,8 +52,7 @@ export default class Home extends Component {
             '#35014F'
           ],
           data: [65, 59, 80, 81, 56]
-        }
-      ]
+        }]
     };
     var date = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.today.getDate()).toString() + "/" + (this.state.today.getFullYear()).toString();
     this.state.date = date
@@ -87,7 +85,7 @@ export default class Home extends Component {
       userdata: this.state.userdata.filter(el => el._id !== id)
     });
   }
-  notifications() {
+  notifications() {//need to query for expiring food in inv
     return (<>
       <UncontrolledAlert color="info">
         Expiring Soon
@@ -203,21 +201,6 @@ export default class Home extends Component {
             <TabPane tabId="2">
               Statistics
           <Row>
-                <Pie
-                  data={this.state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: 'Daily Nutrition',
-                      fontSize: 20
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
-                />
-              </Row><Row>
                 <Doughnut
                   data={this.state}
                   options={{
@@ -258,6 +241,22 @@ export default class Home extends Component {
                     </tr>
                   </tbody>
                 </Table></Col>
+              </Row>
+              <Row>
+                <Bar
+                  data={this.state}
+                  options={{
+                    title: {
+                      display: true,
+                      text: 'Weekly Calories',
+                      fontSize: 20
+                    },
+                    legend: {
+                      display: true,
+                      position: 'right'
+                    }
+                  }}
+                />
               </Row>
             </TabPane>
           </TabContent>

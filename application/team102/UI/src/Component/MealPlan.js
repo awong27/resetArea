@@ -76,6 +76,21 @@ export default class MealPlan extends Component {
       sunday: ""
     };
   }
+  onChangeSundaysCalories(e) { this.setState({ sundaysCalories: e.target.value }); }
+  onChangeMondaysCalories(e) { this.setState({ mondaysCalories: e.target.value }); }
+  onChangeTuesdaysCalories(e) { this.setState({ tuesdaysCalories: e.target.value }); }
+  onChangeWednesdaysCalories(e) { this.setState({ wednesdaysCalories: e.target.value }); }
+  onChangeThursdaysCalories(e) { this.setState({ thursdaysCalories: e.target.value }); }
+  onChangeFridaysCalories(e) { this.setState({ fridaysCalories: e.target.value }); }
+  onChangeSaturdaysCalories(e) { this.setState({ saturdaysCalories: e.target.value }); }
+
+  onChangeSunday(e) { this.setState({ sunday: e.target.value }); }
+  onChangeMonday(e) { this.setState({ monday: e.target.value }); }
+  onChangeTuesday(e) { this.setState({ tuesday: e.target.value }); }
+  onChangeWednesday(e) { this.setState({ wednesday: e.target.value }); }
+  onChangeThursday(e) { this.setState({ thursday: e.target.value }); }
+  onChangeFriday(e) { this.setState({ friday: e.target.value }); }
+  onChangeSaturday(e) { this.setState({ saturday: e.target.value }); }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -108,115 +123,112 @@ export default class MealPlan extends Component {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
       if (currentfood.creator === params.id && currentfood.date === date && currentfood.mealType === mealType) {
-        return (
+        return (<>
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
             key={currentfood._id}
           />
-        );
-      }
+          
+          </>
+        ); //need to add button for addrecipe
+      } return (null);
     });
-    return (null);
   }
   weeksCalories() {
-    this.state.sundaysCalories = 0;
-    this.state.mondaysCalories = 0;
-    this.state.tuesdaysCalories = 0;
-    this.state.wednesdaysCalories = 0;
-    this.state.thursdaysCalories = 0;
-    this.state.fridaysCalories = 0;
-    this.state.saturdaysCalories = 0;
+    this.onChangeSundaysCalories(0);
+    this.onChangeMondaysCalories(0);
+    this.onChangeTuesdaysCalories(0);
+    this.onChangeWednesdaysCalories(0);
+    this.onChangeThursdaysCalories(0);
+    this.onChangeFridaysCalories(0);
+    this.onChangeSaturdaysCalories(0);
     this.state.fooddata.map(currentfood => {
-      if (currentfood.date == this.state.sunday) {
-        this.state.sundaysCalories += parseInt(currentfood.planCalories)
+      if (currentfood.date === this.state.sunday) {
+        this.onChangeSundaysCalories(this.state.sundaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.sundaysCalories)
-      }
-      if (currentfood.date == this.state.monday) {
-        this.state.mondaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.monday) {
+        this.onChangeMondaysCalories(this.state.mondaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.mondaysCalories)
-      }
-      if (currentfood.date == this.state.tuesday) {
-        this.state.tuesdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.tuesday) {
+        this.onChangeTuesdaysCalories(this.state.tuesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.tuesdaysCalories)
-      }
-      if (currentfood.date == this.state.wednesday) {
-        this.state.wednesdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.wednesday) {
+        this.onChangeWednesdaysCalories(this.state.wednesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.wednesdaysCalories)
-      }
-      if (currentfood.date == this.state.thursday) {
-        this.state.thursdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.thursday) {
+        this.onChangeThursdaysCalories(this.state.thursdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.thursdaysCalories)
-      }
-      if (currentfood.date == this.state.friday) {
-        this.state.fridaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.friday) {
+        this.onChangeFridaysCalories(this.state.fridaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.fridaysCalories)
-      }
-      if (currentfood.date == this.state.saturday) {
-        this.state.saturdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.saturday) {
+        this.onChangeSaturdaysCalories(this.state.saturdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.saturdaysCalories)
       }
+      return (null);
     })
   }
   setDays() {
     var month = "";
     var day = "";
-    var year = "";
+    var year = "";  
+  
     var today = new Date(Date.now())
     if (this.state.mon > today + 1) {
-      this.state.monday = (this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeMonday((this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.monday);
     } else {
-      this.state.monday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeMonday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.monday);
     }
     if (this.state.tue > today + 1) {
-      this.state.tuesday = (this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeTuesday((this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.tuesday);
     } else {
-      this.state.tuesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeTuesday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.tuesday);
     }
     if (this.state.wed > today + 1) {
-      this.state.wednesday = (this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeWednesday((this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.wednesday);
     } else {
-      this.state.wednesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeWednesday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.wednesday);
     }
     if (this.state.thu > today + 1) {
-      this.state.thursday = (this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeThursday((this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.thursday);
     } else {
-      this.state.thursday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeThursday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.thursday);
     }
     if (this.state.fri > today + 1) {
-      this.state.friday = (this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeFriday((this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.friday);
     } else {
-      this.state.friday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeFriday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.friday);
     }
     if (this.state.sat > today + 1) {
-      this.state.saturday = (this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeSaturday((this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.saturday);
     } else {
-      this.state.saturday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeSaturday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.saturday);
     }
     if (this.state.sun > today + 1) {
-      this.state.sunday = (this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeSunday((this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.sunday);
     } else {
-      this.state.sunday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString();
+      this.onChangeSunday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString())
       console.log(this.state.sunday);
     }
   }
   breakfast(date, mealType) {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
-      if (currentfood.creator === params.id && currentfood.date == date && currentfood.mealType == mealType) {
+      if (currentfood.creator === params.id && currentfood.date === date && currentfood.mealType === mealType) {
         return (
           <Fooddata
             food={currentfood}
