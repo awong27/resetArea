@@ -32,7 +32,7 @@ const Fooddata = props => (
 
 );
 
-export default class inventory extends Component {
+export default class ShoppingList extends Component {
 
   constructor(props) {
     super(props);

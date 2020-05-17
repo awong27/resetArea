@@ -36,12 +36,12 @@ export default class MealPlan extends Component {
     this.deleteItems = this.deleteItems.bind(this);
     var today = new Date(Date.now())
     var daysLastMonth;
-    if (today.getMonth == 0 || today.getMonth == 1 || today.getMonth == 3 ||
-      today.getMonth == 5 || today.getMonth == 7 || today.getMonth == 8
-      || today.getMonth == 10) {
+    if (today.getMonth === 0 || today.getMonth === 1 || today.getMonth === 3 ||
+      today.getMonth === 5 || today.getMonth === 7 || today.getMonth === 8
+      || today.getMonth === 10) {
       daysLastMonth = 31;
     }
-    else if (today.getMonth == 2) {
+    else if (today.getMonth === 2) {
       daysLastMonth = 28;
     } else {
       daysLastMonth = 30;

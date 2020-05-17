@@ -82,3 +82,7 @@
 /*.modal-header, .modal-body, .modal-footer {
   background-color: rgba(12, 168, 240, 0.247) !important;
 }*/
+.react-datepicker__input-container > input{
+  overflow: hidden !important; 
+  width: 30vw;
+}

@@ -27,9 +27,9 @@ function App() {
       <BrowserRouter>
         <div className="Main">
           <Switch>
-            <Route path="/" exact component={SignIn} />
+            
             <Route path="/Home/:id/:password" exact component={Home} />
-
+<Route path="/Home/" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />
             <Route path="/About" exact component={About} />
 
@@ -47,6 +47,7 @@ function App() {
             <Route path="/create/:id/:password" exact component={CreateFood} />
             <Route path="/create" exact component={CreateFood} />
             <Route path="/Scan" exact component={Scan} />
+            <Route path="/" exact component={SignIn} />
           </Switch>
         </div>
       </BrowserRouter>
@@ -55,3 +56,4 @@ function App() {
 }
 
 export default App;
+//<Redirect to="/login" /> force reload

@@ -201,8 +201,7 @@ export default class Recipe extends Component {
         recipeProtein: this.state.recipeProtein,
         recipeFat: this.state.recipeFat,
         ingredients: ingredient
-      }
-  
+      }  
       this.state.newrecipedata.map(currentfood=>{
       console.log(currentfood.recipe.label);
       label = currentfood.recipe.label;
@@ -211,20 +210,12 @@ export default class Recipe extends Component {
       console.log(newrec);
       currentfood.recipe.ingredients.map(currentingredient=>{
         console.log(currentingredient.text);
-  
       })
-  
-  
-    })
-  
-  
-  
+    })  
       console.log(recipe);
       axios
         .post("http://localhost:8080/recipedata/add", recipe)
         .then(res => console.log(res.data));
-  
-  
     }*/
 
   inventory() {
