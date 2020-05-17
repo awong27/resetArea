@@ -89,6 +89,7 @@ export default class Recipe extends Component {
     this.onChangeCarbs = this.onChangeCarbs.bind(this);
     this.onChangeFat = this.onChangeFat.bind(this);
     this.onChangeSugar = this.onChangeSugar.bind(this);
+    this.onChangeSodium = this.onChangeSodium.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.deleteItems = this.deleteItems.bind(this);
     const { match: { params } } = this.props;
@@ -104,7 +105,8 @@ export default class Recipe extends Component {
       recipeCarbs: "",
       recipeFat: "",
       recipeProtein: "",
-      recipeSugar: ""
+      recipeSugar: "",
+      recipeSodium: ""
     };
   }
   onChangeSearch(e) {
@@ -126,6 +128,11 @@ export default class Recipe extends Component {
   onChangeSugar(e) {
     this.setState({
       recipeSugar: e.target.value.replace(/\D/g, '')
+    });
+  }
+  onChangeSodium(e) {
+    this.setState({
+      recipeSodium: e.target.value.replace(/\D/g, '')
     });
   }
   onChangeProtein(e) {
@@ -277,20 +284,28 @@ export default class Recipe extends Component {
             }*/
   restrictions() {
     return (
-      <Form inline justified onSubmit={this.onSubmit}>
+      <Form justified onSubmit={this.onSubmit}>
         <FormGroup>
-          <Row><Label>New Recipe: </Label>
+          <Row>
             <Input
               type="text"
+              placeholder="Search"
+              style={{ width: '70vw' }}
               required
               className="form-control"
               value={this.state.searches}
               onChange={this.onChangeSearch}
+            /> <Input
+              type="submit"
+              style={{ width: '30vw' }}
+              value="Find"
+              className="btn btn-secondary"
             /></Row>
         </FormGroup>
-        <FormGroup>
+        <FormGroup style={{display: "flex"}}>
           <Input
             type="select"
+            style={{ width: '24vw', padding: '0' }}
             onChange={this.onChangeCalories}
             value={this.state.recipeCalories}>
             <option>Calories</option>
@@ -300,10 +315,9 @@ export default class Recipe extends Component {
             <option>1000  Cal</option>
             <option>1500  Cal</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
           <Input
             type="select"
+            style={{ width: '15vw', padding: '0' }}
             onChange={this.onChangeFat}
             value={this.state.recipeFat}>
             <option>Fat</option>
@@ -320,10 +334,9 @@ export default class Recipe extends Component {
             <option>55 g</option>
             <option>60 g</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
           <Input
             type="select"
+            style={{ width: '19vw', padding: '0' }}
             value={this.state.recipeCarbs}
             onChange={this.onChangeCarbs}>
             <option>Carbs</option>
@@ -340,9 +353,11 @@ export default class Recipe extends Component {
             <option>55 g</option>
             <option>60 g</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
-          <Input type="select">
+          <Input
+            type="select"
+            style={{ width: '23vw', padding: '0' }}
+            value={this.state.recipeSodium}
+            onChange={this.onChangeSodium}>
             <option>Sodium</option>
             <option>5 g</option>
             <option>10 g</option>
@@ -357,10 +372,9 @@ export default class Recipe extends Component {
             <option>55 g</option>
             <option>60 g</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
           <Input
             type="select"
+            style={{ width: '19vw', padding: '0' }}
             value={this.state.recipeSugar}
             onChange={this.onChangeSugar}>
             <option>Sugar</option>
@@ -378,14 +392,6 @@ export default class Recipe extends Component {
             <option>60 g</option>
           </Input>
         </FormGroup>
-        <FormGroup>
-          <Row><Input
-            type="submit"
-            value="Find New Recipe"
-            className="btn btn-primary"
-          /></Row>
-        </FormGroup>
-
       </Form>
     );
   }
@@ -394,7 +400,7 @@ export default class Recipe extends Component {
       <div><TopBar username={this.state.creator} password={this.state.password} /> <br /><br /><br />
         <Container className="fit-content">
           <Row><Col><h1>Recipes</h1></Col></Row>
-          {this.restrictions()}          
+          {this.restrictions()}
           {this.inventory()}
         </Container>
         <Navi username={this.state.creator} password={this.state.password} />
