@@ -5,7 +5,6 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import About from "./Component/About.js";
 import SList from "./Component/ShoppingList.js";
-import SHist from "./Component/ShoppingHistory.js";
 import Inventory from "./Component/inventory.js";
 import mealplan from "./Component/MealPlan.js";
 import inRep from "./Component/RecipeInner.js"
@@ -34,7 +33,6 @@ function App() {
             <Route path="/About" exact component={About} />
 
             <Route path="/SList/:id/:password" exact component={SList} />
-            <Route path="/SHist" exact component={SHist} />
 
             <Route path="/inventory/:id/:password" exact component={Inventory} />
             <Route path="/user-item/:id" component={FoodCard} />

@@ -6,46 +6,41 @@ import "./inv.css";
 import plusbtn from "./plus.svg"
 import axios from "axios";
 const Fooddata = props => (
-  /*  <tr>
-    <td>
-      <Link to = {"/user-item/"+ props.food._id}>{props.food.foodName}</Link>
-      </td>
-      <td>{props.food.expirationDate}</td>
-      <td>{props.food.calories}</td>
-      <td>{props.food.numOfItems}</td>
-      <td>
-        <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-        <a
-          href="/create"
-          onClick={() => {
-            props.deleteItems(props.food._id);
-          }}
-        >
-          delete
-        </a>
-      </td>
-    </tr>*/
   <Button className="invBar" ><Row>
     <NavLink to={"/user-item/" + props.food._id}>{props.food.foodName}</NavLink>
     <Button onClick={() => { props.deleteItems(props.food._id); }}>X</Button>
   </Row></Button>
-
 );
-
+const HList = props => (
+  <Button className="invBar" ><Row>
+    <NavLink to={"/user-item/" + props.food._id}>{props.food.foodName}</NavLink>
+    <Button onClick={() => { props.deleteItems(props.food._id); }}>+</Button>
+  </Row></Button>
+);
 export default class ShoppingList extends Component {
 
   constructor(props) {
     super(props);
-
+    this.onToggle = this.onToggle.bind(this);
+    this.onAddHist = this.onAddHist.bind(this);
     this.deleteItems = this.deleteItems.bind(this);
     const { match: { params } } = this.props;
     this.state = {
       fooddata: [],
+      histData: [],
       username: params.id,
-      password: params.password
+      password: params.password,
+      modal: false,
     };
   }
-
+  onToggle() { this.setState({ modal: !modal }) }
+  // addHist should add current Shopping List to history and empty fooddata list
+  onAddHist() {
+    this.setState({
+      histData: [this.state.fooddata, this.state.histData],
+      fooddata: []
+    });
+  }
   componentDidMount() {
     axios
       .get("http://localhost:8080/fooddata/")
@@ -81,8 +76,23 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
+  History() {
+    const { match: { params } } = this.props;
+    return this.state.fooddata.map(currentfood => {
+      if (currentfood.creator === params.id) {
+        return (
+          <HList
+            food={currentfood}
+            key={currentfood._id}
+          />
+        );
+      }
+      return (null);
+    });
+  }
 
   render() {
+
     return (
       /*
       * Shopping List Pulls info and displays as buttons
@@ -95,16 +105,20 @@ export default class ShoppingList extends Component {
       * bring up things not grabbed by scan but on shopping list
       */
       <div><TopBar username={this.state.username} password={this.state.password} /><br /><br /><br /> <div className="midCon">
-        <div><h1>Shopping List</h1></div>
+        <h1>Shopping List</h1></div> <Button onClick={this.onAddHist()}>New List</Button>
         <Row><Col xs='1' /><Col align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1' /></Row>
         <h3>Main</h3>
         <div className="listItem">
           {this.inventory()}
           {this.subInventory()}
         </div>
-
-      </div>
-        <Button className="addbtn"><img alt="add" src={plusbtn} /></Button>
+        <Button className="addbtn" onClick={this.onToggle()}><img alt="add" src={plusbtn} /></Button>
+        <Modal isOpen={modal} toggle={this.onToggle()} className={className}>
+          <ModalHeader toggle={this.onToggle()}><h3>History</h3></ModalHeader>
+          <ModalBody>
+            {this.History()}
+          </ModalBody>
+        </Modal>
         <Navi username={this.state.username} password={this.state.password} />
       </div>
     )
