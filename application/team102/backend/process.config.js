@@ -23,7 +23,7 @@ module.exports = {
         },
         {
             name: "main server",
-            script: ".server.js",
+            script: "./server.js",
             watch: true,
             ignore_watch: ["node_modules"],
             watch: true,
