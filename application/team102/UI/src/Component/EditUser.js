@@ -5,25 +5,65 @@ import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem} from "r
 
 import "./Home.css"
 
+const family = [ {name: "spouse"}, {name: "child"}];
+
+const dietpreference = [{ pref: "Lactose Intolerant"}, {pref: "Vegan"}];
+
+const familyCard = (fMember) => {
+  return(
+  <ListGroupItem>
+    <Row>
+      <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/></Col>
+      <Col> {fMember.name} </Col>
+      <Col/>
+      <Col/>
+      <Col> Edit</Col>
+    </Row>
+  </ListGroupItem>
+);
+}
+
+const dietCard = (pMember) => {
+  return(
+    <ListGroupItem>
+      <Row>
+        <p>{pMember.pref}</p>
+      </Row>
+    </ListGroupItem>
+);
+}
+
+const familyRender = family.map((fMember) => familyCard(fMember));
+
+const dietRender = dietpreference.map((pMember) => dietCard(pMember));
+
 export default class EditUser extends Component{
+
+
+
+  logout() {
+    //set usrname to null
+    //set token to null
+  }
+
   //pulls everything from user data
-  
-  render() { 
+
+  render() {
     return (
-      <Container > 
+      <Container >
         <ListGroup className="profile">
-              <ListGroupItem > 
-                <Row>           
+              <ListGroupItem >
+                <Row>
                   <Col><NavLink href="/Home/:id/:password"> + </NavLink> </Col>
                   <Col><h3>Profile</h3></Col><Col/><Col/><Col/>
-                </Row>            
+                </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
                   <h4> Guest Name </h4>
                   <Col/>
                   <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/></Col>
-                </Row>              
+                </Row>
               </ListGroupItem>
 
               <ListGroupItem>
@@ -33,30 +73,16 @@ export default class EditUser extends Component{
                   <Col/>
                   <Col/>
                   <Col xs='1'> + </Col>
-                </Row>              
+                </Row>
               </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/></Col>                  
-                  <Col> Spouse </Col>
-                  <Col/>
-                  <Col/>
-                  <Col> Edit</Col>
-                </Row>              
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/></Col>                  
-                  <Col> Child </Col>
-                  <Col/>
-                  <Col/>
-                  <Col> Edit</Col>
-                </Row>              
-              </ListGroupItem>
+
+              {familyRender}
+
+
               <ListGroupItem>
                 <Row>
                   <p> Add more people to your shared fridge, shopping list and recipies</p>
-                </Row>              
+                </Row>
               </ListGroupItem>
 
               <ListGroupItem>
@@ -66,22 +92,19 @@ export default class EditUser extends Component{
                   <Col/>
                   <Col/>
                   <Col xs='1'> + </Col>
-                </Row>              
-              </ListGroupItem>
-              <ListGroupItem>
-                <Row>
-                  <p>Lactose Intolerant</p>
-                </Row>              
+                </Row>
               </ListGroupItem>
 
-              <ListGroupItem >                
+              {dietRender}
+
+              <ListGroupItem >
                 <Row>
                   <h5> Notifications </h5>
                   <Col/>
                   <Col/>
                   <Col/>
                   <Col xs='1'> > </Col>
-                </Row>             
+                </Row>
               </ListGroupItem>
               <ListGroupItem><NavLink href="/about">
                 <Row>
@@ -90,29 +113,29 @@ export default class EditUser extends Component{
                   <Col/>
                   <Col/>
                   <Col xs='1'> > </Col>
-                </Row> </NavLink>              
+                </Row> </NavLink>
               </ListGroupItem>
-              <ListGroupItem >                
+              <ListGroupItem >
                 <Row>
                   <h5> Settings </h5>
                   <Col/>
                   <Col/>
                   <Col/>
                   <Col xs='1'> > </Col>
-                </Row>             
+                </Row>
               </ListGroupItem>
               <ListGroupItem>
                 <Row>
                   <Col>
-                    <Button href="/" size="lg">Log Out</Button>
+                    <Button href="/" onClick={this.logout} size="lg">Log Out</Button>
                   </Col>
-                </Row>              
+                </Row>
               </ListGroupItem>
         </ListGroup>
-        
-                 
-      </Container>      
-     
+
+
+      </Container>
+
     );
   }
 }
