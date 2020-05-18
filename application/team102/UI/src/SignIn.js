@@ -122,7 +122,7 @@ export default class SignIn extends Component {
      * submit enters data into local variables to be checked
      */
     return (
-      <Form align="centered" onSubmit={this.onSubmit}>
+      <Form align="centered" onSubmit={this.onSubmit} style={{top:'0', position: 'fixed'}}>
         <div className="upperbox">
           <FormGroup>
             <Label for="exampleUsername">Username</Label>

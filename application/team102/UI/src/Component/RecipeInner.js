@@ -134,7 +134,7 @@ export default class RecipeInner extends Component {
   }
   render() {
     return (
-      <div className="full"> <TopBar /> <br /><br /><br />
+      <div className="full"> <TopBar /> 
         <div className="idk">
           <Row><Col><h1>Recipes</h1></Col></Row>
           {this.inventory()}

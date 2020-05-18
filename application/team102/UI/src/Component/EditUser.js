@@ -7,7 +7,7 @@ export default class EditUser extends Component {
   //pulls everything from user data  
   render() {
     return (
-      <Container >
+      <Container style={{position: 'flex', top: '0'}}>
         <ListGroup className="profile">
           <ListGroupItem >
             <Row>

@@ -397,7 +397,7 @@ export default class Recipe extends Component {
   }
   render() {
     return (
-      <div><TopBar username={this.state.creator} password={this.state.password} /> <br /><br /><br />
+      <div><TopBar username={this.state.creator} password={this.state.password} /> 
         <Container className="fit-content">
           <Row><Col><h1>Recipes</h1></Col></Row>
           {this.restrictions()}

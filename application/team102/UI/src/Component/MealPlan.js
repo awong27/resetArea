@@ -276,7 +276,7 @@ export default class MealPlan extends Component {
     */
     return (
       <div className="container"><TopBar username={this.state.username} password={this.state.password} />
-        <Container>  <br /><br /><br />
+        <Container> 
           <Row><Col><h1>Meal Plan</h1></Col></Row>
 
           <Nav tabs justified className="plan">

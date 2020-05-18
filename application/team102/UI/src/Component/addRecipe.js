@@ -154,7 +154,7 @@ export default class Recipe extends Component {
   render() {
     return (
       <div><TopBar />
-        <br /><br /><br />
+        
         <div><h1>Recipes</h1></div>
         <Table hover>
           <thead>

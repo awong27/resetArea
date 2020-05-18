@@ -25,8 +25,7 @@ function App() {
     <div align="center">
       <BrowserRouter>
         <div className="Main">
-          <Switch>
-            
+          <Switch>            
             <Route path="/Home/:id/:password" exact component={Home} />
 <Route path="/Home/" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />

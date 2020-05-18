@@ -138,8 +138,7 @@ export default class inventory extends Component {
   render() {
     const create = "/Create/"+this.state.username+"/"+this.state.password;
     return (
-      <div><TopBar username={this.state.username} password={this.state.password} />
-        <br /><br /><br />
+      <div><TopBar username={this.state.username} password={this.state.password} />     
         <div><h1>Inventory</h1></div>
         <div className="FridgeList">
           {this.inventory()}
