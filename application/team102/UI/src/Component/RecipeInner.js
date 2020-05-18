@@ -19,16 +19,10 @@ const Fooddata = props => (
     <td>{props.food.expirationDate}</td>
     <td>{props.food.calories}</td>
     <td>{props.food.numOfItems}</td>
-    <td>
-      <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-      <a
-        href="/create"
-        onClick={() => {
-          props.deleteItems(props.food._id);
-        }}
-      >
+    <td>      
+      <Button onClick={() => { props.deleteItems(props.food._id); }}/>
         delete
-      </a>
+
     </td>
   </tr>
 );

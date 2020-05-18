@@ -34,6 +34,21 @@ export default class MealPlan extends Component {
     this.toggle = this.toggle.bind(this);
     const { match: { params } } = this.props;
     this.deleteItems = this.deleteItems.bind(this);
+    this.onChangeSundaysCalories = this.onChangeSundaysCalories.bind(this);
+    this.onChangeMondaysCalories = this.onChangeMondaysCalories.bind(this);
+    this.onChangeTuesdaysCalories = this.onChangeTuesdaysCalories.bind(this);
+    this.onChangeWednesdaysCalories = this.onChangeWednesdaysCalories.bind(this);
+    this.onChangeThursdaysCalories = this.onChangeThursdaysCalories.bind(this);
+    this.onChangeFridaysCalories = this.onChangeFridaysCalories.bind(this);
+    this.onChangeSaturdaysCalories = this.onChangeSaturdaysCalories.bind(this);
+    this.onChangeSunday = this.onChangeSunday.bind(this);
+    this.onChangeMonday = this.onChangeMonday.bind(this);
+    this.onChangeTuesday = this.onChangeTuesday.bind(this);
+    this.onChangeWednesday = this.onChangeWednesday.bind(this);
+    this.onChangeThursday = this.onChangeThursday.bind(this);
+    this.onChangeFriday = this.onChangeFriday.bind(this);
+    this.onChangeSaturday = this.onChangeSaturday.bind(this);
+    this.setDays = this.setDays.bind(this);
     var today = new Date(Date.now())
     var daysLastMonth;
     if (today.getMonth === 0 || today.getMonth === 1 || today.getMonth === 3 ||
@@ -76,21 +91,21 @@ export default class MealPlan extends Component {
       sunday: ""
     };
   }
-  onChangeSundaysCalories(e) { this.setState({ sundaysCalories: e.target.value }); }
-  onChangeMondaysCalories(e) { this.setState({ mondaysCalories: e.target.value }); }
-  onChangeTuesdaysCalories(e) { this.setState({ tuesdaysCalories: e.target.value }); }
-  onChangeWednesdaysCalories(e) { this.setState({ wednesdaysCalories: e.target.value }); }
-  onChangeThursdaysCalories(e) { this.setState({ thursdaysCalories: e.target.value }); }
-  onChangeFridaysCalories(e) { this.setState({ fridaysCalories: e.target.value }); }
-  onChangeSaturdaysCalories(e) { this.setState({ saturdaysCalories: e.target.value }); }
+  onChangeSundaysCalories(e) { this.setState({ sundaysCalories: e }); }
+  onChangeMondaysCalories(e) { this.setState({ mondaysCalories: e }); }
+  onChangeTuesdaysCalories(e) { this.setState({ tuesdaysCalories: e }); }
+  onChangeWednesdaysCalories(e) { this.setState({ wednesdaysCalories: e }); }
+  onChangeThursdaysCalories(e) { this.setState({ thursdaysCalories: e }); }
+  onChangeFridaysCalories(e) { this.setState({ fridaysCalories: e }); }
+  onChangeSaturdaysCalories(e) { this.setState({ saturdaysCalories: e }); }
 
-  onChangeSunday(e) { this.setState({ sunday: e.target.value }); }
-  onChangeMonday(e) { this.setState({ monday: e.target.value }); }
-  onChangeTuesday(e) { this.setState({ tuesday: e.target.value }); }
-  onChangeWednesday(e) { this.setState({ wednesday: e.target.value }); }
-  onChangeThursday(e) { this.setState({ thursday: e.target.value }); }
-  onChangeFriday(e) { this.setState({ friday: e.target.value }); }
-  onChangeSaturday(e) { this.setState({ saturday: e.target.value }); }
+  onChangeSunday(e) { this.setState({ sunday: e }); }
+  onChangeMonday(e) { this.setState({ monday: e }); }
+  onChangeTuesday(e) { this.setState({ tuesday: e }); }
+  onChangeWednesday(e) { this.setState({ wednesday: e }); }
+  onChangeThursday(e) { this.setState({ thursday: e }); }
+  onChangeFriday(e) { this.setState({ friday: e }); }
+  onChangeSaturday(e) { this.setState({ saturday: e }); }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -119,6 +134,9 @@ export default class MealPlan extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
+  componentWillUnmount(){
+
+  }
   inventory(date, mealType, day) {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -129,8 +147,8 @@ export default class MealPlan extends Component {
             deleteItems={this.deleteItems}
             key={currentfood._id}
           />
-          
-          </>
+
+        </>
         ); //need to add button for addrecipe
       } return (null);
     });
@@ -172,58 +190,57 @@ export default class MealPlan extends Component {
   setDays() {
     var month = "";
     var day = "";
-    var year = "";  
-  
+    var year = "";
+    var monday = "";
+    var tuesday = "";
+    var wednesday = "";
+    var thursday = "";
+    var friday = "";
+    var saturday = "";
+    var sunday = "";
     var today = new Date(Date.now())
     if (this.state.mon > today + 1) {
-      this.onChangeMonday((this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.monday);
+      monday = (this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeMonday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.monday);
+      monday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.tue > today + 1) {
-      this.onChangeTuesday((this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.tuesday);
+      tuesday = (this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeTuesday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.tuesday);
+      tuesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.wed > today + 1) {
-      this.onChangeWednesday((this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.wednesday);
+      wednesday = (this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeWednesday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.wednesday);
+      wednesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.thu > today + 1) {
-      this.onChangeThursday((this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.thursday);
+      thursday = (this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeThursday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.thursday);
+      thursday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.fri > today + 1) {
-      this.onChangeFriday((this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.friday);
+      friday = (this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeFriday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.friday);
+      friday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.sat > today + 1) {
-      this.onChangeSaturday((this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.saturday);
+      saturday = (this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeSaturday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.saturday);
+      saturday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.sun > today + 1) {
-      this.onChangeSunday((this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.sunday);
+      sunday = (this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.onChangeSunday((this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString())
-      console.log(this.state.sunday);
+      sunday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
+    this.onChangeMonday(monday);
+    this.onChangeTuesday(tuesday);
+    this.onChangeWednesday(wednesday);
+    this.onChangeThursday(thursday);
+    this.onChangeFriday(friday);
+    this.onChangeSaturday(saturday);
+    this.onChangeSunday(sunday);
   }
   breakfast(date, mealType) {
     const { match: { params } } = this.props;
@@ -241,9 +258,10 @@ export default class MealPlan extends Component {
     });
   }
   render() {
-    this.setDays();
-    this.weeksCalories();
+    
     /*
+    * this.setDays();
+    * this.weeksCalories();
     * grabs mealplan data
     * populates tabs of the week with breakfast lunch dinner
     * grabs recipe data and inv data for calories
