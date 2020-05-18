@@ -1,24 +1,28 @@
-import React, { Component } from 'react';
-import { Button, Row, Col, Input, NavLink,
-  Modal, ModalHeader, ModalBody } from 'reactstrap';
+import React, { useState, Component } from 'react';
+import {
+  Button, Row, Col, Input, NavLink,
+  Modal, ModalHeader, ModalBody,
+  ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
+} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./inv.css";
 import plusbtn from "./plus.svg"
 import axios from "axios";
-import className from 'classnames';
+import classnames from 'classnames';
 const Fooddata = props => (
-  <Button className="invBar" ><Row>
-    <NavLink to={"/user-item/" + props.food._id}>{props.food.foodName}</NavLink>
-    <Button onClick={() => { props.deleteItems(props.food._id); }}>X</Button>
-  </Row></Button>
+  <Row className="invBar" >
+    <Col xs='1'/><h3>{props.food.foodName}</h3> <Col></Col>
+    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>X</Button><Col xs='1'/>
+  </Row>
 );
 const HList = props => (
-  <Button className="invBar" ><Row>
-    <NavLink to={"/user-item/" + props.food._id}>{props.food.foodName}</NavLink>
-    <Button onClick={() => { props.deleteItems(props.food._id); }}>+</Button>
-  </Row></Button>
+  <Row className="invBar" >
+    <Col xs='1'/><h3>{props.food.foodName}</h3> <Col></Col>
+    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>+</Button><Col xs='1'/>
+  </Row>
 );
+
 export default class ShoppingList extends Component {
 
   constructor(props) {
@@ -26,19 +30,20 @@ export default class ShoppingList extends Component {
 
     this.onAddHist = this.onAddHist.bind(this);
     this.deleteItems = this.deleteItems.bind(this);
-    this.reset = this.reset.bind(this);
+    this.toggle = this.toggle.bind(this);
+    this.pop = this.pop.bind(this);
     const { match: { params } } = this.props;
     this.state = {
       fooddata: [],
       histData: [],
       username: params.id,
       password: params.password,
-
-      flag: false,
+      modal: false,
+      dropdown: false,
     };
   }
-  
-  reset() { this.setState({ flag: !this.state.flag }) }
+  toggle() { this.setState({ modal: !this.state.modal }) }
+  pop() { this.setState({ dropdown: !this.state.dropdown }) }
   // addHist should add current Shopping List to history and empty fooddata list
   onAddHist() {
     this.setState({
@@ -50,8 +55,7 @@ export default class ShoppingList extends Component {
     axios
       .get("http://localhost:8080/fooddata/")
       .then(response => {
-        if(this.state.flag === true){this.onAddHist();}        
-        this.setState({ fooddata: response.data, reset: false });        
+        this.setState({ fooddata: response.data });
       })
       .catch(error => {
         console.log(error);
@@ -99,8 +103,7 @@ export default class ShoppingList extends Component {
   }
 
   render() {
-    var modal = true;
-    var onToggle = () =>  {modal= !modal}; 
+
     return (
       /*
       * Shopping List Pulls info and displays as buttons
@@ -113,16 +116,25 @@ export default class ShoppingList extends Component {
       * bring up things not grabbed by scan but on shopping list
       */
       <div><TopBar username={this.state.username} password={this.state.password} /><br /><br /><br /> <div className="midCon">
-        <h1>Shopping List</h1></div> <Button onClick={this.state.flag =(!this.state.flag)}>New List</Button>
+        <h1>Shopping List</h1></div> 
         <Row><Col xs='1' /><Col align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1' /></Row>
         <h3>Main</h3>
         <div className="listItem">
           {this.inventory()}
           {this.subInventory()}
         </div>
-        <Button className="addbtn" onClick={onToggle()}><img alt="add" src={plusbtn} /></Button>
-        <Modal isOpen={modal} toggle={onToggle()} className={className}>
-          <ModalHeader toggle={onToggle()}><h3>History</h3></ModalHeader>
+        <ButtonDropdown direction="up" isOpen={this.state.dropdown} toggle={() => this.pop()}>
+          <DropdownToggle className="addbtn">
+            <img alt="add" src={plusbtn} />
+          </DropdownToggle>
+          <DropdownMenu>
+            <DropdownItem onClick={() => this.toggle()}>History</DropdownItem>
+            <DropdownItem onClick={() => this.onAddHist}>New List</DropdownItem>
+          </DropdownMenu>
+        </ButtonDropdown>
+  
+        <Modal isOpen={this.state.modal} toggle={() => this.toggle()} className={classnames}>
+          <ModalHeader toggle={() => this.toggle()}><h3>History</h3></ModalHeader>
           <ModalBody>
             {this.History()}
           </ModalBody>
@@ -134,51 +146,14 @@ export default class ShoppingList extends Component {
   subInventory() {
     return (<>
       <h3>Hatchet</h3>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
+      <Row className="subBar">
+        <Col xs='1'/><h3>Candy</h3><Col/><Button className="S-btn" >X</Button><Col xs='1'/>
+      </Row>      
     </>
     );
   }
 }
-/*<ButtonGroup size='lg' >
+/*<ButtonGroup size='lg' > onClick={() => { props.deleteItems(props.food._id); }}
         <Button href="/SHist">History</Button>
         <Button href="/create">New Item</Button>
         <Button href="/inventory">+ Inventory</Button>

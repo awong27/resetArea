@@ -90,12 +90,6 @@ export default class Home extends Component {
       <UncontrolledAlert color="info">
         Expiring Soon
       </UncontrolledAlert>
-      <UncontrolledAlert color="info">
-        Expiring Soon
-      </UncontrolledAlert>
-      <UncontrolledAlert color="info">
-        Expiring Soon
-      </UncontrolledAlert>
     </>
     );
   }
