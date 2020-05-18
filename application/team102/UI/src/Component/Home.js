@@ -8,8 +8,9 @@ import TopBar from "./TopBar";
 import "./Home.css";
 import classnames from 'classnames';
 import axios from "axios";
-import { Bar, Doughnut } from 'react-chartjs-2';
 
+import BarChart from "./BarChart.js"
+import DoughnutChart from "./DoughnutChart.js"
 const Recipedata = props => {
   const { className } = props;
   const [modal, setModal] = useState(false);
@@ -68,26 +69,6 @@ export default class Home extends Component {
       today: new Date(Date.now()),
       date: "",
       activeTab: '1',
-      labels: ['Fats', 'Protein', 'Sugar',
-        'Carbs', 'Sodium'],
-      datasets: [{
-        label: 'Nutrition',
-        backgroundColor: [
-          '#B21F00',
-          '#C9DE00',
-          '#2FDE00',
-          '#00A6B4',
-          '#6800B4'
-        ],
-        hoverBackgroundColor: [
-          '#501800',
-          '#4B5000',
-          '#175000',
-          '#003350',
-          '#35014F'
-        ],
-        data: [65, 59, 80, 81, 56]
-      }]
     };
     var date = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.today.getDate()).toString() + "/" + (this.state.today.getFullYear()).toString();
     this.state.date = date
@@ -234,63 +215,11 @@ export default class Home extends Component {
             <TabPane tabId="2">
               Statistics
               <Row>
-                <Doughnut
-                  data={this.state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: 'Daily Nutrition',
-                      fontSize: 20
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
-                />
-              </Row>
-              <Row><Col xs="1"></Col>
-                <Col><Table striped>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Calories</th>
-                      <td></td> <td>57,352</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Fats</th>
-                      <td></td> <td>768 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Sodium</th>
-                      <td></td> <td>179 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Protien</th>
-                      <td></td> <td>1,423 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Fluids</th>
-                      <td></td> <td>15 gal</td>
-                    </tr>
-                  </tbody>
-                </Table></Col>
-              </Row>
+                <DoughnutChart/>
+              </Row> <br/>             
               <Row>
-                <Bar
-                  data={this.state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: 'Weekly Calories',
-                      fontSize: 20
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
-                />
-              </Row>
+                <BarChart/>
+              </Row><br/><br/><br/>              
             </TabPane>
           </TabContent>
         </Container>
