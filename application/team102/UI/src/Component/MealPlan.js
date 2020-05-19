@@ -25,7 +25,12 @@ const Fooddata = props => (
     </td>
   </tr>*/
   <Row>
-    <Col><p>{props.food.mealName}</p></Col><Col></Col><Col>{props.food.planCalories}</Col><Button onClick={() => { props.deleteItems(props.food._id); }}>X</Button><Col xs='1' />
+    
+    <Col><h5>{props.food.mealName}</h5></Col>
+    <Col xs='1'/>
+    <Col xs='2'><h5>{props.food.planCalories}</h5></Col>
+    <Col xs='1'/>
+    <Button className="del" onClick={() => { props.deleteItems(props.food._id); }}>X</Button>
   </Row>
 );
 export default class MealPlan extends Component {
@@ -34,6 +39,21 @@ export default class MealPlan extends Component {
     this.toggle = this.toggle.bind(this);
     const { match: { params } } = this.props;
     this.deleteItems = this.deleteItems.bind(this);
+    this.onChangeSundaysCalories = this.onChangeSundaysCalories.bind(this);
+    this.onChangeMondaysCalories = this.onChangeMondaysCalories.bind(this);
+    this.onChangeTuesdaysCalories = this.onChangeTuesdaysCalories.bind(this);
+    this.onChangeWednesdaysCalories = this.onChangeWednesdaysCalories.bind(this);
+    this.onChangeThursdaysCalories = this.onChangeThursdaysCalories.bind(this);
+    this.onChangeFridaysCalories = this.onChangeFridaysCalories.bind(this);
+    this.onChangeSaturdaysCalories = this.onChangeSaturdaysCalories.bind(this);
+    this.onChangeSunday = this.onChangeSunday.bind(this);
+    this.onChangeMonday = this.onChangeMonday.bind(this);
+    this.onChangeTuesday = this.onChangeTuesday.bind(this);
+    this.onChangeWednesday = this.onChangeWednesday.bind(this);
+    this.onChangeThursday = this.onChangeThursday.bind(this);
+    this.onChangeFriday = this.onChangeFriday.bind(this);
+    this.onChangeSaturday = this.onChangeSaturday.bind(this);
+    this.setDays = this.setDays.bind(this);
     var today = new Date(Date.now())
     var daysLastMonth;
     if (today.getMonth === 0 || today.getMonth === 1 || today.getMonth === 3 ||
@@ -76,6 +96,21 @@ export default class MealPlan extends Component {
       sunday: ""
     };
   }
+  onChangeSundaysCalories(e) { this.setState({ sundaysCalories: e }); }
+  onChangeMondaysCalories(e) { this.setState({ mondaysCalories: e }); }
+  onChangeTuesdaysCalories(e) { this.setState({ tuesdaysCalories: e }); }
+  onChangeWednesdaysCalories(e) { this.setState({ wednesdaysCalories: e }); }
+  onChangeThursdaysCalories(e) { this.setState({ thursdaysCalories: e }); }
+  onChangeFridaysCalories(e) { this.setState({ fridaysCalories: e }); }
+  onChangeSaturdaysCalories(e) { this.setState({ saturdaysCalories: e }); }
+
+  onChangeSunday(e) { this.setState({ sunday: e }); }
+  onChangeMonday(e) { this.setState({ monday: e }); }
+  onChangeTuesday(e) { this.setState({ tuesday: e }); }
+  onChangeWednesday(e) { this.setState({ wednesday: e }); }
+  onChangeThursday(e) { this.setState({ thursday: e }); }
+  onChangeFriday(e) { this.setState({ friday: e }); }
+  onChangeSaturday(e) { this.setState({ saturday: e }); }
   toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
@@ -104,119 +139,118 @@ export default class MealPlan extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
+  componentWillUnmount() {
+
+  }
   inventory(date, mealType, day) {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
       if (currentfood.creator === params.id && currentfood.date === date && currentfood.mealType === mealType) {
-        return (
+        return (<>
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
             key={currentfood._id}
           />
-        );
-      }
+
+        </>
+        ); //need to add button for addrecipe
+      } return (null);
     });
-    return (null);
   }
   weeksCalories() {
-    this.state.sundaysCalories = 0;
-    this.state.mondaysCalories = 0;
-    this.state.tuesdaysCalories = 0;
-    this.state.wednesdaysCalories = 0;
-    this.state.thursdaysCalories = 0;
-    this.state.fridaysCalories = 0;
-    this.state.saturdaysCalories = 0;
+    this.onChangeSundaysCalories(0);
+    this.onChangeMondaysCalories(0);
+    this.onChangeTuesdaysCalories(0);
+    this.onChangeWednesdaysCalories(0);
+    this.onChangeThursdaysCalories(0);
+    this.onChangeFridaysCalories(0);
+    this.onChangeSaturdaysCalories(0);
     this.state.fooddata.map(currentfood => {
-      if (currentfood.date == this.state.sunday) {
-        this.state.sundaysCalories += parseInt(currentfood.planCalories)
+      if (currentfood.date === this.state.sunday) {
+        this.onChangeSundaysCalories(this.state.sundaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.sundaysCalories)
-      }
-      if (currentfood.date == this.state.monday) {
-        this.state.mondaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.monday) {
+        this.onChangeMondaysCalories(this.state.mondaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.mondaysCalories)
-      }
-      if (currentfood.date == this.state.tuesday) {
-        this.state.tuesdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.tuesday) {
+        this.onChangeTuesdaysCalories(this.state.tuesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.tuesdaysCalories)
-      }
-      if (currentfood.date == this.state.wednesday) {
-        this.state.wednesdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.wednesday) {
+        this.onChangeWednesdaysCalories(this.state.wednesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.wednesdaysCalories)
-      }
-      if (currentfood.date == this.state.thursday) {
-        this.state.thursdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.thursday) {
+        this.onChangeThursdaysCalories(this.state.thursdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.thursdaysCalories)
-      }
-      if (currentfood.date == this.state.friday) {
-        this.state.fridaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.friday) {
+        this.onChangeFridaysCalories(this.state.fridaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.fridaysCalories)
-      }
-      if (currentfood.date == this.state.saturday) {
-        this.state.saturdaysCalories += parseInt(currentfood.planCalories)
+      } else if (currentfood.date === this.state.saturday) {
+        this.onChangeSaturdaysCalories(this.state.saturdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.saturdaysCalories)
       }
+      return (null);
     })
   }
   setDays() {
     var month = "";
     var day = "";
     var year = "";
+    var monday = "";
+    var tuesday = "";
+    var wednesday = "";
+    var thursday = "";
+    var friday = "";
+    var saturday = "";
+    var sunday = "";
     var today = new Date(Date.now())
     if (this.state.mon > today + 1) {
-      this.state.monday = (this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.monday);
+      monday = (this.state.today.getMonth()).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.monday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.monday);
+      monday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.mon).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.tue > today + 1) {
-      this.state.tuesday = (this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.tuesday);
+      tuesday = (this.state.today.getMonth()).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.tuesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.tuesday);
+      tuesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.tue).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.wed > today + 1) {
-      this.state.wednesday = (this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.wednesday);
+      wednesday = (this.state.today.getMonth()).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.wednesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.wednesday);
+      wednesday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.wed).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.thu > today + 1) {
-      this.state.thursday = (this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.thursday);
+      thursday = (this.state.today.getMonth()).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.thursday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.thursday);
+      thursday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.thu).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.fri > today + 1) {
-      this.state.friday = (this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.friday);
+      friday = (this.state.today.getMonth()).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.friday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.friday);
+      friday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.fri).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.sat > today + 1) {
-      this.state.saturday = (this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.saturday);
+      saturday = (this.state.today.getMonth()).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.saturday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.saturday);
+      saturday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sat).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
     if (this.state.sun > today + 1) {
-      this.state.sunday = (this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.sunday);
+      sunday = (this.state.today.getMonth()).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString()
     } else {
-      this.state.sunday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString();
-      console.log(this.state.sunday);
+      sunday = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.sun).toString() + "/" + (this.state.today.getFullYear()).toString()
     }
+    this.onChangeMonday(monday);
+    this.onChangeTuesday(tuesday);
+    this.onChangeWednesday(wednesday);
+    this.onChangeThursday(thursday);
+    this.onChangeFriday(friday);
+    this.onChangeSaturday(saturday);
+    this.onChangeSunday(sunday);
   }
   breakfast(date, mealType) {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
-      if (currentfood.creator === params.id && currentfood.date == date && currentfood.mealType == mealType) {
+      if (currentfood.creator === params.id && currentfood.date === date && currentfood.mealType === mealType) {
         return (
           <Fooddata
             food={currentfood}
@@ -229,9 +263,10 @@ export default class MealPlan extends Component {
     });
   }
   render() {
-    this.setDays();
-    this.weeksCalories();
+
     /*
+    * this.setDays();
+    * this.weeksCalories();
     * grabs mealplan data
     * populates tabs of the week with breakfast lunch dinner
     * grabs recipe data and inv data for calories
@@ -246,7 +281,7 @@ export default class MealPlan extends Component {
     */
     return (
       <div className="container"><TopBar username={this.state.username} password={this.state.password} />
-        <Container>  <br /><br /><br />
+        <Container>
           <Row><Col><h1>Meal Plan</h1></Col></Row>
 
           <Nav tabs justified className="plan">
@@ -296,122 +331,143 @@ export default class MealPlan extends Component {
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="sunday">
               <Row>
-                <Col></Col><Col><p>Calories:{this.state.sundaysCalories}</p></Col><Col></Col>
+                <Col></Col><Col><h5>Calories:{this.state.sundaysCalories}</h5></Col><Col></Col>
               </Row>
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "breakfast", "sunday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "lunch", "sunday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "dinner", "sunday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="monday">
-              <Col></Col><Col><p>Calories:{this.state.mondaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.mondaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "breakfast", "monday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "lunch", "monday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "dinner", "monday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="tuesday">
-              <Col></Col><Col><p>Calories:{this.state.tuesdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.tuesdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "breakfast", "tuesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "lunch", "tuesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "dinner", "tuesday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="wednesday">
-              <Col></Col><Col><p>Calories:{this.state.wednesdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.wednesdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "breakfast", "wednesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "lunch", "wednesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "dinner", "wednesday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="thursday">
-              <Col></Col><Col><p>Calories:{this.state.thursdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.thursdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "breakfast", "thursday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "lunch", "thursday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "dinner", "thursday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="friday">
-              <Col></Col><Col><p>Calories:{this.state.fridaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.fridaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "breakfast", "friday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "lunch", "friday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "dinner", "friday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="saturday">
-              <Col></Col><Col><p>Calories:{this.state.saturdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.saturdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "breakfast", "saturday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "lunch", "saturday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "dinner", "saturday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
           </TabContent>

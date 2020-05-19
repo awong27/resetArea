@@ -242,44 +242,44 @@ searchedRecipes() {
 
 
     return (
-      <div><TopBar/>
-      <br/><br/><br/>
-      <div><h1>Recipes</h1></div>
-      <Table hover>
-        <thead>
-          <tr>
-            <th>Recipe</th>
-            <th>Image</th>
-            <th>Source</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.searchedRecipes()}
-        </tbody>
-      </Table>
-      <div className="listItem">
-      <Button className="invBar"><Row>
-        <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Beef Shank</Col><Col className="expire">4/8</Col><Col className="quantity">1</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Kiwi</Col><Col className="expire">9/1</Col><Col className="quantity">6</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Bread</Col><Col className="expire">2/10</Col><Col className="quantity">12</Col><Col className="actions"></Col>
-      </Row></Button>
-      <Button className="invBar"><Row>
-        <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col className="quantity">3</Col><Col className="actions"></Col>
-      </Row></Button></div>
-      <ButtonGroup size='lg'>
-        <Button href="/create">Delete</Button>
-        <Button href="/create">Scan</Button>
-        <Button href="/create">Eat</Button>
-      </ButtonGroup>
-      <Navi username={this.state.creator} password={this.state.password} />
+      <div><TopBar />
+        
+        <div><h1>Recipes</h1></div>
+        <Table hover>
+          <thead>
+            <tr>
+              <th>Recipe</th>
+              <th>Image</th>
+              <th>Source</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.searchedRecipes()}
+          </tbody>
+        </Table>
+        <div className="listItem">
+          <Button className="invBar"><Row>
+            <Col className="itemName">Banana</Col><Col className="expire">3/15</Col><Col className="quantity">4</Col><Col className="actions"></Col>
+          </Row></Button>
+          <Button className="invBar"><Row>
+            <Col className="itemName">Beef Shank</Col><Col className="expire">4/8</Col><Col className="quantity">1</Col><Col className="actions"></Col>
+          </Row></Button>
+          <Button className="invBar"><Row>
+            <Col className="itemName">Kiwi</Col><Col className="expire">9/1</Col><Col className="quantity">6</Col><Col className="actions"></Col>
+          </Row></Button>
+          <Button className="invBar"><Row>
+            <Col className="itemName">Bread</Col><Col className="expire">2/10</Col><Col className="quantity">12</Col><Col className="actions"></Col>
+          </Row></Button>
+          <Button className="invBar"><Row>
+            <Col className="itemName">Tomato</Col><Col className="expire">6/24</Col><Col className="quantity">3</Col><Col className="actions"></Col>
+          </Row></Button></div>
+        <ButtonGroup size='lg'>
+          <Button href="/create">Delete</Button>
+          <Button href="/create">Scan</Button>
+          <Button href="/create">Eat</Button>
+        </ButtonGroup>
+        <Navi username={this.state.creator} password={this.state.password} />
       </div>
     );
   }

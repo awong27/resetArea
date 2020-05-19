@@ -5,6 +5,8 @@
   background-color: #bae8e8;
   height: 200%;
   min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 54px;
 }
 .upperbox {
   background-color: #e3f6f5;
@@ -37,6 +39,7 @@
 .btn-secondary {
   color: #272343 !important;
   background-color: #e3f6f5 !important;
+  border-color: transparent !important;
 }
 .container {
   background-color: #bae8e8;

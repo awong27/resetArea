@@ -1,7 +1,8 @@
 import React, {useState, Component} from 'react';
 import {Container, Label, Row, Col, Input, Button, ButtonGroup,
   Card, CardImg, Form, CardText, CardFooter, CardHeader,
-  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody} from 'reactstrap';
+  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody, CardTitle, CardImgOverlay
+} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -15,9 +16,9 @@ const Fooddata = props => {
 
   const toggle = () => setModal(!modal);
   return (
-  <Card className="bigdes ">
-    <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage}/>
-    <Modal isOpen={modal} toggle={toggle} className={className}>
+    <Card className="bigdes" body inverse='true'>
+      <CardImg alt="recipeItem" src={props.food.recipeImage}/>
+      <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
         <ModalBody>
           <h4>Calories:{props.food.recipeCalories}</h4>
@@ -28,50 +29,24 @@ const Fooddata = props => {
           <img alt={props.food.recipeName} src={props.food.recipeImage} height="50%" width="100%"/>
         </ModalBody>
         <ModalFooter>
-          <ButtonGroup className="itemOptions">
-            <Button onClick={() => {props.deleteItems(props.food._id);}}>
-              <img alt="delete"  />
+          <ButtonGroup className="itemOptbtn">
+            <Button onClick={() => { props.deleteItems(props.food._id); }}>
+              
             </Button>
             <Button>
-              <CardText></CardText>
+              <CardText>Add to Meal Plan</CardText>
             </Button>
             <Button onClick={() => "/create" + props.food._id}>
-              <img alt="eat"  />
+              
             </Button>
           </ButtonGroup>
         </ModalFooter>
       </Modal>
-
-      <CardHeader>
-        <ButtonGroup className="itemHead">
-          <Button>
-
-          </Button>
-          <Button>
-            <CardText>{props.food.recipeName}</CardText>
-          </Button>
-          <Button>
-            <CardText>{props.food.recipeCalories < 0? Math.round(props.food.recipeCalories):0}</CardText>
-          </Button>
-        </ButtonGroup>
-      </CardHeader>
-      <CardBody position='center'>
-
-      </CardBody>
-      <CardFooter>
-        <ButtonGroup className="itemOptions">
-          <Button onClick={() => {props.deleteItems(props.food._id);}}>
-            <img alt="delete"  />
-          </Button>
-          <Button>
-            <CardText></CardText>
-          </Button>
-          <Button onClick={() => "/create" + props.food._id}>
-            <img alt="eat"  />
-          </Button>
-        </ButtonGroup>
-      </CardFooter>
-  </Card>
+      <CardImgOverlay onClick={toggle} style={{backgroundColor: "rgba(0, 0, 0, 0.375)"}}>
+        <CardTitle position='fixed'><h4>{props.food.recipeName}</h4></CardTitle>
+        <CardText>Calories: {props.food.recipeCalories > 0 ? Math.round(props.food.recipeCalories) : 0}</CardText>
+      </CardImgOverlay>      
+    </Card>
   );
 }
 //grabs search results
@@ -88,6 +63,7 @@ export default class Recipe extends Component {
     this.onChangeCarbs = this.onChangeCarbs.bind(this);
     this.onChangeFat = this.onChangeFat.bind(this);
     this.onChangeSugar = this.onChangeSugar.bind(this);
+    this.onChangeSodium = this.onChangeSodium.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
 
     this.deleteItems = this.deleteItems.bind(this);
@@ -106,7 +82,7 @@ export default class Recipe extends Component {
       recipeFat: "NA",
       recipeProtein: "NA",
       recipeSugar: "NA",
-
+      recipeSodium: "NA",
 
     };
   }
@@ -135,7 +111,12 @@ export default class Recipe extends Component {
       recipeSugar:e.target.value.replace(/\D/g,'')
     });
   }
-  onChangeProtein(e){
+  onChangeSodium(e) {
+    this.setState({
+      recipeSodium: e.target.value.replace(/\D/g, '')
+    });
+  }
+  onChangeProtein(e) {
     this.setState({
       protein:e.target.value
     });
@@ -298,36 +279,42 @@ export default class Recipe extends Component {
 
   restrictions() {
     return (
-      <Form inline justified onSubmit={this.onSubmit}>
+      <Form justified onSubmit={this.onSubmit}>
         <FormGroup>
-          <Row><Label>New Recipe: </Label>
+          <Row>
+            <Input
+              type="text"
+              placeholder="Search"
+              style={{ width: '70vw' }}
+              required
+              className="form-control"
+              value={this.state.searches}
+              onChange={this.onChangeSearch}
+            /> <Input
+              type="submit"
+              style={{ width: '30vw' }}
+              value="Find"
+              className="btn btn-secondary"
+            /></Row>
+        </FormGroup>
+        <FormGroup style={{ display: "flex" }}>
           <Input
-          type="text"
-          required
-          className="form-control"
-          value={this.state.searches}
-          onChange={this.onChangeSearch}
-          /></Row>
-      </FormGroup>
-      <FormGroup>
-      <Input
-      type="select"
-      onChange={this.onChangeCalories}
-      value = {this.state.recipeCalories}>
-        <option>Calories</option>
-        <option>250  Cal</option>
-        <option>500  Cal</option>
-        <option>750  Cal</option>
-        <option>1000  Cal</option>
-        <option>1500  Cal</option>
-      </Input>
-      </FormGroup>
-        <FormGroup>
+            type="select"
+            style={{ width: '24vw', padding: '0' }}
+            onChange={this.onChangeCalories}
+            value={this.state.recipeCalories}>
+            <option>Calories</option>
+            <option>250  Cal</option>
+            <option>500  Cal</option>
+            <option>750  Cal</option>
+            <option>1000  Cal</option>
+            <option>1500  Cal</option>
+          </Input>
           <Input
-          type="select"
-          onChange={this.onChangeFat}
-          value = {this.state.recipeFat}
-          >
+            type="select"
+            style={{ width: '15vw', padding: '0' }}
+            onChange={this.onChangeFat}
+            value={this.state.recipeFat}>
             <option>Fat</option>
             <option>5 g</option>
             <option>10 g</option>
@@ -342,89 +329,77 @@ export default class Recipe extends Component {
             <option>55 g</option>
             <option>60 g</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
           <Input
-          type="select"
-          value={this.state.recipeCarbs}
-          onChange={this.onChangeCarbs}
-          >
-          <option>Carbs</option>
-          <option>5 g</option>
-          <option>10 g</option>
-          <option>15 g</option>
-          <option>20 g</option>
-          <option>25 g</option>
-          <option>30 g</option>
-          <option>35 g</option>
-          <option>40 g</option>
-          <option>45 g</option>
-          <option>50 g</option>
-          <option>55 g</option>
-          <option>60 g</option>
+            type="select"
+            style={{ width: '19vw', padding: '0' }}
+            value={this.state.recipeCarbs}
+            onChange={this.onChangeCarbs}>
+            <option>Carbs</option>
+            <option>5 g</option>
+            <option>10 g</option>
+            <option>15 g</option>
+            <option>20 g</option>
+            <option>25 g</option>
+            <option>30 g</option>
+            <option>35 g</option>
+            <option>40 g</option>
+            <option>45 g</option>
+            <option>50 g</option>
+            <option>55 g</option>
+            <option>60 g</option>
           </Input>
-        </FormGroup>
-        <FormGroup>
-          <Input type="select">
-          <option>Sodium</option>
-          <option>5 g</option>
-          <option>10 g</option>
-          <option>15 g</option>
-          <option>20 g</option>
-          <option>25 g</option>
-          <option>30 g</option>
-          <option>35 g</option>
-          <option>40 g</option>
-          <option>45 g</option>
-          <option>50 g</option>
-          <option>55 g</option>
-          <option>60 g</option>
-          </Input>
-        </FormGroup>
-        <FormGroup>
           <Input
-          type="select"
-          value= {this.state.recipeSugar}
-          onChange={this.onChangeSugar}
-          >
-          <option>Sugar</option>
-          <option>5 g</option>
-          <option>10 g</option>
-          <option>15 g</option>
-          <option>20 g</option>
-          <option>25 g</option>
-          <option>30 g</option>
-          <option>35 g</option>
-          <option>40 g</option>
-          <option>45 g</option>
-          <option>50 g</option>
-          <option>55 g</option>
-          <option>60 g</option>
+            type="select"
+            style={{ width: '23vw', padding: '0' }}
+            value={this.state.recipeSodium}
+            onChange={this.onChangeSodium}>
+            <option>Sodium</option>
+            <option>5 g</option>
+            <option>10 g</option>
+            <option>15 g</option>
+            <option>20 g</option>
+            <option>25 g</option>
+            <option>30 g</option>
+            <option>35 g</option>
+            <option>40 g</option>
+            <option>45 g</option>
+            <option>50 g</option>
+            <option>55 g</option>
+            <option>60 g</option>
+          </Input>
+          <Input
+            type="select"
+            style={{ width: '19vw', padding: '0' }}
+            value={this.state.recipeSugar}
+            onChange={this.onChangeSugar}>
+            <option>Sugar</option>
+            <option>5 g</option>
+            <option>10 g</option>
+            <option>15 g</option>
+            <option>20 g</option>
+            <option>25 g</option>
+            <option>30 g</option>
+            <option>35 g</option>
+            <option>40 g</option>
+            <option>45 g</option>
+            <option>50 g</option>
+            <option>55 g</option>
+            <option>60 g</option>
           </Input>
         </FormGroup>
-
-        <FormGroup>
-          <Row><Input
-          type="submit"
-          value="Find New Recipe"
-          className="btn btn-primary"
-          /></Row>
-        </FormGroup>
-
       </Form>
     );
   }
   render() {
     return (
-      <div><TopBar username={this.state.creator} password={this.state.password}/> <br/><br/><br/>
-      <Container className="fit-content">
-        <Row><Col><h1>Recipes</h1></Col></Row>
-
-        {this.restrictions()}
-          <Row><Col xs='1'/><Col><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1'/></Row>
-        {this.inventory()}
-      </Container>
-        <Navi username={this.state.creator} password={this.state.password}/>
+      <div><TopBar username={this.state.creator} password={this.state.password} />
+        <Container className="fit-content">
+          <Row><Col><h1>Recipes</h1></Col></Row>
+          {this.restrictions()}
+          {this.inventory()}
+          <br/>
+        </Container>
+        <Navi username={this.state.creator} password={this.state.password} />
       </div>
     )
   }

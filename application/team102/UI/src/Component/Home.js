@@ -1,20 +1,62 @@
-import React, { Component } from 'react';
-import { Container, Row, Col, NavLink, Table, TabPane, Nav, NavItem, TabContent, UncontrolledAlert, Button } from "reactstrap";
+import React, { useState, Component } from 'react';
+import {
+  Container, Row, Col, NavLink, Table, TabPane,
+  Nav, NavItem, TabContent, UncontrolledAlert, Button,
+  ButtonGroup, Card, CardImg, CardText, CardBody,
+  Modal, ModalHeader, ModalBody, ModalFooter
+} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./Home.css";
 import classnames from 'classnames';
 import axios from "axios";
-import { Pie, Doughnut } from 'react-chartjs-2';
 
+import BarChart from "./BarChart.js"
+import DoughnutChart from "./DoughnutChart.js"
+const Recipedata = props => {
+  const { className } = props;
+  const [modal, setModal] = useState(false);
+  const toggle = () => setModal(!modal);
+  return (
+    <Card className="homeRep">
+      <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage} />
+      <Modal isOpen={modal} toggle={toggle} className={className}>
+        <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
+        <ModalBody>
+          <h4>Calories:{props.food.recipeCalories}</h4>
+          <h4>Carbs:{props.food.recipeCarbs}</h4>
+          <h4>Sugar:{props.food.recipeSugar}</h4>
+          <h4>Protein:{props.food.recipeProtein}</h4>
+          <h4>Fat:{props.food.recipeFat}</h4>
+          <img alt={props.food.recipeName} src={props.food.recipeImage} height="50%" width="100%" />
+        </ModalBody>
+        <ModalFooter>
+          <ButtonGroup className="itemOptions">
+            <Button onClick={() => { props.deleteItems(props.food.recipe_id); }}>
+              <img alt="delete" />
+            </Button>
+            <Button>
+              <CardText></CardText>
+            </Button>
+            <Button onClick={() => "/create" + props.food.recipe_id}>
+              <img alt="eat" />
+            </Button>
+          </ButtonGroup>
+        </ModalFooter>
+      </Modal>
+      <CardBody position='center'>
+        <CardText>{props.food.recipeName}</CardText>
+      </CardBody>
+    </Card>
+  );
+}
 const Fooddata = props => (
   <Row>
-    <Col><p>{props.food.mealName}</p></Col><Col></Col><Col>Calories: {props.food.planCalories}</Col><Col xs='1' />
-  </Row>
-);
-const Recipedata = props => (
-  <Row>
-    <Col><p>{props.food.recipeName}</p></Col><Col></Col><Col>Calories: {props.food.recipeCalories}</Col><Col xs='1' />
+    <Col xs='1'/>
+    <Col><p>{props.food.recipeName}</p></Col>
+    <Col></Col>
+    <Col>Calories: {props.food.recipeCalories}</Col>
+    <Col xs='1'/>
   </Row>
 );
 
@@ -33,28 +75,6 @@ export default class Home extends Component {
       today: new Date(Date.now()),
       date: "",
       activeTab: '1',
-      labels: ['Fats', 'Protein', 'Sugar',
-        'Carbs', 'Sodium'],
-      datasets: [
-        {
-          label: 'Nutrition',
-          backgroundColor: [
-            '#B21F00',
-            '#C9DE00',
-            '#2FDE00',
-            '#00A6B4',
-            '#6800B4'
-          ],
-          hoverBackgroundColor: [
-            '#501800',
-            '#4B5000',
-            '#175000',
-            '#003350',
-            '#35014F'
-          ],
-          data: [65, 59, 80, 81, 56]
-        }
-      ]
     };
     var date = (this.state.today.getMonth() + 1).toString() + "/" + (this.state.today.getDate()).toString() + "/" + (this.state.today.getFullYear()).toString();
     this.state.date = date
@@ -87,14 +107,8 @@ export default class Home extends Component {
       userdata: this.state.userdata.filter(el => el._id !== id)
     });
   }
-  notifications() {
+  notifications() {//need to query for expiring food in inv
     return (<>
-      <UncontrolledAlert color="info">
-        Expiring Soon
-      </UncontrolledAlert>
-      <UncontrolledAlert color="info">
-        Expiring Soon
-      </UncontrolledAlert>
       <UncontrolledAlert color="info">
         Expiring Soon
       </UncontrolledAlert>
@@ -168,7 +182,7 @@ export default class Home extends Component {
     */
     return (
       <div className="container"> <TopBar username={this.state.username} password={this.state.password} />
-        <Container className="HomePage">  <br />
+        <Container className="HomePage">
           <h2>Welcome, {this.state.username}</h2>
           {this.notifications()}
           <Nav tabs justified className="plan">
@@ -176,13 +190,17 @@ export default class Home extends Component {
               <NavLink className={classnames({ active: this.state.activeTab === '1' })}
                 onClick={() => { this.toggle('1'); }} >
                 Today
-          </NavLink>
+              </NavLink>
             </NavItem>
             <NavItem>
               <NavLink className={classnames({ active: this.state.activeTab === '2' })}
                 onClick={() => { this.toggle('2'); }} >
                 Me
-          </NavLink>
+              </NavLink>
+            </NavItem>
+
+            <NavItem style={{ flex: 'auto' }}>
+              <NavLink>{this.state.date}</NavLink>
             </NavItem>
           </Nav>
           <TabContent activeTab={this.state.activeTab}>
@@ -192,73 +210,20 @@ export default class Home extends Component {
                 <Col>{this.todaysMeals()}</Col>
 
               </Row>
-              <Row className="homeRow">
-                <Col className="homeSquare">
-                  <NavLink href="/Recipes/:id/:password">
-                    {this.myRecipes()}
-                  </NavLink>
-                </Col>
+              <Row className="homeRow" >
+
+                  {this.myRecipes()}
+
               </Row>
             </TabPane>
             <TabPane tabId="2">
-              Statistics
-          <Row>
-                <Pie
-                  data={this.state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: 'Daily Nutrition',
-                      fontSize: 20
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
-                />
-              </Row><Row>
-                <Doughnut
-                  data={this.state}
-                  options={{
-                    title: {
-                      display: true,
-                      text: 'Daily Nutrition',
-                      fontSize: 20
-                    },
-                    legend: {
-                      display: true,
-                      position: 'right'
-                    }
-                  }}
-                />
-              </Row>
-              <Row><Col xs="1"></Col>
-                <Col><Table striped>
-                  <tbody>
-                    <tr>
-                      <th scope="row">Calories</th>
-                      <td></td> <td>57,352</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Fats</th>
-                      <td></td> <td>768 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Sodium</th>
-                      <td></td> <td>179 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Protien</th>
-                      <td></td> <td>1,423 g</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">Fluids</th>
-                      <td></td> <td>15 gal</td>
-                    </tr>
-                  </tbody>
-                </Table></Col>
-              </Row>
+              
+              <Row>
+                <DoughnutChart />
+              </Row> <br />
+              <Row>
+                <BarChart />
+              </Row><br />
             </TabPane>
           </TabContent>
         </Container>

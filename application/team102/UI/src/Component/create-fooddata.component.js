@@ -4,7 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 //import Navi from "./Navigation";
 //import TopBar from "./TopBar";
-import { NavLink, FormGroup, Label, Form, Input, Button, ButtonGroup, Row, Col } from "reactstrap";
+import { FormGroup, Label, Form, Input, Button, ButtonGroup, Row, Col } from "reactstrap";
 
 export default class Create extends Component {
   constructor(props) {
@@ -24,7 +24,7 @@ export default class Create extends Component {
       foodname: "",
       expirationdate: new Date(),
       calories: "",
-      numberOfItems: "",
+      numberOfItems: "1",
       carbs: "",
       sugar: "",
       fat: "",
@@ -41,14 +41,19 @@ export default class Create extends Component {
   // change activations for prop states
   onChangeFoodname(e) { this.setState({ foodname: e.target.value }); }
   onChangeExpirationdate(date) { this.setState({ expirationdate: date }); }
-  onChangeCalories(e) { this.setState({ calories: e.target.value }); }
+  onChangeCalories(e) { this.setState({ calories: e }); }
   onChangeNumberOfItems(e) { this.setState({ numberOfItems: e.target.value }); }
-  onChangeCarbs(e) { this.setState({ carbs: e.target.value }); }
-  onChangeSugar(e) { this.setState({ sugar: e.target.value }); }
-  onChangeFat(e) { this.setState({ fat: e.target.value }); }
-  onChangeProtein(e) { this.setState({ protein: e.target.value }); }
-  onChangeSodium(e) { this.setState({ sodium: e.target.value }); }
-  onAddList(n,e,q){this.setState({addList: [this.state.addList, {n,e,q}]});}
+  onChangeCarbs(e) { this.setState({ carbs: e }); }
+  onChangeSugar(e) { this.setState({ sugar: e }); }
+  onChangeFat(e) { this.setState({ fat: e }); }
+  onChangeProtein(e) { this.setState({ protein: e}); }
+  onChangeSodium(e) { this.setState({ sodium: e }); }
+  onAddList(){
+    //const date = this.state.expirationdate.toDateString.split(/(\d)/)[4]
+    var list = this.state.addList.concat(this.state.foodname+" "+ this.state.numberOfItems);
+    console.log(this.state.expirationdate);
+    this.setState({addList: list})
+  }
   onSubmit(e) {
     e.preventDefault();
     axios
@@ -97,7 +102,7 @@ export default class Create extends Component {
           sodium: this.state.sodium
         };
         console.log(food);
-        this.onAddList(this.state.foodname,this.state.expirationdate,this.state.numberOfItems);
+        this.onAddList();
         axios
           .post("/fooddata/add", food)
           .then(res => console.log(res.data));
@@ -108,9 +113,9 @@ export default class Create extends Component {
   }
   AddList() {
     return(<>
-      {this.state.addList.map((n,e,q) => (
+      {this.state.addList.map((item) => (
         <Row>
-          <Col key={n}>{n}</Col><Col key={e}>{e}</Col><Col key={q}>{q}</Col>
+          <Col>{item}</Col>
         </Row>
       ))}</>
     );
