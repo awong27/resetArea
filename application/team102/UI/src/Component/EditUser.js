@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Tphoto from "./thanos.png";
+import Tphoto from "../profilePictures/profile.jpg";
 import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem } from "reactstrap";
 import "./Home.css"
 
@@ -19,7 +19,7 @@ export default class EditUser extends Component {
             <Row>
               <h4> Guest Name </h4>
               <Col />
-              <Col><img alt="UserEdit" src={Tphoto} className="userEdit" /></Col>
+              <Col><NavLink href="/uploadPic"><img alt="UserEdit" src={Tphoto} className="userEdit" /></NavLink></Col>
             </Row>
           </ListGroupItem>
 
