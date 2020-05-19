@@ -2,7 +2,7 @@ import React, { useState, Component } from 'react';
 import {
   Container, Label, Row, Col, Input, Button, ButtonGroup,
   Card, CardImg, Form, CardText, CardFooter, CardHeader,
-  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody
+  FormGroup, Modal, ModalHeader, ModalBody, ModalFooter, CardBody, CardTitle, CardImgOverlay
 } from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
@@ -16,7 +16,7 @@ const Fooddata = props => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   return (
-    <Card className="bigdes ">
+    <Card className="bigdes" body inverse='true'>
       <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage} />
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
@@ -42,36 +42,10 @@ const Fooddata = props => {
           </ButtonGroup>
         </ModalFooter>
       </Modal>
-
-      <CardHeader>
-        <ButtonGroup className="itemHead">
-          <Button>
-
-          </Button>
-          <Button>
-            <CardText>{props.food.recipeName}</CardText>
-          </Button>
-          <Button>
-            <CardText>{props.food.recipeCalories < 0 ? Math.round(props.food.recipeCalories) : 0}</CardText>
-          </Button>
-        </ButtonGroup>
-      </CardHeader>
-      <CardBody position='center'>
-
-      </CardBody>
-      <CardFooter>
-        <ButtonGroup className="itemOptions">
-          <Button onClick={() => { props.deleteItems(props.food.recipe_id); }}>
-            <img alt="delete" />
-          </Button>
-          <Button>
-            <CardText></CardText>
-          </Button>
-          <Button onClick={() => "/create" + props.food.recipe_id}>
-            <img alt="eat" />
-          </Button>
-        </ButtonGroup>
-      </CardFooter>
+      <CardImgOverlay style={{backgroundColor: "rgba(0, 0, 0, 0.375)"}}>
+        <CardTitle position='fixed'><h4>{props.food.recipeName}</h4></CardTitle>
+        <CardText>Calories: {props.food.recipeCalories > 0 ? Math.round(props.food.recipeCalories) : 0}</CardText>
+      </CardImgOverlay>      
     </Card>
   );
 }
@@ -302,7 +276,7 @@ export default class Recipe extends Component {
               className="btn btn-secondary"
             /></Row>
         </FormGroup>
-        <FormGroup style={{display: "flex"}}>
+        <FormGroup style={{ display: "flex" }}>
           <Input
             type="select"
             style={{ width: '24vw', padding: '0' }}
@@ -397,11 +371,12 @@ export default class Recipe extends Component {
   }
   render() {
     return (
-      <div><TopBar username={this.state.creator} password={this.state.password} /> 
+      <div><TopBar username={this.state.creator} password={this.state.password} />
         <Container className="fit-content">
           <Row><Col><h1>Recipes</h1></Col></Row>
           {this.restrictions()}
           {this.inventory()}
+          <br/>
         </Container>
         <Navi username={this.state.creator} password={this.state.password} />
       </div>
