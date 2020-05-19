@@ -29,7 +29,7 @@ const Fooddata = props => {
           <img alt={props.food.recipeName} src={props.food.recipeImage} height="50%" width="100%" />
         </ModalBody>
         <ModalFooter>
-          <ButtonGroup className="itemOptions">
+          <ButtonGroup className="itemOptbtn">
             <Button onClick={() => { props.deleteItems(props.food.recipe_id); }}>
               <img alt="delete" />
             </Button>

@@ -1,7 +1,9 @@
 import React, { useState, Component } from 'react';
-import { Button, Badge, ButtonGroup, 
-  Card, CardImg, CardText, CardFooter, CardHeader, CardBody, 
-  NavLink, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import {
+  Button, Badge, ButtonGroup,
+  Card, CardImg, CardText, CardFooter, CardHeader, CardBody,
+  NavLink, Modal, ModalHeader, ModalBody, ModalFooter
+} from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import axios from "axios";
@@ -26,7 +28,7 @@ const Fooddata = props => {
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.foodName}</h3></ModalHeader>
         <ModalBody>
-          <td>Expires:{props.food.expirationDate}</td>
+          <h4>Expires:{props.food.expirationDate}</h4>
           <h4>Calories:{props.food.calories}</h4>
           <h4>Carbs:{props.food.carbs}</h4>
           <h4>Sugar:{props.food.sugar}</h4>
@@ -35,7 +37,7 @@ const Fooddata = props => {
           <img alt={props.food.foodName} src={props.food.foodPic} height="50%" width="100%" />
         </ModalBody>
         <ModalFooter>
-          <ButtonGroup>
+          <ButtonGroup className="itemOptbtn">
             <Button onClick={() => { props.deleteItems(props.food._id); }}>
               <img alt="delete" src={trash} />
             </Button>
@@ -52,9 +54,6 @@ const Fooddata = props => {
       <CardHeader>
         <ButtonGroup className="itemHead">
           <Button>
-            <Badge color="danger">!</Badge>
-          </Button>
-          <Button>
             <CardText>{props.food.foodName}</CardText>
           </Button>
           <Button>
@@ -70,8 +69,8 @@ const Fooddata = props => {
           <Button onClick={() => { props.deleteItems(props.food._id); }}>
             <img alt="delete" src={trash} />
           </Button>
-          <Button>
-            <CardText>{props.food.numOfItems}</CardText>
+          <Button >
+            <CardText><h5>{props.food.numOfItems}</h5></CardText>
           </Button>
           <Button onClick={() => "/create" + props.food._id}>
             <img alt="eat" src={consume} />
@@ -87,12 +86,24 @@ export default class inventory extends Component {
     super(props);
     const { match: { params } } = this.props;
     this.deleteItems = this.deleteItems.bind(this);
-
+    this.onAddLength = this.onAddLength.bind(this);
     this.state = {
+      length: 0,
       fooddata: [],
       username: params.id,
       password: params.password
     };
+  }
+
+  onAddLength() {
+    const { match: { params } } = this.props;
+    var i = 0;
+    this.state.fooddata.map(currentfood => {
+      if (currentfood.creator === params.id) {
+        i++;
+      }
+    });
+    this.setState({ length: i });
   }
   //${params.id}
   /**
@@ -102,8 +113,9 @@ export default class inventory extends Component {
     const { match: { params } } = this.props;
     axios
       .get('http://localhost:8080/fooddata/')
-      .then(response => {
+      .then(response => {        
         this.setState({ fooddata: response.data });
+        this.onAddLength();
       })
       .catch(error => {
         console.log(error);
@@ -116,6 +128,7 @@ export default class inventory extends Component {
     this.setState({
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
+    this.onAddLength();
   }
   /**
    * matches food data list with personal id for personal food list
@@ -134,13 +147,13 @@ export default class inventory extends Component {
         );
       } else return (null);
     });
-  }  
+  }
   render() {
-    const create = "/Create/"+this.state.username+"/"+this.state.password;
+    const create = "/Create/" + this.state.username + "/" + this.state.password;
     return (
-      <div><TopBar username={this.state.username} password={this.state.password} />     
+      <div><TopBar username={this.state.username} password={this.state.password} />
         <div><h1>Inventory</h1></div>
-        <div className="FridgeList">
+        <div className="FridgeList" style={{height: (this.state.length+1)*45/2+35+"vw"}}>
           {this.inventory()}
         </div>
         <br /><br />
@@ -151,7 +164,7 @@ export default class inventory extends Component {
   }
 }
 /*foodcard() {
-
+style={{height: (this.state.fooddata.length+1)*45/4+"vw"}}
     return (
       <FoodStuff
         food={this.state.fooddata}

@@ -1,8 +1,10 @@
-import React, {useState, Component } from 'react';
-import { Container, Row, Col, NavLink, Table, TabPane, 
+import React, { useState, Component } from 'react';
+import {
+  Container, Row, Col, NavLink, Table, TabPane,
   Nav, NavItem, TabContent, UncontrolledAlert, Button,
-  ButtonGroup, Card, CardImg, CardText, CardBody, 
-  Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+  ButtonGroup, Card, CardImg, CardText, CardBody,
+  Modal, ModalHeader, ModalBody, ModalFooter
+} from "reactstrap";
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./Home.css";
@@ -145,7 +147,7 @@ export default class Home extends Component {
         count = count - 1;
         console.log(count);
         if (count < 0) {
-          return (<> Find New Recipes </>);
+          return (null);
         }
         return (
           <Recipedata
@@ -176,7 +178,7 @@ export default class Home extends Component {
     */
     return (
       <div className="container"> <TopBar username={this.state.username} password={this.state.password} />
-        <Container className="HomePage">  
+        <Container className="HomePage">
           <h2>Welcome, {this.state.username}</h2>
           {this.notifications()}
           <Nav tabs justified className="plan">
@@ -204,22 +206,20 @@ export default class Home extends Component {
                 <Col>{this.todaysMeals()}</Col>
 
               </Row>
-              <Row className="homeRow">
-                <Col>
-                  <NavLink href="/Recipes/:id/:password">
-                    {this.myRecipes()}
-                  </NavLink>
-                </Col>
+              <Row className="homeRow" >
+
+                  {this.myRecipes()}
+
               </Row>
             </TabPane>
             <TabPane tabId="2">
               Statistics
               <Row>
-                <DoughnutChart/>
-              </Row> <br/>             
+                <DoughnutChart />
+              </Row> <br />
               <Row>
-                <BarChart/>
-              </Row><br/><br/><br/>              
+                <BarChart />
+              </Row><br /><br /><br />
             </TabPane>
           </TabContent>
         </Container>
