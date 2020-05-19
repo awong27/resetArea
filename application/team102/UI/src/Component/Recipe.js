@@ -17,7 +17,7 @@ const Fooddata = props => {
   const toggle = () => setModal(!modal);
   return (
     <Card className="bigdes" body inverse='true'>
-      <CardImg alt="recipeItem" onClick={toggle} src={props.food.recipeImage} />
+      <CardImg alt="recipeItem" src={props.food.recipeImage}/>
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.recipeName}</h3></ModalHeader>
         <ModalBody>
@@ -31,18 +31,18 @@ const Fooddata = props => {
         <ModalFooter>
           <ButtonGroup className="itemOptbtn">
             <Button onClick={() => { props.deleteItems(props.food.recipe_id); }}>
-              <img alt="delete" />
+              
             </Button>
             <Button>
-              <CardText></CardText>
+              <CardText>Add to Meal Plan</CardText>
             </Button>
             <Button onClick={() => "/create" + props.food.recipe_id}>
-              <img alt="eat" />
+              
             </Button>
           </ButtonGroup>
         </ModalFooter>
       </Modal>
-      <CardImgOverlay style={{backgroundColor: "rgba(0, 0, 0, 0.375)"}}>
+      <CardImgOverlay onClick={toggle} style={{backgroundColor: "rgba(0, 0, 0, 0.375)"}}>
         <CardTitle position='fixed'><h4>{props.food.recipeName}</h4></CardTitle>
         <CardText>Calories: {props.food.recipeCalories > 0 ? Math.round(props.food.recipeCalories) : 0}</CardText>
       </CardImgOverlay>      

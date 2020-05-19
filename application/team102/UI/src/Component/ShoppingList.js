@@ -12,14 +12,14 @@ import axios from "axios";
 import classnames from 'classnames';
 const Fooddata = props => (
   <Row className="invBar" >
-    <Col xs='1'/><h3>{props.food.foodName}</h3> <Col></Col>
+    <Col xs='1'/><h4>{props.food.foodName}</h4> <Col></Col>
     <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>X</Button><Col xs='1'/>
   </Row>
 );
 const HList = props => (
-  <Row className="invBar" >
-    <Col xs='1'/><h3>{props.food.foodName}</h3> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>+</Button><Col xs='1'/>
+  <Row className='histlist' >
+    <h4>{props.food.foodName}</h4> <Col></Col>
+    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>+</Button>
   </Row>
 );
 
