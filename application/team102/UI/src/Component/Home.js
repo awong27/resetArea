@@ -52,7 +52,11 @@ const Recipedata = props => {
 }
 const Fooddata = props => (
   <Row>
-    <Col><p>{props.food.recipeName}</p></Col><Col></Col><Col>Calories: {props.food.recipeCalories}</Col><Col xs='1' />
+    <Col xs='1'/>
+    <Col><p>{props.food.recipeName}</p></Col>
+    <Col></Col>
+    <Col>Calories: {props.food.recipeCalories}</Col>
+    <Col xs='1'/>
   </Row>
 );
 
@@ -213,13 +217,13 @@ export default class Home extends Component {
               </Row>
             </TabPane>
             <TabPane tabId="2">
-              Statistics
+              
               <Row>
                 <DoughnutChart />
               </Row> <br />
               <Row>
                 <BarChart />
-              </Row><br /><br /><br />
+              </Row><br />
             </TabPane>
           </TabContent>
         </Container>
