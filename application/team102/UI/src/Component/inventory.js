@@ -148,7 +148,8 @@ export default class inventory extends Component {
       } else return (null);
     });
   }
-  render() {    
+  render() {
+    const create = "/Create/" + this.state.username + "/" + this.state.password;
     return (
       <div><TopBar username={this.state.username} password={this.state.password} />
         <div><h1>Inventory</h1></div>

@@ -4,6 +4,7 @@ import {
     Card, CardImg, CardText, CardTitle, CardImgOverlay,
     Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
+import MealPlan from './MealPlan';
 
 //grabs recipe information
 //displays as a rectangular picture with overlay text
@@ -35,15 +36,13 @@ const RecipeData = props => {
                 </ModalBody>
                 <ModalFooter>
                     <ButtonGroup className="itemOptbtn">
-                        <Button >
-
-                        </Button>
-                        <Button>
+                        <Button onClick={() => {props.addRecipe(props.food);}}>
+                            <CardText>Save</CardText>
+                        </Button>                        
+                        <Button onClick={<MealPlan props={props.food}/>}>
                             <CardText>Add to Meal Plan</CardText>
                         </Button>
-                        <Button onClick={() => "/create" + props.food._id}>
-
-                        </Button>
+                        
                     </ButtonGroup>
                 </ModalFooter>
             </Modal>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Input,
+import { Button, Row, Col, Input, Form, FormGroup,
   Modal, ModalHeader, ModalBody,
   ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
@@ -12,25 +12,22 @@ import classnames from 'classnames';
 const Fooddata = props => (
   <Row className="invBar" >
     <Col xs='1' /><h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); props.addItems(props.food._id); }}>X</Button><Col xs='1' />
+    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); props.onSubmit(props.food._id); }}>X</Button><Col xs='1' />
   </Row>
 );
 const HList = props => (
   <Row className='histlist' >
     <h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.addItems(props.food._id); }}>+</Button>
+    <Button className="S-btn" onClick={() => { props.onSubmit(props.food._id); }}>+</Button>
   </Row>
 );
-
 export default class ShoppingList extends Component {
-
   constructor(props) {
     super(props);
     this.onChangeSearch = this.onChangeSearch.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.onAddHist = this.onAddHist.bind(this);
     this.deleteItems = this.deleteItems.bind(this);
-    this.addItems = this.addItems.bind(this);
     this.toggle = this.toggle.bind(this);
     this.pop = this.pop.bind(this);
     const { match: { params } } = this.props;
@@ -64,7 +61,6 @@ export default class ShoppingList extends Component {
         console.log(error);
       });
   }
-
   deleteItems(id) {
     axios
       .delete("http://localhost:8080/fooddata/" + id)
@@ -74,14 +70,17 @@ export default class ShoppingList extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
-  addItems(id) {
+  /** adds items to the list */
+  onSubmit(e) {
+    e.preventDefault();
     axios
-      .add("http://localhost:8080/fooddata/add" + id)
+      .post("http://localhost:8080/fooddata/add", e.target.value)
       .then(res => console.log(res.data));
     this.setState({
-      fooddata: [id, this.state.fooddata]
+      fooddata: [e.target.value, this.state.fooddata]
     });
   }
+  /** display current shopping list */
   inventory() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -90,7 +89,7 @@ export default class ShoppingList extends Component {
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
-            addItems={this.addItems}
+            onSubmit={this.onSubmit}
             key={currentfood._id}
           />
         );
@@ -98,6 +97,7 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
+  /** displays history list add-able items to current shopping list*/
   History() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -105,7 +105,7 @@ export default class ShoppingList extends Component {
         return (
           <HList
             food={currentfood}
-            addItems={this.addItems}
+            onSubmit={this.onSubmit}
             key={currentfood._id}
           />
         );
@@ -113,6 +113,7 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
+  /** submit form for search bar */
   Add() {
     return (
       <Form justified onSubmit={this.onSubmit}>

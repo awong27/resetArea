@@ -25,11 +25,11 @@ const Fooddata = props => (
     </td>
   </tr>*/
   <Row>
-    
+
     <Col><h5>{props.food.mealName}</h5></Col>
-    <Col xs='1'/>
+    <Col xs='1' />
     <Col xs='2'><h5>{props.food.planCalories}</h5></Col>
-    <Col xs='1'/>
+    <Col xs='1' />
     <Button className="del" onClick={() => { props.deleteItems(props.food._id); }}>X</Button>
   </Row>
 );
@@ -139,8 +139,14 @@ export default class MealPlan extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
-  componentWillUnmount() {
-
+  addItems(newR, day) {
+    newR.setState({date:day});
+    axios
+      .post("http://localhost:8080/mealplan/", newR)
+      .then(res => console.log(res.data));
+    this.setState({
+      fooddata: [this.state.fooddata, newR]
+    });
   }
   inventory(date, mealType, day) {
     const { match: { params } } = this.props;
@@ -337,7 +343,7 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "breakfast", "sunday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row><Col xs='2' />- - -<Col /><Button onClick={()=> this.addItems(this.params.food, this.state.sunday)}>Add Item</Button></Row>
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>

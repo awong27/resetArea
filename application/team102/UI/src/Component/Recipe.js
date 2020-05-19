@@ -41,10 +41,11 @@ export default class Recipe extends Component {
       fat: params.fat,
       calories: params.calories,
       carbs: params.carbs,
-      sugar: params.sugar
+      sugar: params.sugar,
+      date: "",
     };
   }
-  searchRepClean(){this.setState({ newrecipedata:[]});}
+  searchRepClean() { this.setState({ newrecipedata: [] }); }
   onChangeSearch(e) { this.setState({ searches: e.target.value }); }
   onChangeCalories(e) { this.setState({ recipeCalories: e.target.value.replace(/\D/g, '') }); }
   onChangeCarbs(e) { this.setState({ recipeCarbs: e.target.value.replace(/\D/g, '') }); }
@@ -83,20 +84,21 @@ export default class Recipe extends Component {
         recipeSugar: "",
         recipeSodium: "",
         creator: this.state.creator,
+        date: "",
       };
-      newR.ingredients= currentfood.recipe.ingredientLines;
+      newR.ingredients = currentfood.recipe.ingredientLines;
       newR.recipeName = currentfood.recipe.label;
       newR.recipeImage = currentfood.recipe.image;
       newR.recipeCalories = currentfood.recipe.calories;
-      newR.recipeProtein = currentfood.recipe.totalNutrients.PROCNT.quantity; 
+      newR.recipeProtein = currentfood.recipe.totalNutrients.PROCNT.quantity;
       newR.recipeFat = currentfood.recipe.totalNutrients.FAT.quantity;
       newR.recipeCarbs = currentfood.recipe.totalNutrients.CHOCDF.quantity;
       newR.recipeSugar = currentfood.recipe.totalNutrients.SUGAR.quantity;
-      newR.recipeSodium = currentfood.recipe.totalNutrients.NA.quantity;    
+      newR.recipeSodium = currentfood.recipe.totalNutrients.NA.quantity;
       console.log(newR);
       newList.push(newR);
       return (null);
-    })    
+    })
     this.setState({
       newRecipes: newList
     })
@@ -121,7 +123,7 @@ export default class Recipe extends Component {
       recipedata: this.state.recipedata.filter(el => el._id !== id)
     });
   }
-  addRecipe(newR) {    
+  addRecipe(newR) {
     axios
       .post("http://localhost:8080/recipedata/add", newR)
       .then(res => console.log(res.data));
@@ -136,6 +138,7 @@ export default class Recipe extends Component {
           <RecipeData
             food={currentfood}
             username={params.id}
+            addRecipe={this.addRecipe}
             password={params.password}
             key={currentfood._id}
           />
@@ -145,12 +148,14 @@ export default class Recipe extends Component {
   }
 
   searchedRecipes() {
-    //const { match: { params } } = this.props;
+    const { match: { params } } = this.props;
     return this.state.newRecipes.map(currentfood => {
       return (
         <RecipeData
           food={currentfood}
+          username={params.id}
           addRecipe={this.addRecipe}
+          password={params.password}
           key={currentfood._id}
         />
       );
