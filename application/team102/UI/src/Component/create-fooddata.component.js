@@ -122,11 +122,10 @@ export default class Create extends Component {
   }
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
-    return (<div style={{padding: '5%'}}><h3>Create New Food Items</h3> 
-      {this.AddList()}
-      <Form onSubmit={this.onSubmit}>        
+    return (<div style={{ height: "100%", width: "100%" }}>      
+      <Form onSubmit={this.onSubmit} style={{paddingRight: '5%', paddingLeft: '5%',top: "5px",position: "fixed", width: "100vw"}}>        
         <FormGroup >
-          <Label for="foodName">Food Name:</Label>
+          <Label for="foodName"><h3>New Food Items</h3></Label>
           <Input
             type="text"
             required
@@ -167,14 +166,15 @@ export default class Create extends Component {
               </Input>
             </FormGroup>
           </Col>
-        </Row><Button size='lg' className="SignSpace form-control input" type="submit" value="Create food"> Submit </Button>
-      </Form>
-      
-      <ButtonGroup size='lg' className="SignSpace" style={{boxSizing: 'content-box'}}>
-        <Button href={inv}>Go Back</Button>
-        <Button className="lightState" >Create</Button>
+        </Row>    
+        
+      <ButtonGroup size='lg' className="SignSpace" style={{boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth:"100vw"}}>
+        <Button href={inv}>Back</Button>
+        <Button className="form-control input" type="submit" value="Create food"> Submit </Button>    
         <Button href="/scan" >Scan</Button>
-      </ButtonGroup>
+      </ButtonGroup> 
+      
+      </Form> <div style={{ top: "300px", height: "100%", width: "100%" }}>{this.AddList()}</div>
     </div>
     );
   }
