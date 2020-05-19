@@ -119,7 +119,7 @@ export default class MealPlan extends Component {
     }
   }
   componentDidMount() {
-    const { match: { params } } = this.props;
+    //const { match: { params } } = this.props;
     axios
       .get("http://localhost:8080/mealplan/")
       .then(response => {
@@ -193,9 +193,9 @@ export default class MealPlan extends Component {
     })
   }
   setDays() {
-    var month = "";
-    var day = "";
-    var year = "";
+    //var month = "";
+    //var day = "";
+    //var year = "";
     var monday = "";
     var tuesday = "";
     var wednesday = "";

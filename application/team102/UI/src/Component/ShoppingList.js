@@ -1,6 +1,6 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import {
-  Button, Row, Col, Input, NavLink,
+  Button, Row, Col, Input, 
   Modal, ModalHeader, ModalBody,
   ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';

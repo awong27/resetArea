@@ -125,7 +125,7 @@ export default class RecipeInner extends Component {
     )
   }
   ingredients() {
-    const { match: { params } } = this.props;
+    //const { match: { params } } = this.props;
     return this.state.ingredients.map(currentfood => {
       return (
         <Ingredientdata food={currentfood} key={currentfood._id} />

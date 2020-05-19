@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import {
-  Container, Row, Col, NavLink, Table, TabPane,
+  Container, Row, Col, NavLink, TabPane,
   Nav, NavItem, TabContent, UncontrolledAlert, Button,
   ButtonGroup, Card, CardImg, CardText, CardBody,
   Modal, ModalHeader, ModalBody, ModalFooter
@@ -133,7 +133,7 @@ export default class Home extends Component {
             key={currentfood._id}
           />
         );
-      }
+      }return(null);
     });
   }
   myRecipes() {
@@ -160,15 +160,15 @@ export default class Home extends Component {
             key={currentfood._id}
           />
         );
-      }
+      } return (null);
     });
   }
   render() {
-    const { match: { params } } = this.props;
+    //const { match: { params } } = this.props;
 
-    var inv = "/inventory/" + params.id + "/" + params.password;
-    var stat = "/Statistics/" + params.id + "/" + params.password;
-    var meal = "/mealplan/" + params.id + "/" + params.password;
+    //var inv = "/inventory/" + params.id + "/" + params.password;
+    //var stat = "/Statistics/" + params.id + "/" + params.password;
+    //var meal = "/mealplan/" + params.id + "/" + params.password;
 
     //console.log(user);
     /*

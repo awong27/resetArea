@@ -85,7 +85,7 @@ export default class Create extends Component {
             this.onChangeSugar(Math.round(currentfood.value));
           } else if (currentfood.nutrientName === 'Sodium, Na') {
             this.onChangeSodium(Math.round(currentfood.value));
-          }
+          } return(null);
         })
         /* adds all values into a temp list
          * sends to backend to be added to personal id food list
