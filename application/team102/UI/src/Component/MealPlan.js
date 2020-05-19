@@ -25,7 +25,12 @@ const Fooddata = props => (
     </td>
   </tr>*/
   <Row>
-    <Col><p>{props.food.mealName}</p></Col><Col></Col><Col>{props.food.planCalories}</Col><Button onClick={() => { props.deleteItems(props.food._id); }}>X</Button><Col xs='1' />
+    
+    <Col><h5>{props.food.mealName}</h5></Col>
+    <Col xs='1'/>
+    <Col xs='2'><h5>{props.food.planCalories}</h5></Col>
+    <Col xs='1'/>
+    <Button className="del" onClick={() => { props.deleteItems(props.food._id); }}>X</Button>
   </Row>
 );
 export default class MealPlan extends Component {
@@ -134,7 +139,7 @@ export default class MealPlan extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
-  componentWillUnmount(){
+  componentWillUnmount() {
 
   }
   inventory(date, mealType, day) {
@@ -258,7 +263,7 @@ export default class MealPlan extends Component {
     });
   }
   render() {
-    
+
     /*
     * this.setDays();
     * this.weeksCalories();
@@ -276,7 +281,7 @@ export default class MealPlan extends Component {
     */
     return (
       <div className="container"><TopBar username={this.state.username} password={this.state.password} />
-        <Container> 
+        <Container>
           <Row><Col><h1>Meal Plan</h1></Col></Row>
 
           <Nav tabs justified className="plan">
@@ -326,122 +331,143 @@ export default class MealPlan extends Component {
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="sunday">
               <Row>
-                <Col></Col><Col><p>Calories:{this.state.sundaysCalories}</p></Col><Col></Col>
+                <Col></Col><Col><h5>Calories:{this.state.sundaysCalories}</h5></Col><Col></Col>
               </Row>
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "breakfast", "sunday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "lunch", "sunday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "dinner", "sunday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="monday">
-              <Col></Col><Col><p>Calories:{this.state.mondaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.mondaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "breakfast", "monday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "lunch", "monday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "dinner", "monday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="tuesday">
-              <Col></Col><Col><p>Calories:{this.state.tuesdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.tuesdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "breakfast", "tuesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "lunch", "tuesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "dinner", "tuesday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="wednesday">
-              <Col></Col><Col><p>Calories:{this.state.wednesdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.wednesdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "breakfast", "wednesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "lunch", "wednesday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "dinner", "wednesday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="thursday">
-              <Col></Col><Col><p>Calories:{this.state.thursdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.thursdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "breakfast", "thursday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "lunch", "thursday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "dinner", "thursday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="friday">
-              <Col></Col><Col><p>Calories:{this.state.fridaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.fridaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "breakfast", "friday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "lunch", "friday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "dinner", "friday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="saturday">
-              <Col></Col><Col><p>Calories:{this.state.saturdaysCalories}</p></Col><Col></Col>
+              <Col></Col><Col><h5>Calories:{this.state.saturdaysCalories}</h5></Col><Col></Col>
               <Row />
-              <Row>
-                <Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
+              <Row className="barline">
+                <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "breakfast", "saturday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "lunch", "saturday")}</p>
-              <Row>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "dinner", "saturday")}</p>
+              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
               <Row className="bottom"></Row>
             </TabPane>
           </TabContent>
