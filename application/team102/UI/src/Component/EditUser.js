@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, {Component, useState } from 'react';
 import Tphoto from "./thanos.png";
 
-import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem} from "reactstrap";
+import { Container, Row, Col, NavLink, Button, ListGroup, ListGroupItem,
+        Modal, ModalHeader, ModalBody, ModalFooter,
+        Form, FormGroup, Label, Input, FormText} from "reactstrap";
 
 import "./Home.css"
 
@@ -37,9 +39,21 @@ const familyRender = family.map((fMember) => familyCard(fMember));
 
 const dietRender = dietpreference.map((pMember) => dietCard(pMember));
 
-export default class EditUser extends Component{
 
 
+export default class EditUser extends React.Component{
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      prefModal: false,
+    };
+    this.prefToggle = this.prefToggle.bind(this);
+  }
+
+  prefToggle() {
+    const crntState = this.state.prefModal;
+    this.setState({prefModal: !crntState}); }
 
   logout() {
     //set usrname to null
@@ -51,6 +65,19 @@ export default class EditUser extends Component{
   render() {
     return (
       <Container >
+
+      <Modal isOpen={this.state.prefModal}>
+        <ModalHeader>Add Preference</ModalHeader>
+        <ModalBody>
+          <Label for="newPreference">Preference:</Label>
+          <Input type="preference" name="preference" id="newPreference" placeholder="Vegan, Lactose Intollerant, Immune to Fish, etc"/>
+        </ModalBody>
+        <ModalFooter>
+          <Button color="primary" onClick={this.prefToggle}> Add </Button> {' '}
+          <Button color="secondary" onClick={this.prefToggle}> Cancel </Button>
+        </ModalFooter>
+      </Modal>
+
         <ListGroup className="profile">
               <ListGroupItem >
                 <Row>
@@ -61,8 +88,9 @@ export default class EditUser extends Component{
               <ListGroupItem>
                 <Row>
                   <h4> Guest Name </h4>
-                  <Col/>
-                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/></Col>
+                  <Col></Col>
+                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/>
+                  <br /><Button size="sm"> Edit Picture </Button></Col>
                 </Row>
               </ListGroupItem>
 
@@ -91,7 +119,7 @@ export default class EditUser extends Component{
                   <Col/>
                   <Col/>
                   <Col/>
-                  <Col xs='1'> + </Col>
+                  <Button size='sm' onClick={this.prefToggle}> + </Button>
                 </Row>
               </ListGroupItem>
 
