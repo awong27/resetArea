@@ -1,8 +1,8 @@
-import React, { useState, Component } from 'react';
+import React, { useState} from 'react';
 import {
-    Container, Row, Col, Input, Button, ButtonGroup,
-    Card, CardImg, Form, CardText, CardTitle, CardImgOverlay,
-    FormGroup, Modal, ModalHeader, ModalBody, ModalFooter,
+    Row, Col, Button, ButtonGroup,
+    Card, CardImg, CardText, CardTitle, CardImgOverlay,
+    Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 
 //grabs recipe information

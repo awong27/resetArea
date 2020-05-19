@@ -7,7 +7,6 @@ import About from "./Component/About.js";
 import SList from "./Component/ShoppingList.js";
 import Inventory from "./Component/inventory.js";
 import mealplan from "./Component/MealPlan.js";
-import inRep from "./Component/RecipeInner.js"
 import Recipe from "./Component/Recipe.js"
 import Home from "./Component/Home.js";
 import EditUser from "./Component/EditUser.js"
@@ -36,8 +35,6 @@ function App() {
             <Route path="/mealplan/:id/:password" exact component={mealplan} />
 
             <Route path="/Recipe/:id/:password" exact component={Recipe} />
-
-            <Route path="/inRep/:id/:password/:recipeName" exact component={inRep} />
 
             <Route path="/create/:id/:password" exact component={CreateFood} />
             <Route path="/create" exact component={CreateFood} />
