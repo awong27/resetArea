@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import DatePicker from "react-datepicker";
+import MediaHandler from './MediaHandler';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
-//import Navi from "./Navigation";
-//import TopBar from "./TopBar";
+import cam from "./cameraIcon.svg"
 import { FormGroup, Label, Form, Input, Button, ButtonGroup, Row, Col } from "reactstrap";
-
+const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
 export default class Create extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +20,7 @@ export default class Create extends Component {
     this.onChangeProtein = this.onChangeProtein.bind(this);
     this.onAddList = this.onAddList.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.mediaHandler = new MediaHandler();
     this.state = {
       foodname: "",
       expirationdate: new Date(),
@@ -35,7 +36,11 @@ export default class Create extends Component {
       addList: [],
       password: params.password,
       username: params.id,
-      count: 0
+      count: 0,
+      hasMedia: false,
+      imageString: "",
+      rawData: [], 
+      pop: false,
     };
   }
   // change activations for prop states
@@ -46,13 +51,13 @@ export default class Create extends Component {
   onChangeCarbs(e) { this.setState({ carbs: e }); }
   onChangeSugar(e) { this.setState({ sugar: e }); }
   onChangeFat(e) { this.setState({ fat: e }); }
-  onChangeProtein(e) { this.setState({ protein: e}); }
+  onChangeProtein(e) { this.setState({ protein: e }); }
   onChangeSodium(e) { this.setState({ sodium: e }); }
-  onAddList(){
+  onAddList() {
     //const date = this.state.expirationdate.toDateString.split(/(\d)/)[4]
-    var list = this.state.addList.concat(this.state.foodname+" "+ this.state.numberOfItems);
+    var list = this.state.addList.concat(this.state.foodname + " " + this.state.numberOfItems);
     console.log(this.state.expirationdate);
-    this.setState({addList: list})
+    this.setState({ addList: list })
   }
   onSubmit(e) {
     e.preventDefault();
@@ -85,7 +90,7 @@ export default class Create extends Component {
             this.onChangeSugar(Math.round(currentfood.value));
           } else if (currentfood.nutrientName === 'Sodium, Na') {
             this.onChangeSodium(Math.round(currentfood.value));
-          } return(null);
+          } return (null);
         })
         /* adds all values into a temp list
          * sends to backend to be added to personal id food list
@@ -112,7 +117,7 @@ export default class Create extends Component {
       });
   }
   AddList() {
-    return(<>
+    return (<>
       {this.state.addList.map((item) => (
         <Row>
           <Col>{item}</Col>
@@ -120,10 +125,83 @@ export default class Create extends Component {
       ))}</>
     );
   }
+  /*componentDidMount() {
+    this.mediaHandler.getPermissions()
+      .then((stream) => {
+        this.setState({ hasMedia: true });
+        try {
+          this.myVideo.srcObject = stream;
+        } catch (e) {
+          this.myVideo.src = URL.createObjectURL(stream);
+        }
+        this.myVideo.play();
+      })
+  }*/
+  captureImage = () => {
+    console.log('inside captureImage function')
+    const context = this.canvas.getContext('2d');
+    context.drawImage(this.myVideo, 0, 0, 400, 350);
+    const image = this.canvas.toDataURL('image/jpeg', 0.5);
+    this.setState({ imageString: image });
+    return image;
+  }
+  processImage = () => {
+    console.log('inside processImage function')
+    const url = 'http://localhost:3010/api/image/save';
+    const img = this.state.imageString;
+    if (img !== "") {
+      let formData = new FormData();
+      formData.set('file', img);
+      axios.post(url, formData, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      }).then((res) => {
+        console.log(res.data);
+        this.setState({ rawData: res.data });
+        this.processData();
+      }).catch((e) => {
+        console.log(e)
+      });
+    }
+  }
+  processData = () => {// returns a array with description and qty
+    const processedData = [];
+    let newItem = { description: "", quantity: 0 };
+    let hashKey = {};
+
+    this.state.rawData.forEach((item) => {
+      if (hashKey.hasOwnProperty(item)) {
+        hashKey[item] += 1;
+      } else {
+        hashKey[item] = 1;
+      }
+    });
+    Object.keys(hashKey).forEach((k) => {
+      processedData.push({
+        description: k,
+        quantity: hashKey[k]
+      })
+    })
+    console.log(hashKey);
+    console.log(processedData);
+  }
+  scan() {
+    return(
+      <div className="container">
+        <div className="video-container">
+          <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
+        </div>
+        <Button id="capture" onClick={this.captureImage}>Capture</Button>
+        <Button id="process" onClick={this.processImage}>Process</Button>
+        <div className="image-container">
+          <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
+        </div>
+      </div>
+    );
+  }
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
-    return (<div style={{ height: "100%", width: "100%" }}>      
-      <Form onSubmit={this.onSubmit} style={{paddingRight: '5%', paddingLeft: '5%',top: "5px",position: "fixed", width: "100vw"}}>        
+    return (<div style={{ height: "100%", width: "100%" }}>
+      <Form onSubmit={this.onSubmit} style={{ paddingRight: '5%', paddingLeft: '5%', top: "5px", position: "fixed", width: "100vw" }}>
         <FormGroup >
           <Label for="foodName"><h3>New Food Items</h3></Label>
           <Input
@@ -133,7 +211,7 @@ export default class Create extends Component {
             value={this.state.foodname}
             onChange={this.onChangeFoodname} />
         </FormGroup>
-        <Row> 
+        <Row>
           <Col >
             <FormGroup>
               <Label for="ExpDate">Exp. Date:</Label>
@@ -142,13 +220,13 @@ export default class Create extends Component {
                 selected={this.state.expirationdate}
                 onChange={this.onChangeExpirationdate} />
             </FormGroup>
-          </Col> 
+          </Col>
           <Col >
             <FormGroup>
               <Label for="qty">Quantity:</Label>
               <Input
                 type="select"
-                style={{height: 'auto', width: 'auto'}}
+                style={{ height: 'auto', width: 'auto' }}
                 value={this.state.numberOfItems}
                 onChange={this.onChangeNumberOfItems}>
                 <option>1</option>
@@ -166,15 +244,16 @@ export default class Create extends Component {
               </Input>
             </FormGroup>
           </Col>
-        </Row>    
-        
-      <ButtonGroup size='lg' className="SignSpace" style={{boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth:"100vw"}}>
-        <Button href={inv}>Back</Button>
-        <Button className="form-control input" type="submit" value="Create food"> Submit </Button>    
-        <Button href="/scan" >Scan</Button>
-      </ButtonGroup> 
-      
+        </Row>
+
+        <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }}>
+          <Button href={inv}>Back</Button>
+          <Button className="form-control input" type="submit" value="Create food"> Submit </Button>
+          <Button href="/scan" >Scan</Button>
+        </ButtonGroup>
+
       </Form> <div style={{ top: "300px", height: "100%", width: "100%" }}>{this.AddList()}</div>
+      
     </div>
     );
   }

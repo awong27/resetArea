@@ -82,7 +82,7 @@ export default class Scan extends Component {
                     <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
                 </div>
                 <Button id="capture" onClick={this.captureImage}>Capture</Button>
-                <Button id="process" onClick={this.processImage} >Process</Button>
+                <Button id="process" onClick={this.processImage}>Process</Button>
                 <div className="image-container">
                     <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
                 </div>

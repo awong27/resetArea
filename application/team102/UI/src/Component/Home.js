@@ -198,26 +198,23 @@ export default class Home extends Component {
                 Me
               </NavLink>
             </NavItem>
-
             <NavItem style={{ flex: 'auto' }}>
               <NavLink>{this.state.date}</NavLink>
             </NavItem>
           </Nav>
+
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <h3>Meal Plan For Today</h3>
               <Row className="homeRow">
                 <Col>{this.todaysMeals()}</Col>
-
               </Row>
+              <h3>Recent Recipies</h3>
               <Row className="homeRow" >
-
                   {this.myRecipes()}
-
               </Row>
             </TabPane>
-            <TabPane tabId="2">
-              
+            <TabPane tabId="2">              
               <Row>
                 <DoughnutChart />
               </Row> <br />
