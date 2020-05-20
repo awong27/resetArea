@@ -17,7 +17,7 @@ export default class Scan extends Component {
         };
         this.mediaHandler = new MediaHandler();
     }
-    /*componentDidMount() {
+    componentDidMount() {
         this.mediaHandler.getPermissions()
             .then((stream) => {
                 this.setState({ hasMedia: true });
@@ -28,7 +28,7 @@ export default class Scan extends Component {
                 }
                 this.myVideo.play();
             })
-    }*/
+    }
     captureImage = () => {
         console.log('inside captureImage function')
         const context = this.canvas.getContext('2d');
