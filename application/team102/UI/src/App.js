@@ -13,6 +13,11 @@ import EditUser from "./Component/EditUser.js"
 import SignIn from "./SignIn.js";
 import CreateFood from "./Component/create-fooddata.component.js";
 import Scan from "./Component/Scan.js";
+<<<<<<< HEAD
+=======
+import FoodCard from "./Component/user-inventory.component.js";
+import UploadPic from "./Component/uploadPic";
+>>>>>>> 8a43d695d56d1510900fd6c9e2fa3f7cfa854833
 
 function App() {
   /*
@@ -26,6 +31,7 @@ function App() {
             <Route path="/Home/:id/:password" exact component={Home} />
 <Route path="/Home/" exact component={Home} />
             <Route path="/EditUser" exact component={EditUser} />
+            <Route path="/uploadPic" exact component={UploadPic} />
             <Route path="/About" exact component={About} />
 
             <Route path="/SList/:id/:password" exact component={SList} />

@@ -7,7 +7,7 @@ import {
 } from "reactstrap";
 import './Nav.css';
 import NavHome from "./Home.svg";
-import Tphoto from "./thanos.png";
+import Tphoto from "../profilePictures/profile.jpg";
 
 const TopBar = ({ username, password }) => {
   console.log(username);
