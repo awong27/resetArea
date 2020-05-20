@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import {
-  Button, Badge, ButtonGroup,
+  Button, ButtonGroup,
   Card, CardImg, CardText, CardFooter, CardHeader, CardBody,
   NavLink, Modal, ModalHeader, ModalBody, ModalFooter
 } from 'reactstrap';
@@ -101,7 +101,7 @@ export default class inventory extends Component {
     this.state.fooddata.map(currentfood => {
       if (currentfood.creator === params.id) {
         i++;
-      }
+      }return (null);
     });
     this.setState({ length: i });
   }
@@ -110,7 +110,7 @@ export default class inventory extends Component {
    * grabs list of food data
    */
   componentDidMount() {
-    const { match: { params } } = this.props;
+    //const { match: { params } } = this.props;
     axios
       .get('http://localhost:8080/fooddata/')
       .then(response => {        

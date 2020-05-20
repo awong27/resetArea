@@ -1,6 +1,5 @@
-import React, { useState, Component } from 'react';
-import {
-  Button, Row, Col, Input, NavLink,
+import React, { Component } from 'react';
+import { Button, Row, Col, Input, Form, FormGroup,
   Modal, ModalHeader, ModalBody,
   ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 } from 'reactstrap';
@@ -12,22 +11,21 @@ import axios from "axios";
 import classnames from 'classnames';
 const Fooddata = props => (
   <Row className="invBar" >
-    <Col xs='1'/><h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>X</Button><Col xs='1'/>
+    <Col xs='1' /><h4>{props.food.foodName}</h4> <Col></Col>
+    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); props.onSubmit(props.food._id); }}>X</Button><Col xs='1' />
   </Row>
 );
 const HList = props => (
   <Row className='histlist' >
     <h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); }}>+</Button>
+    <Button className="S-btn" onClick={() => { props.onSubmit(props.food._id); }}>+</Button>
   </Row>
 );
-
 export default class ShoppingList extends Component {
-
   constructor(props) {
     super(props);
-
+    this.onChangeSearch = this.onChangeSearch.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
     this.onAddHist = this.onAddHist.bind(this);
     this.deleteItems = this.deleteItems.bind(this);
     this.toggle = this.toggle.bind(this);
@@ -40,10 +38,12 @@ export default class ShoppingList extends Component {
       password: params.password,
       modal: false,
       dropdown: false,
+      searches: "",
     };
   }
   toggle() { this.setState({ modal: !this.state.modal }) }
   pop() { this.setState({ dropdown: !this.state.dropdown }) }
+  onChangeSearch(e) { this.setState({ searches: e.target.value }); }
   // addHist should add current Shopping List to history and empty fooddata list
   onAddHist() {
     this.setState({
@@ -61,7 +61,6 @@ export default class ShoppingList extends Component {
         console.log(error);
       });
   }
-
   deleteItems(id) {
     axios
       .delete("http://localhost:8080/fooddata/" + id)
@@ -71,7 +70,17 @@ export default class ShoppingList extends Component {
       fooddata: this.state.fooddata.filter(el => el._id !== id)
     });
   }
-
+  /** adds items to the list */
+  onSubmit(e) {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8080/fooddata/add", e.target.value)
+      .then(res => console.log(res.data));
+    this.setState({
+      fooddata: [e.target.value, this.state.fooddata]
+    });
+  }
+  /** display current shopping list */
   inventory() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -80,6 +89,7 @@ export default class ShoppingList extends Component {
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
+            onSubmit={this.onSubmit}
             key={currentfood._id}
           />
         );
@@ -87,6 +97,7 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
+  /** displays history list add-able items to current shopping list*/
   History() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -94,6 +105,7 @@ export default class ShoppingList extends Component {
         return (
           <HList
             food={currentfood}
+            onSubmit={this.onSubmit}
             key={currentfood._id}
           />
         );
@@ -101,9 +113,31 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
-
+  /** submit form for search bar */
+  Add() {
+    return (
+      <Form justified onSubmit={this.onSubmit}>
+        <FormGroup>
+          <Row>
+            <Input
+              type="text"
+              placeholder="Search"
+              style={{ width: '70vw' }}
+              required
+              className="form-control"
+              value={this.state.searches}
+              onChange={this.onChangeSearch}
+            /> <Input
+              type="submit"
+              style={{ width: '30vw' }}
+              value="Add Item"
+              className="btn btn-secondary"
+            /></Row>
+        </FormGroup>
+      </Form>
+    )
+  }
   render() {
-
     return (
       /*
       * Shopping List Pulls info and displays as buttons
@@ -116,12 +150,10 @@ export default class ShoppingList extends Component {
       * bring up things not grabbed by scan but on shopping list
       */
       <div><TopBar username={this.state.username} password={this.state.password} /><div className="midCon">
-        <h1>Shopping List</h1></div> 
-        <Row><Col xs='1' /><Col align="centered"><Input type="search" name="search" id="exampleSearch" placeholder="Search" /></Col><Col xs='1' /></Row>
-        <h3>Main</h3>
+        <h1>Shopping List</h1></div>
+        {this.Add()}
         <div className="listItem">
           {this.inventory()}
-          {this.subInventory()}
         </div>
         <ButtonDropdown direction="up" isOpen={this.state.dropdown} toggle={() => this.pop()}>
           <DropdownToggle className="addbtn">
@@ -129,10 +161,10 @@ export default class ShoppingList extends Component {
           </DropdownToggle>
           <DropdownMenu>
             <DropdownItem onClick={() => this.toggle()}>History</DropdownItem>
-            <DropdownItem onClick={() => this.onAddHist}>New List</DropdownItem>
+            <DropdownItem onClick={() => this.onAddHist()}>New List</DropdownItem>
           </DropdownMenu>
         </ButtonDropdown>
-  
+
         <Modal isOpen={this.state.modal} toggle={() => this.toggle()} className={classnames}>
           <ModalHeader toggle={() => this.toggle()}><h3>History</h3></ModalHeader>
           <ModalBody>
@@ -143,19 +175,23 @@ export default class ShoppingList extends Component {
       </div>
     )
   }
-  subInventory() {
-    return (<>
-      <h3>Hatchet</h3>
-      <Row className="subBar">
-        <Col xs='1'/><h3>Candy</h3><Col/><Button className="S-btn" >X</Button><Col xs='1'/>
-      </Row>      
-    </>
-    );
-  }
+
 }
 /*<ButtonGroup size='lg' > onClick={() => { props.deleteItems(props.food._id); }}
         <Button href="/SHist">History</Button>
         <Button href="/create">New Item</Button>
         <Button href="/inventory">+ Inventory</Button>
       </ButtonGroup>
+
+
+      {this.subInventory()}
+      subInventory() {
+    return (<>
+      <h3>Hatchet</h3>
+      <Row className="subBar">
+        <Col xs='1'/><h3>Candy</h3><Col/><Button className="S-btn" >X</Button><Col xs='1'/>
+      </Row>
+    </>
+    );
+  }
       */

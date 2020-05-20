@@ -7,12 +7,13 @@ import axios from 'axios';
 const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
 
 export default class Scan extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             hasMedia: false,
             imageString: "",
-            rawData: []
+            rawData: [],
+            foods: [],
         };
         this.mediaHandler = new MediaHandler();
     }
@@ -34,6 +35,7 @@ export default class Scan extends Component {
         context.drawImage(this.myVideo, 0, 0, 400, 350);
         const image = this.canvas.toDataURL('image/jpeg', 0.5);
         this.setState({ imageString: image });
+        this.processImage();
         return image;
     }
     processImage = () => {
@@ -54,27 +56,31 @@ export default class Scan extends Component {
             });
         }
     }
-    processData = () => {
+    processData = () => {// returns a array with description and qty
         const processedData = [];
-        let newItem = { description: "", quantity: 0 };
         let hashKey = {};
-
         this.state.rawData.forEach((item) => {
-            if (hashKey.hasOwnProperty(item)) {
-                hashKey[item] += 1;
-            } else {
-                hashKey[item] = 1;
-            }
+          if (hashKey.hasOwnProperty(item)) {
+            hashKey[item] += 1;
+          } else {
+            hashKey[item] = 1;
+          }
         });
         Object.keys(hashKey).forEach((k) => {
-            processedData.push({
-                description: k,
-                quantity: hashKey[k]
-            })
+          let newItem = { description: "", quantity: 0 };
+          newItem.description = k;
+          newItem.quantity = hashKey[k];
+          processedData.push({ newItem });
+          /*processedData.push({
+            description: k,
+            quantity: hashKey[k]
+          })*/
         })
         console.log(hashKey);
         console.log(processedData);
-    }
+        this.props.onFoods(processedData);
+        this.props.onPop();
+      }
     render() {
         return (
             <div className="container">
@@ -82,7 +88,7 @@ export default class Scan extends Component {
                     <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
                 </div>
                 <Button id="capture" onClick={this.captureImage}>Capture</Button>
-                <Button id="process" onClick={this.processImage} >Process</Button>
+                
                 <div className="image-container">
                     <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
                 </div>
@@ -90,3 +96,5 @@ export default class Scan extends Component {
         )
     }
 }
+
+//<Button id="process" onClick={this.processImage}>Process</Button>

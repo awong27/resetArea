@@ -1,6 +1,6 @@
 import React, { useState, Component } from 'react';
 import {
-  Container, Row, Col, NavLink, Table, TabPane,
+  Container, Row, Col, NavLink, TabPane,
   Nav, NavItem, TabContent, UncontrolledAlert, Button,
   ButtonGroup, Card, CardImg, CardText, CardBody,
   Modal, ModalHeader, ModalBody, ModalFooter
@@ -133,7 +133,7 @@ export default class Home extends Component {
             key={currentfood._id}
           />
         );
-      }
+      }return(null);
     });
   }
   myRecipes() {
@@ -160,15 +160,15 @@ export default class Home extends Component {
             key={currentfood._id}
           />
         );
-      }
+      } return (null);
     });
   }
   render() {
-    const { match: { params } } = this.props;
+    //const { match: { params } } = this.props;
 
-    var inv = "/inventory/" + params.id + "/" + params.password;
-    var stat = "/Statistics/" + params.id + "/" + params.password;
-    var meal = "/mealplan/" + params.id + "/" + params.password;
+    //var inv = "/inventory/" + params.id + "/" + params.password;
+    //var stat = "/Statistics/" + params.id + "/" + params.password;
+    //var meal = "/mealplan/" + params.id + "/" + params.password;
 
     //console.log(user);
     /*
@@ -198,26 +198,23 @@ export default class Home extends Component {
                 Me
               </NavLink>
             </NavItem>
-
             <NavItem style={{ flex: 'auto' }}>
               <NavLink>{this.state.date}</NavLink>
             </NavItem>
           </Nav>
+
           <TabContent activeTab={this.state.activeTab}>
             <TabPane tabId="1">
               <h3>Meal Plan For Today</h3>
               <Row className="homeRow">
                 <Col>{this.todaysMeals()}</Col>
-
               </Row>
+              <h3>Recent Recipies</h3>
               <Row className="homeRow" >
-
                   {this.myRecipes()}
-
               </Row>
             </TabPane>
-            <TabPane tabId="2">
-              
+            <TabPane tabId="2">              
               <Row>
                 <DoughnutChart />
               </Row> <br />
