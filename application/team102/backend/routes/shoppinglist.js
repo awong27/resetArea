@@ -10,13 +10,19 @@ router.route("/").get((req, res) => {
 router.route("/add").post((req, res) => {
 
 
-  const listItem = req.body.listItem;
+  const itemName = req.body.itemName;
+
+  const creator = req.body.creator;
+  const status = req.body.status;
 
 
 
 
   const newShoppingList = new Shoppingdata({
-    listItem
+    itemName,
+
+    creator,
+    status
 
 
   });
@@ -43,7 +49,10 @@ router.route("/update/:id").post((req, res) => {
   Shoppingdata.findById(req.params.id)
     .then(shoppinglistdata => {
 
-      shoppinglistdata.listItem = req.body.listItem;
+      shoppinglistdata.itemName = req.body.itemName;
+
+      shoppinglistdata.creator = req.body.creator;
+      shoppinglistdata.status = req.body.status;
 
 
 
