@@ -51,11 +51,10 @@ const Recipedata = props => {
   );
 }
 const Fooddata = props => (
-  <Row>
-    <Col xs='1'/>
-    <Col><p>{props.food.recipeName}</p></Col>
+  <Row>    
+    <Col><h4>{props.food.mealName}</h4></Col>
     <Col></Col>
-    <Col>Calories: {props.food.recipeCalories}</Col>
+    <Col><h4>{props.food.planCalories}</h4></Col>
     <Col xs='1'/>
   </Row>
 );
@@ -149,7 +148,7 @@ export default class Home extends Component {
     return this.state.recipedata.map(currentfood => {
       if (currentfood.creator === params.id) {
         count = count - 1;
-        console.log(count);
+        
         if (count < 0) {
           return (null);
         }
@@ -213,6 +212,7 @@ export default class Home extends Component {
               <Row className="homeRow" >
                   {this.myRecipes()}
               </Row>
+              <br/>
             </TabPane>
             <TabPane tabId="2">              
               <Row>
