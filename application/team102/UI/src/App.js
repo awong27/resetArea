@@ -23,10 +23,10 @@ function App() {
     <div align="center">
       <BrowserRouter>
         <div className="Main">
-          <Switch>            
+          <Switch>
             <Route path="/Home/:id/:password" exact component={Home} />
-<Route path="/Home/" exact component={Home} />
-            <Route path="/EditUser" exact component={EditUser} />
+            <Route path="/Home/" exact component={Home} />
+            <Route path="/EditUser/:id/:password" exact component={EditUser} />
             <Route path="/uploadPic" exact component={UploadPic} />
             <Route path="/About" exact component={About} />
 
