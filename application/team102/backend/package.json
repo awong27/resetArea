@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "author": "",
   "license": "ISC",
@@ -13,9 +13,23 @@
     "node": "12.16.1"
   },
   "dependencies": {
+    "@google-cloud/vision": "^1.11.0",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "cheerio": "^1.0.0-rc.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "mongoose": "^5.9.5"
+    "express-fileupload": "^1.1.7-alpha.3",
+    "http-proxy": "^1.18.0",
+    "mongodb": "^3.5.6",
+    "mongoose": "^5.9.5",
+    "pm2": "^4.4.0",
+    "proxy": "^1.0.1",
+    "request": "^2.88.2",
+    "request-promise": "^4.2.5"
+  },
+  "devDependencies": {
+    "ava": "^3.8.2"
   }
 }

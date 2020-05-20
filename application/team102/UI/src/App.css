@@ -1,0 +1,116 @@
+.App {
+  text-align: center;
+}
+.Main {
+  background-color: #bae8e8;
+  height: 200%;
+  min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 54px;
+}
+.upperbox {
+  background-color: #e3f6f5;
+  box-shadow: inset rgb(0, 0, 0);
+  width: 100vw;
+  height: 50vh;
+  box-sizing: border-box;
+  border-radius: 10%;
+  padding-top: 5vh;
+  padding-right: 10vw;
+  padding-left: 10vw;
+  text-align: left;
+}
+.lowerbox {
+  background-color: #97c6f1;
+  box-shadow: rgb(241, 239, 239);
+  width: 100vw;
+  height: 50vh;
+  box-sizing: border-box;
+  border-radius: 10%;
+}
+.lowerbox > a:link , a:visited {
+  padding:3vh 7vw;
+  width: 50vw;    
+  box-sizing: border-box;
+  border-radius: 10%;
+  border-color: silver;
+  margin: 10px;
+}
+.btn-secondary {
+  color: #272343 !important;
+  background-color: #e3f6f5 !important;
+  border-color: transparent !important;
+}
+.container {
+  background-color: #bae8e8;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  min-height: 100vh;
+  height: 100% !important;
+  margin: 0 !important;
+  width: 100vw;
+}
+.lightState {
+  background-color: rgb(96, 152, 204) !important;
+  box-shadow: rgb(75, 113, 114) !important;
+}
+.row {
+  margin: 0 !important;
+}
+.SignSpace {  
+  width: 80vw !important;
+  align-content: center;
+  position: relative;
+  height: 7.75vh !important;
+  margin-top: 10vh;
+  padding-left: 10vw !important;
+  padding-right: 10vw !important;
+  border-color: transparent !important;
+}
+.SignSpace > .btn{
+  border-color: transparent !important;
+}
+.lowerbox > .btn-group {
+  box-sizing: content-box !important;
+}
+.modal-content {
+  background-color: #bae8e8 !important;
+}
+.modal-body {
+  background-color: rgba(12, 168, 240, 0.247) !important;  
+}
+.modal-header, .modal-footer {
+  border-color: rgba(25, 89, 119, 0.247) !important;
+}
+/*.modal-header, .modal-body, .modal-footer {
+  background-color: rgba(12, 168, 240, 0.247) !important;
+}*/
+.react-datepicker__input-container > input{
+  overflow: hidden !important; 
+  width: 30vw;
+}
+.repdeck > .card > .col > .nav-link > .card-body {
+  text-align: center;
+  padding: 10px !important;
+  color: rgb(41, 39, 39);
+}
+.repdeck > .card >.col >.nav-link {
+  width: fit-content;
+  padding: 5%;
+}
+.repdeck > .card >.col {
+  width: 25vw;  
+  margin: 3px;
+  background-color: #e3f6f5;
+  border-radius: 30px;
+}
+.repdeck > .card {
+  border: 0;
+  background-color: transparent;
+  flex-direction: row;
+  width: 85vw;
+}
+.repdeck {
+  overflow-x: scroll ;
+}
+

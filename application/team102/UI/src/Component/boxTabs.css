@@ -1,0 +1,35 @@
+.tabBox {
+    background-color: silver;
+    width: 100vw;
+    height: 100vh;
+    box-sizing: border-box;
+    border-radius: 30px 30px 0px 0;
+    padding-top: 5vh;
+    padding-right: 5vw;
+    padding-left: 15vw;
+    text-align: left;
+}
+.full {
+    width: 100vw;
+    height: 100vh;
+}
+.full > .idk > .row {    
+    margin-right: 15px;
+}
+.bigdes {
+    margin: 20px 20px 0px 20px; 
+    width: 90vw;
+    height: 25vh;
+    background-color: #e3f6e8 !important;
+    padding: 0;
+    box-shadow: 0px 4px 4px rgba(14, 11, 11, 0.26) !important;
+    border-color: #66be7e !important;
+
+    border-radius: 30px;      
+    overflow: hidden !important;
+}
+.bigdes >.card-img { 
+    height: 30vh;
+    width: 100vw;    
+    align-items: center;
+}

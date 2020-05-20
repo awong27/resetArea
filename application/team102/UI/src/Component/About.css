@@ -1,0 +1,33 @@
+   .carousel-caption > h3 {       
+    text-align: center;   
+    font-size: 5vw;     
+  }
+  .carousel-caption > p {          
+    font-size: 3vw;     
+    
+  }
+  .carousel-item > img {
+    margin: auto;
+    max-width: 70%;
+    max-height: 50vw;   
+    
+  }
+  .carousel-item {
+    
+    max-width: 100%;
+    height: fixed;
+    background-color:#8f99ad;
+    
+  }
+  .carousel-caption {
+    background-color: #8f99ad81 !important;
+    color: rgb(255, 255, 255) !important;  
+    box-sizing: content-box;
+    flex-direction: column;
+    display: block !important;    
+    height: 20%;    
+  }
+  
+  
+  
+  

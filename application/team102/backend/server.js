@@ -1,7 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-const path = require("path");
 
 require("dotenv").config();
 
@@ -23,28 +22,26 @@ connection.once("open", () => {
 });
 
 const fooddataRouter = require("./routes/fooddata");
+const userdataRouter = require("./routes/userdata");
 
+const dailyRouter = require("./routes/dailyNutrition");
+const mealplanRouter = require("./routes/mealplan");
+const recipeRouter = require("./routes/recipedata");
+const shoppingRouter = require("./routes/shoppinglist");
+
+
+
+app.use("/userdata", userdataRouter);
 app.use("/fooddata", fooddataRouter);
+
+app.use("/dailyNutrition", dailyRouter);
+app.use("/mealplan", mealplanRouter);
+app.use("/recipedata", recipeRouter);
+app.use("/shoppinglist", shoppingRouter);
 
 // app.get("/", function(req, res, next) {
 //   res.send("Hello world");
 // });
-// if (process.env.NODE_ENV === "production") {
-//   // Exprees will serve up production assets
-//   app.use(express.static("client/build"));
-
-//   // Express serve up index.html file if it doesn't recognize route
-//   const path = require("path");
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
-//   });
-// }
-if (process.env.NODE_ENV === "production") {
-  app.use("/build", express.static("../UI/build"));
-}
-app.get("*", (request, response) => {
-  response.sendFile(path.join(__dirname, "..", "UI", "build", "index.html"));
-});
 
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
