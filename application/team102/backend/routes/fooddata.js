@@ -12,14 +12,24 @@ router.route("/add").post((req, res) => {
   const expirationDate = req.body.expirationDate;
   const calories = req.body.calories;
   const numOfItems = req.body.numOfItems;
-  const date = new Date();
+  const creator = req.body.creator;
+  const carbs = req.body.carbs;
+  const protein = req.body.protein;
+  const fat = req.body.fat;
+  const sugar = req.body.sugar;
+  const sodium = req.body.sodium;
 
   const newFood = new Fooddata({
     foodName,
+    sodium,
     expirationDate,
     calories,
     numOfItems,
-    date
+    creator,
+    carbs,
+    protein,
+    fat,
+    sugar
   });
 
   newFood
@@ -45,9 +55,14 @@ router.route("/update/:id").post((req, res) => {
     .then(fooddata => {
       fooddata.foodName = req.body.foodName;
       fooddata.expirationDate = req.body.expirationDate;
-      fooddata.calories = Number(req.body.calories);
-      fooddata.numOfItems = Number(req.body.numOfItems);
-      fooddata.date = Date.parse(req.body.date);
+      fooddata.calories = req.body.calories;
+      fooddata.numOfItems = req.body.numOfItems;
+      fooddata.creator = req.body.creator;
+      fooddata.carbs = req.body.carbs;
+      fooddata.protein= req.body.protein;
+      fooddata.fat= req.body.fat;
+      fooddata.sugar = req.body.sugar;
+      fooddata.sodium= req.body.sodium;
 
       fooddata
         .save()
