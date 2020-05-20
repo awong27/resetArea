@@ -47,7 +47,7 @@ export default class Create extends Component {
     };
   }
   // change activations for prop states
-  onPop() {this.setState({pop: !this.state.pop})}
+  onPop() { this.setState({ pop: !this.state.pop }) }
   onChangeFoodname(e) { this.setState({ foodname: e.target.value }); }
   onChangeExpirationdate(date) { this.setState({ expirationdate: date }); }
   onChangeCalories(e) { this.setState({ calories: e }); }
@@ -57,7 +57,7 @@ export default class Create extends Component {
   onChangeFat(e) { this.setState({ fat: e }); }
   onChangeProtein(e) { this.setState({ protein: e }); }
   onChangeSodium(e) { this.setState({ sodium: e }); }
-  onFoods(e) {this.setState({foods: e})}
+  onFoods(e) { this.setState({ foods: e }) }
   toInv() { // only things passed to the final list is allowed
     this.state.addList.map(item => {
       axios
@@ -126,16 +126,20 @@ export default class Create extends Component {
     list.expdate = this.state.expirationdate;
     list.qty = this.state.numberOfItems;
     console.log(list);
-    this.setState({ addList: [list, this.state.addList] });
+    let newList = this.state.addList;
+    newList.push(list);
+    this.setState({ addList: newList });
   }
   AddList() {//{(item.expdate.getMonth() + 1).toString() + "/" + (item.expdate.getDate()).toString() + "/" + (item.expdate.getFullYear()).toString()}
-    this.state.addList.map((item) => {
-        return (<Row>
-          <Col >{item.foodname}</Col> 
-          <Col></Col>
-          <Col>{item.qty}</Col>
-        </Row>
-      )}
+    console.log("here");
+    return this.state.addList.map((item) => {
+      return (<Row >
+        <Col >{item.foodname}</Col>
+        <Col>toggle</Col>
+        <Col>{item.qty}</Col>
+      </Row>
+      )
+    }
     )
   }
   /*
@@ -308,23 +312,23 @@ export default class Create extends Component {
             </Input>
           </Col>
         </Row>
-        </FormGroup><Button size='lg' className="SignSpace form-control input" type="submit" value="Create food"> Submit </Button>
+        </FormGroup><Button size='lg' style={{ position: "fixed", bottom: "0", right: "0" }} className="form-control input" type="submit" value="Create food"> Add Item </Button>
       </Form>
     );
   }
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
-    
+
     return (<div style={{ height: "100%", width: "100%" }}>
-      
+
       {this.state.pop === true ? this.onScan() : ""}
-      {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop}/> : this.manualSubmit()}
-      <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
+      {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop} /> : this.manualSubmit()}
+      <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", top: "-57px", display: "flex", minWidth: "100vw", minHeight: "54px" }} >
         <Button href={inv}>Back</Button>
-        <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
-        <Button onClick={() => this.setState({show: !this.state.show})} >Scan</Button>
+        <Button onClick={() => this.toInv()}> +Inventory</Button>
+        <Button onClick={() => this.setState({ show: !this.state.show })} ><img alt="camera" src={cam} className="nav-pic" /></Button>
       </ButtonGroup>
-      <div style={{ top: "300px", height: "100%", width: "100%" }}></div>
+      <div style={{ top: "300px", height: "100%", width: "100%" }}>{this.AddList()}</div>
     </div>
     );
   }
