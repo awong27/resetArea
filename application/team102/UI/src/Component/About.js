@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import Navi from "./Navigation";
-import TopBar from "./TopBar"; 
-import { UncontrolledCarousel} from "reactstrap";
+import TopBar from "./TopBar";
+import { UncontrolledCarousel } from "reactstrap";
 import "./About.css"
-export default class About extends Component{
-  render(){
-    return(
-      <div className = "container" ><TopBar username={this.state.username} password={this.state.password}/><br/><br/><br/>
+export default class About extends Component {
+  render() {
+    return (
+      <div className="container" ><TopBar username={this.state.username} password={this.state.password} />
         <h1>About the Team</h1>
         <UncontrolledCarousel items={items} />
         <h2>Meetings: Wed 12:30PM | Sat 2:00PM</h2>
-        <h3>Our dedicated Team is focused to develop a Refrigerator Organizer 
-          and host it on the Google Cloud Engine using MERN Stack(MongoDB- 
-          Database, Express - Web App Framework, ReactJS- Front End UI ,NodeJS for Server).</h3>  
-          <br></br><br></br> 
-          <Navi username={this.state.username} password={this.state.password}/>      
-      </div>    
+        <h3>Our dedicated Team is focused to develop a Refrigerator Organizer
+          and host it on the Google Cloud Engine using MERN Stack(MongoDB-
+          Database, Express - Web App Framework, ReactJS- Front End UI ,NodeJS for Server).</h3>
+        <br></br><br></br>
+        <Navi username={this.state.username} password={this.state.password} />
+      </div>
     );
   }
 }
@@ -52,7 +52,7 @@ const items = [
     src: 'https://i.imgur.com/5pq0krV.png',
     altText: "Slide 5",
     caption: "Git Master",
-    header: "Matthew Cookie Davis",    
+    header: "Matthew Cookie Davis",
     key: "5"
   },
   {

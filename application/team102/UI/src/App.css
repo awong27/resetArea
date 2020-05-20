@@ -5,6 +5,8 @@
   background-color: #bae8e8;
   height: 200%;
   min-height: 100vh;
+  padding-top: 60px;
+  padding-bottom: 54px;
 }
 .upperbox {
   background-color: #e3f6f5;
@@ -25,7 +27,6 @@
   height: 50vh;
   box-sizing: border-box;
   border-radius: 10%;
-
 }
 .lowerbox > a:link , a:visited {
   padding:3vh 7vw;
@@ -35,10 +36,10 @@
   border-color: silver;
   margin: 10px;
 }
-
 .btn-secondary {
   color: #272343 !important;
   background-color: #e3f6f5 !important;
+  border-color: transparent !important;
 }
 .container {
   background-color: #bae8e8;
@@ -49,23 +50,25 @@
   margin: 0 !important;
   width: 100vw;
 }
-
 .lightState {
   background-color: rgb(96, 152, 204) !important;
   box-shadow: rgb(75, 113, 114) !important;
 }
-
 .row {
   margin: 0 !important;
 }
-.SignSpace {
-  
-  width: 80vw;
+.SignSpace {  
+  width: 80vw !important;
   align-content: center;
   position: relative;
+  height: 7.75vh !important;
   margin-top: 10vh;
   padding-left: 10vw !important;
   padding-right: 10vw !important;
+  border-color: transparent !important;
+}
+.SignSpace > .btn{
+  border-color: transparent !important;
 }
 .lowerbox > .btn-group {
   box-sizing: content-box !important;
@@ -82,3 +85,7 @@
 /*.modal-header, .modal-body, .modal-footer {
   background-color: rgba(12, 168, 240, 0.247) !important;
 }*/
+.react-datepicker__input-container > input{
+  overflow: hidden !important; 
+  width: 30vw;
+}

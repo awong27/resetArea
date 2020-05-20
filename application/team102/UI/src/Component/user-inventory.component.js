@@ -38,13 +38,12 @@ export default class FoodCard extends Component {
       fooddata: [],
 
 
-     };
+    };
 
   }
 
   componentDidMount() {
-    const {match:{params}} = this.props;
-
+    const { match: { params } } = this.props;
     //console.log({itemid});
     axios
       .get(`http://localhost:8080/fooddata/${params.id}`)
@@ -68,33 +67,28 @@ export default class FoodCard extends Component {
 
 
   foodcard() {
-
-      return (
-        <FoodStuff
-          food={this.state.fooddata}
-          deleteItems={this.deleteItems}
-          key={this.state.fooddata._id}
-        />
-      );
-
+    return (
+      <FoodStuff
+        food={this.state.fooddata}
+        deleteItems={this.deleteItems}
+        key={this.state.fooddata._id}
+      />
+    );
   }
 
   render() {
-    var name= this.state.fooddata.foodName;
-    var expire= this.state.fooddata.expirationDate;
-    var creat=this.state.fooddata.creator;
+    var name = this.state.fooddata.foodName;
+    var expire = this.state.fooddata.expirationDate;
+    var creat = this.state.fooddata.creator;
     var calories = this.state.fooddata.calories;
     var carbs = this.state.fooddata.carbs;
     var protein = this.state.fooddata.protein;
-    var sugar=this.state.fooddata.sugar;
+    var sugar = this.state.fooddata.sugar;
     var fat = this.state.fooddata.fat;
     var id = this.state.fooddata._id;
 
-
     const foodpic = <img src={this.state.fooddata.foodPic} height="200" width="200"></img>;
     return (
-
-
       <div>
         <h3>{name}</h3>
         <h4>{foodpic}</h4>

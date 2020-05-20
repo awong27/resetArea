@@ -63,6 +63,12 @@ app.all('/api/image/save', (req, res) =>{
   });
 });
 
+app.all('/api/uploadfile', (req, res) => {
+  apiProxy.web(req, res, {
+    target: 'http://localhost:3002',
+  });
+});
+
 app.all("*", (req, res) => {
   // front end server / react
   apiProxy.web(req, res, {
