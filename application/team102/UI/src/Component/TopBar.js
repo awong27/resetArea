@@ -14,10 +14,11 @@ const TopBar = ({ username, password }) => {
   /*
       * spaces items evenly
       * home button
-      * 
+      *
       * user photo
       */
   var home = "/Home/" + username + "/" + password
+  var user = "/EditUser/" + username+ "/" + password
   return (
 
     <Nav onScroll='fixed' fill='true' className='d-block'>
@@ -31,7 +32,7 @@ const TopBar = ({ username, password }) => {
         <NavItem ><h1>DIRT</h1></NavItem>
         <NavItem /><NavItem />
         <NavItem>
-          <NavLink href="/EditUser"><img alt="UserPic" src={Tphoto} className="userPic" /></NavLink>
+          <NavLink href={user}><img alt="UserPic" src={Tphoto} className="userPic" /></NavLink>
         </NavItem>
 
       </Navbar>
