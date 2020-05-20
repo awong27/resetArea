@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Input, NavLink,Form,FormGroup } from 'reactstrap';
+import { Button, Row, Col, Input, NavLink, Form, FormGroup } from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./inv.css";
@@ -25,35 +25,18 @@ const Shoppingdata = props => (
         </a>
       </td>
     </tr>*/
-  <Button className="invBar" ><Row>
-    <Col><p>{props.food.itemName}</p></Col><Col></Col><Col></Col><Button onClick={() => { props.toggleItems(props.food._id,props.food.itemAmount,props.food.itemName,props.food.status); }}>X</Button><Col xs='1' />
-  </Row></Button>
+  <Row className='invBar histlist' >
+    <Col xs='1' /><Col ><h4>{props.food.itemName}</h4> </Col>
+    <Button className="S-btn" onClick={() => { props.toggleItems(props.food._id, props.food.itemAmount, props.food.itemName, props.food.status); }}>X</Button><Col xs='1' />
+  </Row>
 
 );
 
 const ShoppingHist = props => (
-  /*  <tr>
-    <td>
-      <Link to = {"/user-item/"+ props.food._id}>{props.food.foodName}</Link>
-      </td>
-      <td>{props.food.expirationDate}</td>
-      <td>{props.food.calories}</td>
-      <td>{props.food.numOfItems}</td>
-      <td>
-        <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
-        <a
-          href="/create"
-          onClick={() => {
-            props.deleteItems(props.food._id);
-          }}
-        >
-          delete
-        </a>
-      </td>
-    </tr>*/
-  <Button className="invBar" ><Row>
-    <Col><p>{props.food.itemName}</p></Col><Col></Col><Col></Col><Button onClick={() => { props.toggleItems(props.food._id,props.food.itemAmount,props.food.itemName,props.food.status); }}>Add to List</Button><Col xs='1' />
-  </Row></Button>
+  <Row className='invBar histlist' >
+    <Col xs='1' /><Col ><h4>{props.food.itemName}</h4> </Col>
+    <Button className="S-btn" onClick={() => { props.toggleItems(props.food._id, props.food.itemAmount, props.food.itemName, props.food.status); }}>+</Button><Col xs='1' />
+  </Row>
 
 );
 
@@ -70,12 +53,12 @@ export default class ShoppingList extends Component {
     const { match: { params } } = this.props;
     this.state = {
       shopdata: [],
-      check:1,
+      check: 1,
       username: params.id,
       password: params.password,
-      newItemName:"",
-      newItemAmount:"",
-      removedItem:{}
+      newItemName: "",
+      newItemAmount: "",
+      removedItem: {}
     };
   }
 
@@ -90,62 +73,59 @@ export default class ShoppingList extends Component {
       });
   }
 
-  toggleItems(id,itemAmount,itemName,status) {
+  toggleItems(id, itemAmount, itemName, status) {
     var stat;
-    if(status=="past"){
-      stat="current"
-    }else{
-      stat="past"
+    if (status == "past") {
+      stat = "current"
+    } else {
+      stat = "past"
     }
-
-    const removed ={
+    const removed = {
       itemName: itemName,
 
       status: stat,
-      creator:this.state.username
+      creator: this.state.username
     }
-
     axios
-      .post("http://localhost:8080/shoppinglist/update/" + id,removed)
+      .post("http://localhost:8080/shoppinglist/update/" + id, removed)
       .then(res => {
         console.log(res.data)
         window.location.reload()
-        }
-    )
-
-
+      })
       .catch(error => {
-      console.log(error);
-    });
-
-
+        console.log(error);
+      });
   }
-  onChangeItemName(e){
+  onChangeItemName(e) {
     this.setState({
-      newItemName:e.target.value
+      newItemName: e.target.value
     })
   }
-  onChangeItemAmount(e){
+  onChangeItemAmount(e) {
     this.setState({
-      newItemAmount:e.target.value
+      newItemAmount: e.target.value
     })
   }
-  onSubmit(e){
+  onSubmit(e) {
     e.preventDefault();
-
-
-
     const item = {
-      itemName:this.state.newItemName,
-
-      creator:this.state.username,
-      status:"current"
-    }
+      itemName: this.state.newItemName,
+      creator: this.state.username,
+      status: "current"
+    }; 
+    var flag = false;
     console.log(item)
-    axios
-      .post("http://localhost:8080/shoppinglist/add", item)
-      .then(res => console.log(res.data));
-
+    this.state.shopdata.map(curr => {
+      if (item.itemName === curr.itemName && item.creator === curr.creator) { return flag = true; }
+    })
+    if (flag === false) {
+      axios
+        .post("http://localhost:8080/shoppinglist/add", item)
+        .then(res => console.log(res.data));
+      var list = this.state.shopdata;
+      list.push(item);
+      this.setState({ shopdata: list });
+    }
   }
 
   shopList() {
@@ -179,23 +159,23 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
-/*
-  inventory() {
-    const { match: { params } } = this.props;
-    return this.state.fooddata.map(currentfood => {
-      if (currentfood.creator === params.id) {
-        return (
-          <Fooddata
-            food={currentfood}
-            deleteItems={this.deleteItems}
-            key={currentfood._id}
-          />
-        );
-      }
-      return (null);
-    });
-  }
-*/
+  /*
+    inventory() {
+      const { match: { params } } = this.props;
+      return this.state.fooddata.map(currentfood => {
+        if (currentfood.creator === params.id) {
+          return (
+            <Fooddata
+              food={currentfood}
+              deleteItems={this.deleteItems}
+              key={currentfood._id}
+            />
+          );
+        }
+        return (null);
+      });
+    }
+  */
   render() {
     return (
       /*
@@ -208,24 +188,26 @@ export default class ShoppingList extends Component {
       * scan to match list with what was bought and populate with values
       * bring up things not grabbed by scan but on shopping list
       */
-      <div><TopBar username={this.state.username} password={this.state.password} /><br /><br /><br /> <div className="midCon">
+      <div><TopBar username={this.state.username} password={this.state.password} /> <div className="midCon">
         <div><h1>Shopping List</h1></div>
 
-        <Form onSubmit={this.onSubmit}>
-        <FormGroup>
-          <Input
-            type="text"
-            required
-            placeholder="New Item Name"
-            value={this.state.newItemName}
-            onChange={this.onChangeItemName} />
+        <Form justified onSubmit={this.onSubmit}>
+          <FormGroup >
+            <Row>
+              <Input
+                type="text"
+                required
+                style={{ width: '70vw' }}
+                placeholder="New Item Name"
+                value={this.state.newItemName}
+                onChange={this.onChangeItemName} />
 
-          <Input
-          type="submit"
-          style={{ width: '30vw' }}
-          value="Add"
-          className="btn btn-secondary"
-        /></FormGroup></Form>
+              <Input
+                type="submit"
+                style={{ width: '30vw' }}
+                value="Add"
+                className="btn btn-secondary"
+              /></Row></FormGroup></Form>
 
         <h3>Current Items</h3>
         <div className="listItem">
@@ -236,61 +218,9 @@ export default class ShoppingList extends Component {
           {this.shopHist()}
         </div>
       </div>
-        <Button className="addbtn"><img alt="add" src={plusbtn} /></Button>
         <Navi username={this.state.username} password={this.state.password} />
       </div>
     )
   }
-  subInventory() {
-    return (<>
-      <h3>Hatchet</h3>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-      <Button className="subBar" ><Row>
-        <NavLink>Ducks</NavLink>
-        <Button>X</Button>
-        <Button>+</Button>
-      </Row></Button>
-    </>
-    );
-  }
 }
-/*<ButtonGroup size='lg' >
-        <Button href="/SHist">History</Button>
-        <Button href="/create">New Item</Button>
-        <Button href="/inventory">+ Inventory</Button>
-      </ButtonGroup>
-      */
+

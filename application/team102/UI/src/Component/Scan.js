@@ -17,7 +17,7 @@ export default class Scan extends Component {
         };
         this.mediaHandler = new MediaHandler();
     }
-    componentDidMount() {
+    /*componentDidMount() {
         this.mediaHandler.getPermissions()
             .then((stream) => {
                 this.setState({ hasMedia: true });
@@ -28,7 +28,7 @@ export default class Scan extends Component {
                 }
                 this.myVideo.play();
             })
-    }
+    }*/
     captureImage = () => {
         console.log('inside captureImage function')
         const context = this.canvas.getContext('2d');
@@ -83,16 +83,16 @@ export default class Scan extends Component {
       }
     render() {
         return (
-            <div className="container">
+            <>
                 <div className="video-container">
-                    <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
+                    <video className="video" width="100vw" height="50vw" ref={(ref) => { this.myVideo = ref; }}></video>
                 </div>
-                <Button id="capture" onClick={this.captureImage}>Capture</Button>
+                <Button size='lg' style={{ position: "fixed", bottom: "0", right: "0", width:"100vw", height: "7.5vh"}} id="capture" onClick={this.captureImage}>Capture</Button>
                 
                 <div className="image-container">
-                    <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
+                    <canvas ref={(canvas) => { this.canvas = canvas }} width='100vw' height='50vh' ></canvas>
                 </div>
-            </div>
+            </>
         )
     }
 }

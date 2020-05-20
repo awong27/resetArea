@@ -43,7 +43,7 @@
 }
 .homeRow {
 
-    height: 30vh;
+    height: 35vh;
     padding-left: 15px;
     padding-right: 15px;
     overflow-x: scroll;
@@ -81,8 +81,8 @@
 }
 .homeRep {
     margin: 20px 20px 0px 20px; 
-    width: 60vw;
-    height: 30vh;
+    width: 33vw;
+    height: 20vh;
     background-color: #e3f6e8 !important;
     padding: 0;
     box-shadow: 0px 4px 4px rgba(14, 11, 11, 0.26) !important;

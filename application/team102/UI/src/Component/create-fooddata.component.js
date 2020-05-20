@@ -49,7 +49,7 @@ export default class Create extends Component {
   // change activations for prop states
   onPop() { this.setState({ pop: !this.state.pop }) }
   onChangeFoodname(e) { this.setState({ foodname: e.target.value }); }
-  onChangeExpirationdate(date) { this.setState({ expirationdate: date }); }
+  onChangeExpirationdate(date) { this.setState({ expirationdate: date }) }
   onChangeCalories(e) { this.setState({ calories: e }); }
   onChangeNumberOfItems(e) { this.setState({ numberOfItems: e.target.value }); }
   onChangeCarbs(e) { this.setState({ carbs: e }); }
@@ -96,7 +96,7 @@ export default class Create extends Component {
            */
           const food = {
             foodName: item.foodname,
-            expirationDate: item.expdate,
+            expirationDate: (item.expdate.getMonth() + 1).toString() + "/" + (item.expdate.getDate()).toString() + "/" + (item.expdate.getFullYear()).toString(),
             calories: this.state.calories,
             numOfItems: item.qty,
             carbs: this.state.carbs,
@@ -125,7 +125,7 @@ export default class Create extends Component {
     var list = { foodname: "", expdate: new Date(), qty: "1" };
     list.foodname = this.state.foodname;
     list.expdate = this.state.expirationdate;
-    list.qty = this.state.numberOfItems;
+    list.qty = this.state.numberOfItems;    
     console.log(list);
     let newList = this.state.addList;
     newList.push(list);
@@ -265,7 +265,7 @@ export default class Create extends Component {
               </FormGroup>
             </Col>
           </Row>
-          <Button className="form-control input" type="submit" value="Create food"> Add Item </Button>
+          <Button size='lg' style={{ position: "fixed", bottom: "0", right: "0" }} className="form-control input" type="submit" value="Create food"> Check </Button>
         </Form>
       );
     })
@@ -284,7 +284,7 @@ export default class Create extends Component {
             onChange={this.onChangeFoodname} />
         </FormGroup>
         <FormGroup><Row>
-          <Col >
+          <Col>
             <Label for="ExpDate">Exp. Date:</Label>
             <DatePicker
               required
@@ -320,11 +320,11 @@ export default class Create extends Component {
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
 
-    return (<div style={{ height: "100%", width: "100%" }}>
+    return (<div style={{width: '90vw'}}>
 
       {this.state.pop === true ? this.onScan() : ""}
       {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop} /> : this.manualSubmit()}
-      <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", top: "-57px", display: "flex", minWidth: "100vw", minHeight: "54px" }} >
+      <ButtonGroup size='lg'  style={{ boxSizing: 'content-box', position: "fixed", right: "0", top: "0", display: "flex", minWidth: "100vw", minHeight: "54px" }} >
         <Button href={inv}>Back</Button>
         <Button onClick={() => this.toInv()}> + Inventory</Button>
         <Button onClick={() => this.setState({ show: !this.state.show })} ><img alt="camera" src={cam} className="nav-pic" /></Button>
@@ -335,6 +335,6 @@ export default class Create extends Component {
   }
 }
 /**
- *{this.AddList()}
+ *{this.AddList()} className="SignSpace"
  *
  */

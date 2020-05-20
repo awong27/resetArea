@@ -122,6 +122,7 @@
 .S-btn {
     border-color: transparent !important;
     background-color: rgba(12, 168, 240, 0.247)  !important;
+    height: 36px;
 }
 .itemOptbtn {
     width: 100vw !important;    
@@ -146,5 +147,5 @@
     align-content: center;
 }
 .histlist {
-    margin-bottom: 5px !important;
+    padding: 7.5px !important;
 }
