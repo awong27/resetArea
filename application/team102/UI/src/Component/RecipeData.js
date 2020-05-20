@@ -4,7 +4,7 @@ import {
     Card, CardImg, CardText, CardTitle, CardImgOverlay,
     Modal, ModalHeader, ModalBody, ModalFooter, CardBody,
 } from 'reactstrap';
-import MealPlan from './MealPlan';
+
 import "./boxTabs.css"
 //grabs recipe information
 //displays as a rectangular picture with overlay text
