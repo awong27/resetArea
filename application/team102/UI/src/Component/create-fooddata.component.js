@@ -4,6 +4,7 @@ import MediaHandler from './MediaHandler';
 import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import cam from "./cameraIcon.svg"
+import Scan from "./Scan.js"
 import { FormGroup, Label, Form, Input, Button, ButtonGroup, Row, Col } from "reactstrap";
 const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
 
@@ -19,7 +20,7 @@ export default class Create extends Component {
     this.onChangeSugar = this.onChangeSugar.bind(this);
     this.onChangeFat = this.onChangeFat.bind(this);
     this.onChangeProtein = this.onChangeProtein.bind(this);
-
+    this.onFoods = this.onFoods.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     this.mediaHandler = new MediaHandler();
     this.state = {
@@ -55,7 +56,7 @@ export default class Create extends Component {
   onChangeFat(e) { this.setState({ fat: e }); }
   onChangeProtein(e) { this.setState({ protein: e }); }
   onChangeSodium(e) { this.setState({ sodium: e }); }
-
+  onFoods(e) {this.setState({foods: e})}
   toInv() { // only things passed to the final list is allowed
     this.state.addList.map(item => {
       axios
@@ -136,6 +137,7 @@ export default class Create extends Component {
       )}
     )
   }
+  /*
   componentDidMount() {
     this.mediaHandler.getPermissions()
       .then((stream) => {
@@ -192,7 +194,7 @@ export default class Create extends Component {
       /*processedData.push({
         description: k,
         quantity: hashKey[k]
-      })*/
+      })
     })
     console.log(hashKey);
     console.log(processedData);
@@ -211,7 +213,7 @@ export default class Create extends Component {
         </div>
       </div>
     );
-  }
+  }*/
   onScan() { // scanned submit form, name and qty should be filled in, expdate required
     return this.state.foods.map(newI => {
       return (
@@ -311,10 +313,11 @@ export default class Create extends Component {
   }
   render() {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
+    
     return (<div style={{ height: "100%", width: "100%" }}>
       {this.manualSubmit()} {this.AddList()}
       {this.state.pop === true ? this.onScan() : ""}
-      {this.state.show === true ? this.scan() : ""}
+      {this.state.show === true ? <Scan onFoods={this.onFoods}/> : ""}
       <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
         <Button href={inv}>Back</Button>
         <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
