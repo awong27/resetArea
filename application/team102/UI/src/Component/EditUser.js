@@ -1,4 +1,3 @@
-
 import React, {Component, useState } from 'react';
 import Tphoto from "./blankProfile.png";
 import TopBar from "./TopBar";
@@ -14,10 +13,13 @@ export default class EditUser extends React.Component{
 
   constructor(props) {
     super(props);
+    const { match: { params } } = this.props;
     this.state = {
       prefModal: false,
       userModal: false,
       tempName: "",
+      username:params.id,
+      password:params.password,
       family: [ {name: "spouse", id: 1}, {name: "child", id:2}],
       preferences: [{ pref: "Lactose Intolerant" , id: 1}, {pref: "Vegan", id: 2}],
     };
@@ -101,7 +103,7 @@ export default class EditUser extends React.Component{
     return (
       <div>
       <Container style={{background: 'lightblue'}}>
-      <TopBar/>
+      <TopBar username={this.state.username} password={this.state.password} />
 
       <Modal isOpen={this.state.prefModal}>
         <ModalHeader>Add Preference</ModalHeader>
