@@ -71,7 +71,7 @@ export default class Create extends Component {
           this.setState({
             foods: response.data.foods[0].foodNutrients
           });
-          /* Searches array for matching nutrient name, only exact 
+          /* Searches array for matching nutrient name, only exact
            * calls funct to change value once found
            */
           this.state.foods.map(currentfood => {
@@ -103,7 +103,8 @@ export default class Create extends Component {
             protein: this.state.protein,
             fat: this.state.fat,
             sugar: this.state.sugar,
-            sodium: this.state.sodium
+            sodium: this.state.sodium,
+            creator:this.state.username
           };
           console.log(food);
           axios

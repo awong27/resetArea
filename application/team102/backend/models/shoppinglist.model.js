@@ -5,7 +5,9 @@ const Schema = mongoose.Schema;
 const shoppinglistSchema = new Schema(
   {
     itemName:{type:String,required:true},
-    itemAmount:{type:String, required:true}
+
+    creator:{type:String, required:true},
+    status:{type:String,required:true}
   }
 );
 
