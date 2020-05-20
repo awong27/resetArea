@@ -6,6 +6,7 @@ import axios from "axios";
 import cam from "./cameraIcon.svg"
 import { FormGroup, Label, Form, Input, Button, ButtonGroup, Row, Col } from "reactstrap";
 const gatewayUrl = process.env.gatewayUrl || 'http://localhost:3004';
+
 export default class Create extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ export default class Create extends Component {
     this.onChangeSugar = this.onChangeSugar.bind(this);
     this.onChangeFat = this.onChangeFat.bind(this);
     this.onChangeProtein = this.onChangeProtein.bind(this);
-    this.onAddList = this.onAddList.bind(this);
+
     this.onSubmit = this.onSubmit.bind(this);
     this.mediaHandler = new MediaHandler();
     this.state = {
@@ -39,7 +40,7 @@ export default class Create extends Component {
       count: 0,
       hasMedia: false,
       imageString: "",
-      rawData: [], 
+      rawData: [],
       pop: false,
     };
   }
@@ -53,77 +54,86 @@ export default class Create extends Component {
   onChangeFat(e) { this.setState({ fat: e }); }
   onChangeProtein(e) { this.setState({ protein: e }); }
   onChangeSodium(e) { this.setState({ sodium: e }); }
-  onAddList() {
-    //const date = this.state.expirationdate.toDateString.split(/(\d)/)[4]
-    var list = this.state.addList.concat(this.state.foodname + " " + this.state.numberOfItems);
-    console.log(this.state.expirationdate);
-    this.setState({ addList: list })
+
+  toInv() { // only things passed to the final list is allowed
+    this.state.addList.map(item => {
+      axios
+        /* Searches food name param in Api returns all types matching
+         * foods -> array going to be loaded with first result info
+         * has all nutrition facts
+         */
+        .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query=" + this.state.foodname)
+        .then(response => {
+          console.log(response.data.foods[0].foodNutrients[0]);
+          this.setState({
+            foods: response.data.foods[0].foodNutrients
+          });
+          /* Searches array for matching nutrient name, only exact 
+           * calls funct to change value once found
+           */
+          this.state.foods.map(currentfood => {
+            console.log(currentfood.nutrientName, currentfood.value);
+            console.log(currentfood.value);
+            if (currentfood.nutrientName === 'Energy') {
+              this.onChangeCalories(Math.round(currentfood.value));
+            } else if (currentfood.nutrientName === 'Carbohydrate, by difference') {
+              this.onChangeCarbs(Math.round(currentfood.value));
+            } else if (currentfood.nutrientName === 'Total lipid (fat)') {
+              this.onChangeFat(Math.round(currentfood.value));
+            } else if (currentfood.nutrientName === 'Protein') {
+              this.onChangeProtein(Math.round(currentfood.value));
+            } else if (currentfood.nutrientName === 'Sugars, total including NLEA') {
+              this.onChangeSugar(Math.round(currentfood.value));
+            } else if (currentfood.nutrientName === 'Sodium, Na') {
+              this.onChangeSodium(Math.round(currentfood.value));
+            } return (null);
+          })
+          /* adds all values into a temp list
+           * sends to backend to be added to personal id food list
+           */
+          const food = {
+            foodName: item.foodname,
+            expirationDate: item.expdate,
+            calories: this.state.calories,
+            numOfItems: item.qty,
+            carbs: this.state.carbs,
+            protein: this.state.protein,
+            fat: this.state.fat,
+            sugar: this.state.sugar,
+            sodium: this.state.sodium
+          };
+          console.log(food);
+          axios
+            .post("/fooddata/add", food)
+            .then(res => console.log(res.data));
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    })
+    this.setState({ addList: [] });
   }
   onSubmit(e) {
     e.preventDefault();
-    axios
-      /* Searches food name param in Api returns all types matching
-       * foods -> array going to be loaded with first result info
-       * has all nutrition facts
-       */
-      .get("https://api.nal.usda.gov/fdc/v1/foods/search?api_key=ldLF1ky8NkwmcLnTDvqDoSjul1eanGZ1o6vZ2Q9u&query=" + this.state.foodname)
-      .then(response => {
-        console.log(response.data.foods[0].foodNutrients[0]);
-        this.setState({
-          foods: response.data.foods[0].foodNutrients
-        });
-        /* Searches array for matching nutrient name, only exact 
-         * calls funct to change value once found
-         */
-        this.state.foods.map(currentfood => {
-          console.log(currentfood.nutrientName, currentfood.value);
-          console.log(currentfood.value);
-          if (currentfood.nutrientName === 'Energy') {
-            this.onChangeCalories(Math.round(currentfood.value));
-          } else if (currentfood.nutrientName === 'Carbohydrate, by difference') {
-            this.onChangeCarbs(Math.round(currentfood.value));
-          } else if (currentfood.nutrientName === 'Total lipid (fat)') {
-            this.onChangeFat(Math.round(currentfood.value));
-          } else if (currentfood.nutrientName === 'Protein') {
-            this.onChangeProtein(Math.round(currentfood.value));
-          } else if (currentfood.nutrientName === 'Sugars, total including NLEA') {
-            this.onChangeSugar(Math.round(currentfood.value));
-          } else if (currentfood.nutrientName === 'Sodium, Na') {
-            this.onChangeSodium(Math.round(currentfood.value));
-          } return (null);
-        })
-        /* adds all values into a temp list
-         * sends to backend to be added to personal id food list
-         */
-        const food = {
-          foodName: this.state.foodname,
-          expirationDate: this.state.expirationdate,
-          calories: this.state.calories,
-          numOfItems: this.state.numberOfItems,
-          carbs: this.state.carbs,
-          protein: this.state.protein,
-          fat: this.state.fat,
-          sugar: this.state.sugar,
-          sodium: this.state.sodium
-        };
-        console.log(food);
-        this.onAddList();
-        axios
-          .post("/fooddata/add", food)
-          .then(res => console.log(res.data));
-      })
-      .catch(error => {
-        console.log(error);
-      });
+    //const date = (this.state.expirationdate.getMonth() + 1).toString() + "/" + (this.state.expirationdate.getDate()).toString() + "/" + (this.state.expirationdate.getFullYear()).toString();
+    //var list = this.state.addList.concat(this.state.foodname + " " + date+" "+ this.state.numberOfItems);
+    //console.log(this.state.expirationdate);
+    var list = { foodname: "", expdate: new Date(), qty: "1" };
+    list.foodname = this.state.foodname;
+    list.expdate = this.state.expirationdate;
+    list.qty = this.state.numberOfItems;
+    console.log(list);
+    this.setState({ addList: [list, this.state.addList] });
   }
-  AddList() {
-    return (<>
-      {this.state.addList.map((item) => (
-        <Row>
-          <Col>{item}</Col>
+  AddList() {//{(item.expdate.getMonth() + 1).toString() + "/" + (item.expdate.getDate()).toString() + "/" + (item.expdate.getFullYear()).toString()}
+    this.state.addList.map((item) => {
+        return (<Row>
+          <Col >{item.foodname}</Col> 
+          <Col></Col>
+          <Col>{item.qty}</Col>
         </Row>
-      ))}</>
-    );
+      )}
+    )
   }
   /*componentDidMount() {
     this.mediaHandler.getPermissions()
@@ -137,15 +147,15 @@ export default class Create extends Component {
         this.myVideo.play();
       })
   }*/
-  captureImage = () => {
+  captureImage = () => { // takes picture
     console.log('inside captureImage function')
     const context = this.canvas.getContext('2d');
     context.drawImage(this.myVideo, 0, 0, 400, 350);
     const image = this.canvas.toDataURL('image/jpeg', 0.5);
     this.setState({ imageString: image });
-    return image;
+    this.processImage();
   }
-  processImage = () => {
+  processImage = () => { // sends and grabs data
     console.log('inside processImage function')
     const url = 'http://localhost:3010/api/image/save';
     const img = this.state.imageString;
@@ -165,9 +175,7 @@ export default class Create extends Component {
   }
   processData = () => {// returns a array with description and qty
     const processedData = [];
-    let newItem = { description: "", quantity: 0 };
     let hashKey = {};
-
     this.state.rawData.forEach((item) => {
       if (hashKey.hasOwnProperty(item)) {
         hashKey[item] += 1;
@@ -176,89 +184,147 @@ export default class Create extends Component {
       }
     });
     Object.keys(hashKey).forEach((k) => {
-      processedData.push({
+      let newItem = { description: "", quantity: 0 };
+      newItem.description = k;
+      newItem.quantity = hashKey[k];
+      processedData.push({ newItem });
+      /*processedData.push({
         description: k,
         quantity: hashKey[k]
-      })
+      })*/
     })
     console.log(hashKey);
     console.log(processedData);
+    this.setState({ foods: processedData });
   }
   scan() {
-    return(
+    return (
       <div className="container">
         <div className="video-container">
           <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
         </div>
-        <Button id="capture" onClick={this.captureImage}>Capture</Button>
-        <Button id="process" onClick={this.processImage}>Process</Button>
+        <Button id="capture" onClick={this.captureImage}>Scan</Button>
         <div className="image-container">
           <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
         </div>
       </div>
     );
   }
-  render() {
-    var inv = "/inventory/" + this.state.username + "/" + this.state.password
-    return (<div style={{ height: "100%", width: "100%" }}>
-      <Form onSubmit={this.onSubmit} style={{ paddingRight: '5%', paddingLeft: '5%', top: "5px", position: "fixed", width: "100vw" }}>
+  onScan() { // scanned submit form, name and qty should be filled in, expdate required
+    return this.state.foods.map(newI => {
+      return (
+        <Form onSubmit={this.onSubmit}>
+          <FormGroup >
+            <Input
+              value={this.state.foodname}
+              selected={newI.description}
+              onChange={this.onChangeFoodname} />
+          </FormGroup>
+          <Row>
+            <Col >
+              <FormGroup>
+                <Label for="ExpDate">Exp. Date:</Label>
+                <DatePicker
+                  required
+                  selected={this.state.expirationdate}
+                  onChange={this.onChangeExpirationdate} />
+              </FormGroup>
+            </Col>
+            <Col >
+              <FormGroup>
+                <Label for="qty">Quantity:</Label>
+                <Input
+                  type="select"
+                  style={{ height: 'auto', width: 'auto' }}
+                  value={this.state.numberOfItems}
+                  selected={newI.quantity}
+                  onChange={this.onChangeNumberOfItems}>
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>3</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
+                  <option>9</option>
+                  <option>10</option>
+                  <option>11</option>
+                  <option>12</option>
+                </Input>
+              </FormGroup>
+            </Col>
+          </Row>
+          <Button className="form-control input" type="submit" value="Create food"> Add Item </Button>
+        </Form>
+      );
+    })
+  }
+  manualSubmit() {
+    return (
+      <Form onSubmit={this.onSubmit}>
         <FormGroup >
-          <Label for="foodName"><h3>New Food Items</h3></Label>
+          <Label for="foodName">Food Name:</Label>
           <Input
             type="text"
             required
             placeholder="What Food Are You Looking For?"
+            className="form-control"
             value={this.state.foodname}
             onChange={this.onChangeFoodname} />
         </FormGroup>
-        <Row>
+        <FormGroup><Row>
           <Col >
-            <FormGroup>
-              <Label for="ExpDate">Exp. Date:</Label>
-              <DatePicker
-                required
-                selected={this.state.expirationdate}
-                onChange={this.onChangeExpirationdate} />
-            </FormGroup>
+            <Label for="ExpDate">Exp. Date:</Label>
+            <DatePicker
+              required
+              selected={this.state.expirationdate}
+              onChange={this.onChangeExpirationdate} />
           </Col>
           <Col >
-            <FormGroup>
-              <Label for="qty">Quantity:</Label>
-              <Input
-                type="select"
-                style={{ height: 'auto', width: 'auto' }}
-                value={this.state.numberOfItems}
-                onChange={this.onChangeNumberOfItems}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>3</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
-                <option>9</option>
-                <option>10</option>
-                <option>11</option>
-                <option>12</option>
-              </Input>
-            </FormGroup>
+            <Label for="qty">Quantity:</Label>
+            <Input
+              type="select"
+              style={{ height: 'auto', width: 'auto' }}
+              value={this.state.numberOfItems}
+              onChange={this.onChangeNumberOfItems}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>3</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+              <option>11</option>
+              <option>12</option>
+            </Input>
           </Col>
         </Row>
+        </FormGroup><Button size='lg' className="SignSpace form-control input" type="submit" value="Create food"> Submit </Button>
+      </Form>
+    );
+  }
+  render() {
+    var inv = "/inventory/" + this.state.username + "/" + this.state.password
+    return (<div style={{ height: "100%", width: "100%" }}>
+      {this.manualSubmit()} {this.AddList()}
+      {this.state.pop === true ? this.onScan() : ""}
+      <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
+        <Button href={inv}>Back</Button>
+        <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
+        <Button href="/scan" >Scan</Button>
+      </ButtonGroup>
 
-        <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }}>
-          <Button href={inv}>Back</Button>
-          <Button className="form-control input" type="submit" value="Create food"> Submit </Button>
-          <Button href="/scan" >Scan</Button>
-        </ButtonGroup>
+      <div style={{ top: "300px", height: "100%", width: "100%" }}></div>
 
-      </Form> <div style={{ top: "300px", height: "100%", width: "100%" }}>{this.AddList()}</div>
-      
     </div>
     );
   }
 }
 /**
- *
+ *{this.AddList()}
  *
  */

@@ -5,7 +5,7 @@ import {
     Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import MealPlan from './MealPlan';
-
+import "./boxTabs.css"
 //grabs recipe information
 //displays as a rectangular picture with overlay text
 //when clicked with have a pop up with more info
