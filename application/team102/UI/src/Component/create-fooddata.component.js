@@ -42,6 +42,7 @@ export default class Create extends Component {
       imageString: "",
       rawData: [],
       pop: false,
+      show: false,
     };
   }
   // change activations for prop states
@@ -135,7 +136,7 @@ export default class Create extends Component {
       )}
     )
   }
-  /*componentDidMount() {
+  componentDidMount() {
     this.mediaHandler.getPermissions()
       .then((stream) => {
         this.setState({ hasMedia: true });
@@ -146,7 +147,7 @@ export default class Create extends Component {
         }
         this.myVideo.play();
       })
-  }*/
+  }
   captureImage = () => { // takes picture
     console.log('inside captureImage function')
     const context = this.canvas.getContext('2d');
@@ -197,13 +198,14 @@ export default class Create extends Component {
     console.log(processedData);
     this.setState({ foods: processedData });
   }
-  scan() {
+  scan() { // shows scanner pop up
     return (
       <div className="container">
         <div className="video-container">
           <video className="video" width="400" height="350" ref={(ref) => { this.myVideo = ref; }}></video>
         </div>
         <Button id="capture" onClick={this.captureImage}>Scan</Button>
+        <Button onClick={() => this.setState({show: !this.state.show})} >Back</Button>
         <div className="image-container">
           <canvas ref={(canvas) => { this.canvas = canvas }} width='400' height='350' ></canvas>
         </div>
@@ -312,14 +314,13 @@ export default class Create extends Component {
     return (<div style={{ height: "100%", width: "100%" }}>
       {this.manualSubmit()} {this.AddList()}
       {this.state.pop === true ? this.onScan() : ""}
+      {this.state.show === true ? this.scan() : ""}
       <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
         <Button href={inv}>Back</Button>
         <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
-        <Button href="/scan" >Scan</Button>
+        <Button onClick={() => this.setState({show: !this.state.show})} >Scan</Button>
       </ButtonGroup>
-
       <div style={{ top: "300px", height: "100%", width: "100%" }}></div>
-
     </div>
     );
   }
