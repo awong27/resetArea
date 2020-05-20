@@ -5,6 +5,7 @@ import TopBar from "./TopBar";
 import classnames from 'classnames';
 import "./mealplan.css";
 import axios from "axios";
+import Recipe from './Recipe';
 
 const Fooddata = props => (
   /*<tr>
@@ -343,17 +344,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "breakfast", "sunday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button >Add Item</Button></Row>
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "lunch", "sunday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "dinner", "sunday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="monday">
@@ -363,17 +364,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "breakfast", "monday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "lunch", "monday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "dinner", "monday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="tuesday">
@@ -383,17 +384,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "breakfast", "tuesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "lunch", "tuesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "dinner", "tuesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="wednesday">
@@ -403,17 +404,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "breakfast", "wednesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "lunch", "wednesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "dinner", "wednesday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="thursday">
@@ -423,17 +424,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "breakfast", "thursday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "lunch", "thursday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "dinner", "thursday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="friday">
@@ -443,17 +444,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "breakfast", "friday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "lunch", "friday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "dinner", "friday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="saturday">
@@ -463,17 +464,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "breakfast", "saturday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "lunch", "saturday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "dinner", "saturday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button>Add Item</Button></Row>
+              
               <Row className="bottom"></Row>
             </TabPane>
           </TabContent>

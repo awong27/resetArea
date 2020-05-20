@@ -43,6 +43,7 @@ export default class Recipe extends Component {
       carbs: params.carbs,
       sugar: params.sugar,
       date: "",
+      mealType: "",
     };
   }
   searchRepClean() { this.setState({ newrecipedata: [] }); }
@@ -85,6 +86,7 @@ export default class Recipe extends Component {
         recipeSodium: "",
         creator: this.state.creator,
         date: "",
+        mealType: "",
       };
       newR.ingredients = currentfood.recipe.ingredientLines;
       newR.recipeName = currentfood.recipe.label;
@@ -147,8 +149,8 @@ export default class Recipe extends Component {
       } return (null);
     });
   }
-  addItems(newR, day) {
-    newR.setState({date:day});
+  addItems(newR, day, mealType) {
+    newR.setState({date:day, mealType});
     axios
       .post("http://localhost:8080/mealplan/", newR)
       .then(res => console.log(res.data));
@@ -162,6 +164,7 @@ export default class Recipe extends Component {
           username={params.id}
           addItems={this.addItems}
           addRecipe={this.addRecipe}
+          date={this.state.date}
           password={params.password}
           key={currentfood._id}
         />

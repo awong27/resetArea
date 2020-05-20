@@ -134,12 +134,7 @@ export default class EditUser extends React.Component{
       </Modal>
 
         <ListGroup className="profile" >
-              <ListGroupItem >
-                <Row>
-                  <Col ><NavLink href="/Home/:id/:password"> + </NavLink> </Col>
-                  <Col><h3>Profile</h3></Col><Col/><Col/><Col/>
-                </Row>
-              </ListGroupItem>
+              
               <ListGroupItem style={{background: 'lightblue'}}>
                 <Row>
                   <h4> Guest Name </h4>

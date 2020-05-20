@@ -43,12 +43,9 @@
 }
 .homeRow {
 
-    height: 30vh;
+    height: 38vh;
     padding-left: 15px;
     padding-right: 15px;
-    overflow-x: scroll;
-   
-    flex-wrap: wrap;
 }
 .homeSquare {
     width: 45vw;
@@ -81,8 +78,8 @@
 }
 .homeRep {
     margin: 20px 20px 0px 20px; 
-    width: 60vw;
-    height: 30vh;
+    width: 30vw;
+    height: 15vh;
     background-color: #e3f6e8 !important;
     padding: 0;
     box-shadow: 0px 4px 4px rgba(14, 11, 11, 0.26) !important;
@@ -93,6 +90,6 @@
 }
 .homeRep >.card-img { 
     height: 30vh;
-    width: 100vw;    
+    width: 30vw;    
     align-items: center;
 }

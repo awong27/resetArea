@@ -18,12 +18,14 @@ import plusbtn from "./plus.svg";
    * CardHeader and CardFooter 
    * display buttons, name and exp date 
    */
+  
 const Fooddata = props => {
   const { className } = props;
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
+  
   return (
-    <Card className="invItem">
+    <Card className="invItem" >
       <CardImg alt="FridgeItem" onClick={toggle} src={props.food.foodPic} />
       <Modal isOpen={modal} toggle={toggle} className={className}>
         <ModalHeader toggle={toggle}><h3>{props.food.foodName}</h3></ModalHeader>
@@ -121,6 +123,7 @@ export default class inventory extends Component {
         console.log(error);
       });
   }
+  
   deleteItems(id) {
     axios
       .delete("http://localhost:8080/fooddata/" + id)
@@ -139,7 +142,7 @@ export default class inventory extends Component {
     return this.state.fooddata.map(currentfood => {
       if (currentfood.creator === params.id) {
         return (
-          <Fooddata
+          <Fooddata            
             food={currentfood}
             deleteItems={this.deleteItems}
             key={currentfood._id}
