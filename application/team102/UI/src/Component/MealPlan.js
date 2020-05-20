@@ -174,25 +174,25 @@ export default class MealPlan extends Component {
     this.onChangeFridaysCalories(0);
     this.onChangeSaturdaysCalories(0);
     this.state.fooddata.map(currentfood => {
-      if (currentfood.date === this.state.sunday) {
+      if (currentfood.date === this.state.sunday&& currentfood.creator== this.state.username) {
         this.onChangeSundaysCalories(this.state.sundaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.sundaysCalories)
-      } else if (currentfood.date === this.state.monday) {
+      } else if (currentfood.date === this.state.monday&& currentfood.creator== this.state.username) {
         this.onChangeMondaysCalories(this.state.mondaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.mondaysCalories)
-      } else if (currentfood.date === this.state.tuesday) {
+      } else if (currentfood.date === this.state.tuesday&& currentfood.creator== this.state.username) {
         this.onChangeTuesdaysCalories(this.state.tuesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.tuesdaysCalories)
-      } else if (currentfood.date === this.state.wednesday) {
+      } else if (currentfood.date === this.state.wednesday&& currentfood.creator== this.state.username) {
         this.onChangeWednesdaysCalories(this.state.wednesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.wednesdaysCalories)
-      } else if (currentfood.date === this.state.thursday) {
+      } else if (currentfood.date === this.state.thursday&& currentfood.creator== this.state.username) {
         this.onChangeThursdaysCalories(this.state.thursdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.thursdaysCalories)
-      } else if (currentfood.date === this.state.friday) {
+      } else if (currentfood.date === this.state.friday&& currentfood.creator== this.state.username) {
         this.onChangeFridaysCalories(this.state.fridaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.fridaysCalories)
-      } else if (currentfood.date === this.state.saturday) {
+      } else if (currentfood.date === this.state.saturday&& currentfood.creator== this.state.username) {
         this.onChangeSaturdaysCalories(this.state.saturdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.saturdaysCalories)
       }
@@ -349,12 +349,12 @@ export default class MealPlan extends Component {
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "lunch", "sunday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "dinner", "sunday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="monday">
@@ -364,17 +364,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "breakfast", "monday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "lunch", "monday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.monday, "dinner", "monday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="tuesday">
@@ -384,17 +384,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "breakfast", "tuesday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "lunch", "tuesday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.tuesday, "dinner", "tuesday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="wednesday">
@@ -404,17 +404,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "breakfast", "wednesday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "lunch", "wednesday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.wednesday, "dinner", "wednesday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="thursday">
@@ -424,17 +424,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "breakfast", "thursday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "lunch", "thursday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.thursday, "dinner", "thursday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="friday">
@@ -444,17 +444,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "breakfast", "friday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "lunch", "friday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.friday, "dinner", "friday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
             <TabPane tabId="saturday">
@@ -464,17 +464,17 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "breakfast", "saturday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "lunch", "saturday")}</p>
-              
+
               <Row className="barline">
                 <Col><h3>Dinner</h3></Col><Col><Col></Col></Col>
               </Row>
               <p>{this.inventory(this.state.saturday, "dinner", "saturday")}</p>
-              
+
               <Row className="bottom"></Row>
             </TabPane>
           </TabContent>
