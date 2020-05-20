@@ -78,8 +78,8 @@ export default class Scan extends Component {
         })
         console.log(hashKey);
         console.log(processedData);
-        this.props.onFoods(processedData);
-        this.props.onPop();
+        this.onFoods(processedData);
+        this.onPop();
       }
     render() {
         return (

@@ -12,8 +12,6 @@ import navMeal from './NavMeal.png'
 import navRecipe from './recipeIcon.png'
 
 var Navigation = ({ username, password }) => {
-  console.log(username);
-  console.log(password);
   const [openTab, setTab] = useState(0);
   var recipe = "/Recipe/" + username + "/" + password
   var slist = "/SList/" + username + "/" + password

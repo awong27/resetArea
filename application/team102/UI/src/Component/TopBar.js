@@ -10,8 +10,7 @@ import NavHome from "./Home.svg";
 import Tphoto from "../profilePictures/profile.jpg";
 
 const TopBar = ({ username, password }) => {
-  console.log(username);
-  console.log(password);
+
   /*
       * spaces items evenly
       * home button

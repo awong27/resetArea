@@ -5,6 +5,7 @@ import TopBar from "./TopBar";
 import classnames from 'classnames';
 import "./mealplan.css";
 import axios from "axios";
+import Recipe from './Recipe';
 
 const Fooddata = props => (
   /*<tr>
@@ -343,7 +344,7 @@ export default class MealPlan extends Component {
                 <Col xs='1' /><Col><h3>Breakfast</h3></Col><Col></Col><Col></Col>
               </Row>
               <p>{this.inventory(this.state.sunday, "breakfast", "sunday")}</p>
-              <Row><Col xs='2' />- - -<Col /><Button >Add Item</Button></Row>
+              <Row><Col xs='2' />- - -<Col /><Button onClick={() => {return(<Recipe date={"sunday"}/>)}}>Add Item</Button></Row>
               <Row className="barline">
                 <Col><h3>Lunch</h3></Col><Col><Col></Col></Col>
               </Row>

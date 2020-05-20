@@ -130,12 +130,12 @@ export default class Create extends Component {
     newList.push(list);
     this.setState({ addList: newList });
   }
-  AddList() {//{(item.expdate.getMonth() + 1).toString() + "/" + (item.expdate.getDate()).toString() + "/" + (item.expdate.getFullYear()).toString()}
-    console.log("here");
+  AddList() {//
+    
     return this.state.addList.map((item) => {
       return (<Row >
         <Col >{item.foodname}</Col>
-        <Col>toggle</Col>
+        <Col>{(item.expdate.getMonth() + 1).toString() + "/" + (item.expdate.getDate()).toString() + "/" + (item.expdate.getFullYear()).toString()}</Col>
         <Col>{item.qty}</Col>
       </Row>
       )
@@ -325,7 +325,7 @@ export default class Create extends Component {
       {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop} /> : this.manualSubmit()}
       <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", top: "-57px", display: "flex", minWidth: "100vw", minHeight: "54px" }} >
         <Button href={inv}>Back</Button>
-        <Button onClick={() => this.toInv()}> +Inventory</Button>
+        <Button onClick={() => this.toInv()}> + Inventory</Button>
         <Button onClick={() => this.setState({ show: !this.state.show })} ><img alt="camera" src={cam} className="nav-pic" /></Button>
       </ButtonGroup>
       <div style={{ top: "300px", height: "100%", width: "100%" }}>{this.AddList()}</div>

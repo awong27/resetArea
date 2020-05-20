@@ -89,3 +89,28 @@
   overflow: hidden !important; 
   width: 30vw;
 }
+.repdeck > .card > .col > .nav-link > .card-body {
+  text-align: center;
+  padding: 10px !important;
+  color: rgb(41, 39, 39);
+}
+.repdeck > .card >.col >.nav-link {
+  width: fit-content;
+  padding: 5%;
+}
+.repdeck > .card >.col {
+  width: 25vw;  
+  margin: 3px;
+  background-color: #e3f6f5;
+  border-radius: 30px;
+}
+.repdeck > .card {
+  border: 0;
+  background-color: transparent;
+  flex-direction: row;
+  width: 85vw;
+}
+.repdeck {
+  overflow-x: scroll ;
+}
+
