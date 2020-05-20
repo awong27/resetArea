@@ -112,7 +112,7 @@ export default class ShoppingList extends Component {
       itemName: this.state.newItemName,
       creator: this.state.username,
       status: "current"
-    }; 
+    };
     var flag = false;
     console.log(item)
     this.state.shopdata.map(curr => {
@@ -125,6 +125,7 @@ export default class ShoppingList extends Component {
       var list = this.state.shopdata;
       list.push(item);
       this.setState({ shopdata: list });
+      window.location.reload();
     }
   }
 
@@ -223,4 +224,3 @@ export default class ShoppingList extends Component {
     )
   }
 }
-
