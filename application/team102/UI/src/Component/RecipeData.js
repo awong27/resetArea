@@ -1,6 +1,6 @@
 import React, { useState} from 'react';
 import {
-    Row, Col, Button, ButtonGroup, Collapse,
+    Row, Col, Button, ButtonGroup, Collapse, NavLink,
     Card, CardImg, CardText, CardTitle, CardImgOverlay,
     Modal, ModalHeader, ModalBody, ModalFooter, CardBody,
 } from 'reactstrap';
@@ -15,6 +15,7 @@ const RecipeData = props => {
     const toggle = () => setModal(!modal);
     const [pop, setPop] = useState(false);
     const toggle2 = () => setPop(!pop);
+    var mealplan = "/mealplan/" + props.username + "/" + props.password;
     return (
         <Card className="bigdes" body inverse={true}>
             <CardImg alt="recipeItem" src={props.food.recipeImage} />
@@ -41,17 +42,17 @@ const RecipeData = props => {
                         <Button onClick={() => {props.addRecipe(props.food);}}>
                             <CardText>Save</CardText>
                         </Button>                        
-                        <Button onClick={toggle2} style={{ marginBottom: '1rem' }}>
-                            <CardText>Add to Meal Plan</CardText>
-                            <Collapse isOpen={isOpen}>
+                        <Button onClick={toggle2} >
+                            <CardText style={{ marginBottom: '0' }}>Add to Meal Plan</CardText>
+                            <Collapse isOpen={pop}>
                                 <Card>
-                                    <CardBody addItems={props.food, 'Sunday'}>Sunday</CardBody>
-                                    <CardBody addItems={props.food, 'Monday'}>Monday</CardBody>
-                                    <CardBody addItems={props.food, 'Tuesday'}>Tuesday</CardBody>
-                                    <CardBody addItems={props.food, 'Wednesday'}>Wednesday</CardBody>
-                                    <CardBody addItems={props.food, 'Thursday'}>Thursday</CardBody>
-                                    <CardBody addItems={props.food, 'Friday'}>Friday</CardBody>
-                                    <CardBody addItems={props.food, 'Saturday'}>Saturday</CardBody>
+                                    <NavLink href={mealplan}><CardBody  addItems={props.food, 'Sunday'}>Sunday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Monday'}>Monday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Tuesday'}>Tuesday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Wednesday'}>Wednesday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Thursday'}>Thursday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Friday'}>Friday</CardBody></NavLink>
+                                    <NavLink href={mealplan}><CardBody addItems={props.food, 'Saturday'}>Saturday</CardBody></NavLink>
                                 </Card>
                             </Collapse>
                         </Button>
