@@ -141,12 +141,14 @@ export default class MealPlan extends Component {
     });
   }
   addItems(newR, day) {
-    newR.setState({date:day});
+    newR.setState({ date: day });
     axios
       .post("http://localhost:8080/mealplan/", newR)
       .then(res => console.log(res.data));
+    let list = this.state.fooddata;
+    list.push(newR);
     this.setState({
-      fooddata: [this.state.fooddata, newR]
+      fooddata: list
     });
   }
   inventory(date, mealType, day) {
@@ -174,25 +176,25 @@ export default class MealPlan extends Component {
     this.onChangeFridaysCalories(0);
     this.onChangeSaturdaysCalories(0);
     this.state.fooddata.map(currentfood => {
-      if (currentfood.date === this.state.sunday&& currentfood.creator== this.state.username) {
+      if (currentfood.date === this.state.sunday && currentfood.creator == this.state.username) {
         this.onChangeSundaysCalories(this.state.sundaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.sundaysCalories)
-      } else if (currentfood.date === this.state.monday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.monday && currentfood.creator == this.state.username) {
         this.onChangeMondaysCalories(this.state.mondaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.mondaysCalories)
-      } else if (currentfood.date === this.state.tuesday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.tuesday && currentfood.creator == this.state.username) {
         this.onChangeTuesdaysCalories(this.state.tuesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.tuesdaysCalories)
-      } else if (currentfood.date === this.state.wednesday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.wednesday && currentfood.creator == this.state.username) {
         this.onChangeWednesdaysCalories(this.state.wednesdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.wednesdaysCalories)
-      } else if (currentfood.date === this.state.thursday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.thursday && currentfood.creator == this.state.username) {
         this.onChangeThursdaysCalories(this.state.thursdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.thursdaysCalories)
-      } else if (currentfood.date === this.state.friday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.friday && currentfood.creator == this.state.username) {
         this.onChangeFridaysCalories(this.state.fridaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.fridaysCalories)
-      } else if (currentfood.date === this.state.saturday&& currentfood.creator== this.state.username) {
+      } else if (currentfood.date === this.state.saturday && currentfood.creator == this.state.username) {
         this.onChangeSaturdaysCalories(this.state.saturdaysCalories + parseInt(currentfood.planCalories))
         console.log(this.state.saturdaysCalories)
       }
