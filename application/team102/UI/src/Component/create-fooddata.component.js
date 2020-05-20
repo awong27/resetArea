@@ -318,7 +318,7 @@ export default class Create extends Component {
     return (<div style={{ height: "100%", width: "100%" }}>
       
       {this.state.pop === true ? this.onScan() : ""}
-      {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop}/> : this.manualSubmit(),this.AddList()}
+      {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop}/> : this.manualSubmit()}
       <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
         <Button href={inv}>Back</Button>
         <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
