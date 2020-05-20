@@ -1,86 +1,185 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Input, Form, FormGroup,
-  Modal, ModalHeader, ModalBody,
-  ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
-} from 'reactstrap';
+import { Button, Row, Col, Input, NavLink,Form,FormGroup } from 'reactstrap';
 import Navi from "./Navigation";
 import TopBar from "./TopBar";
 import "./inv.css";
 import plusbtn from "./plus.svg"
 import axios from "axios";
-import classnames from 'classnames';
-const Fooddata = props => (
-  <Row className="invBar" >
-    <Col xs='1' /><h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.deleteItems(props.food._id); props.onSubmit(props.food._id); }}>X</Button><Col xs='1' />
-  </Row>
+const Shoppingdata = props => (
+  /*  <tr>
+    <td>
+      <Link to = {"/user-item/"+ props.food._id}>{props.food.foodName}</Link>
+      </td>
+      <td>{props.food.expirationDate}</td>
+      <td>{props.food.calories}</td>
+      <td>{props.food.numOfItems}</td>
+      <td>
+        <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
+        <a
+          href="/create"
+          onClick={() => {
+            props.deleteItems(props.food._id);
+          }}
+        >
+          delete
+        </a>
+      </td>
+    </tr>*/
+  <Button className="invBar" ><Row>
+    <Col><p>{props.food.itemName}</p></Col><Col></Col><Col></Col><Button onClick={() => { props.toggleItems(props.food._id,props.food.itemAmount,props.food.itemName,props.food.status); }}>X</Button><Col xs='1' />
+  </Row></Button>
+
 );
-const HList = props => (
-  <Row className='histlist' >
-    <h4>{props.food.foodName}</h4> <Col></Col>
-    <Button className="S-btn" onClick={() => { props.onSubmit(props.food._id); }}>+</Button>
-  </Row>
+
+const ShoppingHist = props => (
+  /*  <tr>
+    <td>
+      <Link to = {"/user-item/"+ props.food._id}>{props.food.foodName}</Link>
+      </td>
+      <td>{props.food.expirationDate}</td>
+      <td>{props.food.calories}</td>
+      <td>{props.food.numOfItems}</td>
+      <td>
+        <Link to={"/edit/" + props.food._id}>edit</Link> |{" "}
+        <a
+          href="/create"
+          onClick={() => {
+            props.deleteItems(props.food._id);
+          }}
+        >
+          delete
+        </a>
+      </td>
+    </tr>*/
+  <Button className="invBar" ><Row>
+    <Col><p>{props.food.itemName}</p></Col><Col></Col><Col></Col><Button onClick={() => { props.toggleItems(props.food._id,props.food.itemAmount,props.food.itemName,props.food.status); }}>Add to List</Button><Col xs='1' />
+  </Row></Button>
+
 );
+
 export default class ShoppingList extends Component {
+
   constructor(props) {
     super(props);
-    this.onChangeSearch = this.onChangeSearch.bind(this);
+
+    this.onChangeItemName = this.onChangeItemName.bind(this);
+    this.onChangeItemAmount = this.onChangeItemAmount.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
-    this.onAddHist = this.onAddHist.bind(this);
-    this.deleteItems = this.deleteItems.bind(this);
-    this.toggle = this.toggle.bind(this);
-    this.pop = this.pop.bind(this);
+
+    this.toggleItems = this.toggleItems.bind(this);
     const { match: { params } } = this.props;
     this.state = {
-      fooddata: [],
-      histData: [],
+      shopdata: [],
+      check:1,
       username: params.id,
       password: params.password,
-      modal: false,
-      dropdown: false,
-      searches: "",
+      newItemName:"",
+      newItemAmount:"",
+      removedItem:{}
     };
   }
-  toggle() { this.setState({ modal: !this.state.modal }) }
-  pop() { this.setState({ dropdown: !this.state.dropdown }) }
-  onChangeSearch(e) { this.setState({ searches: e.target.value }); }
-  // addHist should add current Shopping List to history and empty fooddata list
-  onAddHist() {
-    this.setState({
-      histData: [this.state.fooddata, this.state.histData],
-      fooddata: []
-    });
-  }
+
   componentDidMount() {
     axios
-      .get("http://localhost:8080/fooddata/")
+      .get("http://localhost:8080/shoppinglist/")
       .then(response => {
-        this.setState({ fooddata: response.data });
+        this.setState({ shopdata: response.data });
       })
       .catch(error => {
         console.log(error);
       });
   }
-  deleteItems(id) {
+
+  toggleItems(id,itemAmount,itemName,status) {
+    var stat;
+    if(status=="past"){
+      stat="current"
+    }else{
+      stat="past"
+    }
+
+    const removed ={
+      itemName: itemName,
+
+      status: stat,
+      creator:this.state.username
+    }
+
     axios
-      .delete("http://localhost:8080/fooddata/" + id)
-      .then(res => console.log(res.data));
-    this.setState({
-      histData: [id, this.state.histData],
-      fooddata: this.state.fooddata.filter(el => el._id !== id)
+      .post("http://localhost:8080/shoppinglist/update/" + id,removed)
+      .then(res => {
+        console.log(res.data)
+        window.location.reload()
+        }
+    )
+
+
+      .catch(error => {
+      console.log(error);
     });
+
+
   }
-  /** adds items to the list */
-  onSubmit(e) {
+  onChangeItemName(e){
+    this.setState({
+      newItemName:e.target.value
+    })
+  }
+  onChangeItemAmount(e){
+    this.setState({
+      newItemAmount:e.target.value
+    })
+  }
+  onSubmit(e){
     e.preventDefault();
+
+
+
+    const item = {
+      itemName:this.state.newItemName,
+
+      creator:this.state.username,
+      status:"current"
+    }
+    console.log(item)
     axios
-      .post("http://localhost:8080/fooddata/add", e.target.value)
+      .post("http://localhost:8080/shoppinglist/add", item)
       .then(res => console.log(res.data));
-    this.setState({
-      fooddata: [e.target.value, this.state.fooddata]
+
+  }
+
+  shopList() {
+    const { match: { params } } = this.props;
+    return this.state.shopdata.map(currentfood => {
+      if (currentfood.creator === params.id && currentfood.status == "current") {
+        return (
+          <Shoppingdata
+            food={currentfood}
+            toggleItems={this.toggleItems}
+            key={currentfood._id}
+          />
+        );
+      }
+      return (null);
     });
   }
-  /** display current shopping list */
+
+  shopHist() {
+    const { match: { params } } = this.props;
+    return this.state.shopdata.map(currentfood => {
+      if (currentfood.creator === params.id && currentfood.status == "past") {
+        return (
+          <ShoppingHist
+            food={currentfood}
+            toggleItems={this.toggleItems}
+            key={currentfood._id}
+          />
+        );
+      }
+      return (null);
+    });
+  }
+/*
   inventory() {
     const { match: { params } } = this.props;
     return this.state.fooddata.map(currentfood => {
@@ -89,7 +188,6 @@ export default class ShoppingList extends Component {
           <Fooddata
             food={currentfood}
             deleteItems={this.deleteItems}
-            onSubmit={this.onSubmit}
             key={currentfood._id}
           />
         );
@@ -97,101 +195,102 @@ export default class ShoppingList extends Component {
       return (null);
     });
   }
-  /** displays history list add-able items to current shopping list*/
-  History() {
-    const { match: { params } } = this.props;
-    return this.state.fooddata.map(currentfood => {
-      if (currentfood.creator === params.id) {
-        return (
-          <HList
-            food={currentfood}
-            onSubmit={this.onSubmit}
-            key={currentfood._id}
-          />
-        );
-      }
-      return (null);
-    });
-  }
-  /** submit form for search bar */
-  Add() {
-    return (
-      <Form justified onSubmit={this.onSubmit}>
-        <FormGroup>
-          <Row>
-            <Input
-              type="text"
-              placeholder="Search"
-              style={{ width: '70vw' }}
-              required
-              className="form-control"
-              value={this.state.searches}
-              onChange={this.onChangeSearch}
-            /> <Input
-              type="submit"
-              style={{ width: '30vw' }}
-              value="Add Item"
-              className="btn btn-secondary"
-            /></Row>
-        </FormGroup>
-      </Form>
-    )
-  }
+*/
   render() {
     return (
       /*
       * Shopping List Pulls info and displays as buttons
       * should be able to see main list and sublist at the bottom
       * need main user and sub users id
-      * 
+      *
       * needs to grab date when list is clear and send to shopping history
-      * 
+      *
       * scan to match list with what was bought and populate with values
       * bring up things not grabbed by scan but on shopping list
       */
-      <div><TopBar username={this.state.username} password={this.state.password} /><div className="midCon">
-        <h1>Shopping List</h1></div>
-        {this.Add()}
-        <div className="listItem">
-          {this.inventory()}
-        </div>
-        <ButtonDropdown direction="up" isOpen={this.state.dropdown} toggle={() => this.pop()}>
-          <DropdownToggle className="addbtn">
-            <img alt="add" src={plusbtn} />
-          </DropdownToggle>
-          <DropdownMenu>
-            <DropdownItem onClick={() => this.toggle()}>History</DropdownItem>
-            <DropdownItem onClick={() => this.onAddHist()}>New List</DropdownItem>
-          </DropdownMenu>
-        </ButtonDropdown>
+      <div><TopBar username={this.state.username} password={this.state.password} /><br /><br /><br /> <div className="midCon">
+        <div><h1>Shopping List</h1></div>
 
-        <Modal isOpen={this.state.modal} toggle={() => this.toggle()} className={classnames}>
-          <ModalHeader toggle={() => this.toggle()}><h3>History</h3></ModalHeader>
-          <ModalBody>
-            {this.History()}
-          </ModalBody>
-        </Modal>
+        <Form onSubmit={this.onSubmit}>
+        <FormGroup>
+          <Input
+            type="text"
+            required
+            placeholder="New Item Name"
+            value={this.state.newItemName}
+            onChange={this.onChangeItemName} />
+
+          <Input
+          type="submit"
+          style={{ width: '30vw' }}
+          value="Add"
+          className="btn btn-secondary"
+        /></FormGroup></Form>
+
+        <h3>Current Items</h3>
+        <div className="listItem">
+          {this.shopList()}
+        </div>
+        < h3>Past Shopping Items</h3>
+        <div className="listItem">
+          {this.shopHist()}
+        </div>
+      </div>
+        <Button className="addbtn"><img alt="add" src={plusbtn} /></Button>
         <Navi username={this.state.username} password={this.state.password} />
       </div>
     )
   }
-
+  subInventory() {
+    return (<>
+      <h3>Hatchet</h3>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+      <Button className="subBar" ><Row>
+        <NavLink>Ducks</NavLink>
+        <Button>X</Button>
+        <Button>+</Button>
+      </Row></Button>
+    </>
+    );
+  }
 }
-/*<ButtonGroup size='lg' > onClick={() => { props.deleteItems(props.food._id); }}
+/*<ButtonGroup size='lg' >
         <Button href="/SHist">History</Button>
         <Button href="/create">New Item</Button>
         <Button href="/inventory">+ Inventory</Button>
       </ButtonGroup>
-
-
-      {this.subInventory()}
-      subInventory() {
-    return (<>
-      <h3>Hatchet</h3>
-      <Row className="subBar">
-        <Col xs='1'/><h3>Candy</h3><Col/><Button className="S-btn" >X</Button><Col xs='1'/>
-      </Row>
-    </>
-    );
-  }
       */
