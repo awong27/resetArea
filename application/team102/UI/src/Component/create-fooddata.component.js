@@ -47,6 +47,7 @@ export default class Create extends Component {
     };
   }
   // change activations for prop states
+  onPop() {this.setState({pop: !this.state.pop})}
   onChangeFoodname(e) { this.setState({ foodname: e.target.value }); }
   onChangeExpirationdate(date) { this.setState({ expirationdate: date }); }
   onChangeCalories(e) { this.setState({ calories: e }); }
@@ -315,9 +316,9 @@ export default class Create extends Component {
     var inv = "/inventory/" + this.state.username + "/" + this.state.password
     
     return (<div style={{ height: "100%", width: "100%" }}>
-      {this.manualSubmit()} {this.AddList()}
+      
       {this.state.pop === true ? this.onScan() : ""}
-      {this.state.show === true ? <Scan onFoods={this.onFoods}/> : ""}
+      {this.state.show === true ? <Scan onFoods={this.onFoods} onPop={this.onPop}/> : this.manualSubmit(),this.AddList()}
       <ButtonGroup size='lg' className="SignSpace" style={{ boxSizing: 'content-box', position: "fixed", right: "-10vw", bottom: "0px", display: "flex", minWidth: "100vw" }} >
         <Button href={inv}>Back</Button>
         <Button onClick={() => this.toInv()}> Add List To Inventory</Button>
