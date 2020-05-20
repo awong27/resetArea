@@ -141,8 +141,7 @@ export default class EditUser extends React.Component{
                 <Row>
                   <h4> Guest Name </h4>
                   <Col></Col>
-                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/>
-                  <br /><Button size="sm"> Edit Picture </Button></Col>
+                  <Col><img alt="UserEdit" src={Tphoto} className="userEdit"/> </Col>
                 </Row>
               </ListGroupItem>
 
@@ -182,16 +181,14 @@ export default class EditUser extends React.Component{
                   <Col/>
                   <Col/>
                   <Col/>
-                  <Col xs='1'> > </Col>
                 </Row>
               </ListGroupItem>
-              <ListGroupItem style={{background: 'lightblue'}}><NavLink style={{color: "black"}} href="/about">
+              <ListGroupItem style={{background: 'lightblue'}}><NavLink style={{color: "#4d4d4d"}} href="/about">
                 <Row>
                   <h5> About Us </h5>
                   <Col/>
                   <Col/>
                   <Col/>
-                  <Col xs='1'> > </Col>
                 </Row> </NavLink>
               </ListGroupItem>
               <ListGroupItem style={{background: 'lightblue'}}>
