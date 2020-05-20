@@ -138,6 +138,7 @@ export default class Recipe extends Component {
           <RecipeData
             food={currentfood}
             username={params.id}
+            addItems={this.addItems}
             addRecipe={this.addRecipe}
             password={params.password}
             key={currentfood._id}
@@ -146,7 +147,12 @@ export default class Recipe extends Component {
       } return (null);
     });
   }
-
+  addItems(newR, day) {
+    newR.setState({date:day});
+    axios
+      .post("http://localhost:8080/mealplan/", newR)
+      .then(res => console.log(res.data));
+  }
   searchedRecipes() {
     const { match: { params } } = this.props;
     return this.state.newRecipes.map(currentfood => {
@@ -154,6 +160,7 @@ export default class Recipe extends Component {
         <RecipeData
           food={currentfood}
           username={params.id}
+          addItems={this.addItems}
           addRecipe={this.addRecipe}
           password={params.password}
           key={currentfood._id}

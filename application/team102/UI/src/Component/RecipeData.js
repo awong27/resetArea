@@ -1,8 +1,8 @@
 import React, { useState} from 'react';
 import {
-    Row, Col, Button, ButtonGroup,
+    Row, Col, Button, ButtonGroup, Collapse,
     Card, CardImg, CardText, CardTitle, CardImgOverlay,
-    Modal, ModalHeader, ModalBody, ModalFooter,
+    Modal, ModalHeader, ModalBody, ModalFooter, CardBody,
 } from 'reactstrap';
 import MealPlan from './MealPlan';
 import "./boxTabs.css"
@@ -13,6 +13,8 @@ const RecipeData = props => {
     const { className } = props;
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
+    const [pop, setPop] = useState(false);
+    const toggle2 = () => setPop(!pop);
     return (
         <Card className="bigdes" body inverse={true}>
             <CardImg alt="recipeItem" src={props.food.recipeImage} />
@@ -39,8 +41,19 @@ const RecipeData = props => {
                         <Button onClick={() => {props.addRecipe(props.food);}}>
                             <CardText>Save</CardText>
                         </Button>                        
-                        <Button onClick={<MealPlan props={props.food}/>}>
+                        <Button onClick={toggle2} style={{ marginBottom: '1rem' }}>
                             <CardText>Add to Meal Plan</CardText>
+                            <Collapse isOpen={isOpen}>
+                                <Card>
+                                    <CardBody addItems={props.food, 'Sunday'}>Sunday</CardBody>
+                                    <CardBody addItems={props.food, 'Monday'}>Monday</CardBody>
+                                    <CardBody addItems={props.food, 'Tuesday'}>Tuesday</CardBody>
+                                    <CardBody addItems={props.food, 'Wednesday'}>Wednesday</CardBody>
+                                    <CardBody addItems={props.food, 'Thursday'}>Thursday</CardBody>
+                                    <CardBody addItems={props.food, 'Friday'}>Friday</CardBody>
+                                    <CardBody addItems={props.food, 'Saturday'}>Saturday</CardBody>
+                                </Card>
+                            </Collapse>
                         </Button>
                         
                     </ButtonGroup>
